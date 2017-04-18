@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8280BAAD-D5D3-4F30-A40A-E6655865C3B7}</ProjectGuid>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>HA.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>HA</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Exe</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>HA</RootNamespace>
+    <StartupObject>HA.MainModule</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <FallbackCulture>en-US</FallbackCulture>
+    <UpdateUrlEnabled>false</UpdateUrlEnabled>
+    <ManifestCertificateThumbprint>8CF935DE6232F2BEE3434D42C4AF615DEF06CF3A</ManifestCertificateThumbprint>
+    <ManifestKeyFile>HA_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>ftp://www.ilovevb.net/HA/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://ILoveVB.NET/HA/</InstallUrl>
+    <SupportUrl>http://www.heroicadventure.com</SupportUrl>
+    <ProductName>Heroic Adventure</ProductName>
+    <PublisherName>Chris Williams</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.1.7.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\DBuild\DBuild.vbproj">
+      <Name>DBuild</Name>
+      <Project>{2696FB74-A6F0-4756-96AD-DDE252C5F487}</Project>
+      <Package>{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Awards.vb" />
+    <Compile Include="Common\Dice.vb" />
+    <Compile Include="Common\Enumerations.vb" />
+    <Compile Include="Common\LineDrawing.vb" />
+    <Compile Include="Common\Structures.vb" />
+    <Compile Include="Common\Util.vb" />
+    <Compile Include="Common\Verbs.vb" />
+    <Compile Include="English.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>English.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Items\Amulets\Amulet.vb" />
+    <Compile Include="Items\Amulets\AoIntellect.vb" />
+    <Compile Include="Items\Amulets\AoInvisibility.vb" />
+    <Compile Include="Items\Amulets\AoProtection.vb" />
+    <Compile Include="Items\Amulets\AoStrength.vb" />
+    <Compile Include="Items\Armors\Armor.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AutoWalk.vb" />
+    <Compile Include="Avatar.vb" />
+    <Compile Include="AvatarSorter.vb" />
+    <Compile Include="Generation.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Character.vb" />
+    <Compile Include="Hero.vb" />
+    <Compile Include="Common\Helper.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Inventory.vb" />
+    <Compile Include="Items\Armors\BandedMail.vb" />
+    <Compile Include="Items\Armors\Boots\Boots.vb" />
+    <Compile Include="Items\Armors\Boots\ChainBoots.vb" />
+    <Compile Include="Items\Armors\Boots\FurBoots.vb" />
+    <Compile Include="Items\Armors\Boots\LeatherBoots.vb" />
+    <Compile Include="Items\Armors\Boots\Sandles.vb" />
+    <Compile Include="Items\Armors\Bracers\BoProtection.vb" />
+    <Compile Include="Items\Armors\Bracers\BoStrength.vb" />
+    <Compile Include="Items\Armors\Bracers\Bracers.vb" />
+    <Compile Include="Items\Armors\Bracers\LeatherBracers.vb" />
+    <Compile Include="Items\Armors\BreastPlate.vb" />
+    <Compile Include="Items\Armors\ChainMail.vb" />
+    <Compile Include="Items\Armors\ChainShirt.vb" />
+    <Compile Include="Items\Armors\Cloaks\Cloak.vb" />
+    <Compile Include="Items\Armors\Cloaks\SturdyCloak.vb" />
+    <Compile Include="Items\Armors\Cloaks\UnadornedCloak.vb" />
+    <Compile Include="Items\Armors\Clothing.vb" />
+    <Compile Include="Items\Armors\DwarvenPlate.vb" />
+    <Compile Include="Items\Armors\ElvenChain.vb" />
+    <Compile Include="Items\Armors\FullPlate.vb" />
+    <Compile Include="Items\Armors\Furs.vb" />
+    <Compile Include="Items\Armors\Gloves\ChainGauntlets.vb" />
+    <Compile Include="Items\Armors\Gloves\Gloves.vb" />
+    <Compile Include="Items\Armors\Gloves\LeatherGauntlets.vb" />
+    <Compile Include="Items\Armors\Gloves\PlateGauntlets.vb" />
+    <Compile Include="Items\Armors\HalfPlate.vb" />
+    <Compile Include="Items\Armors\Helmets\ChainHood.vb" />
+    <Compile Include="Items\Armors\Helmets\FurHat.vb" />
+    <Compile Include="Items\Armors\Helmets\Helmet.vb" />
+    <Compile Include="Items\Armors\Helmets\HornedHelmet.vb" />
+    <Compile Include="Items\Armors\Helmets\LeatherHelmet.vb" />
+    <Compile Include="Items\Armors\Helmets\OrcishHelm.vb" />
+    <Compile Include="Items\Armors\Helmets\PlateHelm.vb" />
+    <Compile Include="Items\Armors\Helmets\ScaleHelm.vb" />
+    <Compile Include="Items\Armors\Helmets\SkullCap.vb" />
+    <Compile Include="Items\Armors\Hide.vb" />
+    <Compile Include="Items\Armors\Leather.vb" />
+    <Compile Include="Items\Armors\Padded.vb" />
+    <Compile Include="Items\Armors\Robes.vb" />
+    <Compile Include="Items\Armors\ScaleMail.vb" />
+    <Compile Include="Items\Armors\Shields\Buckler.vb" />
+    <Compile Include="Items\Armors\Shields\LargeShield.vb" />
+    <Compile Include="Items\Armors\Shields\Shield.vb" />
+    <Compile Include="Items\Armors\Shields\SmallShield.vb" />
+    <Compile Include="Items\Armors\SplintMail.vb" />
+    <Compile Include="Items\Armors\StuddedLeather.vb" />
+    <Compile Include="Items\Food\Apple.vb" />
+    <Compile Include="Items\Food\Bread.vb" />
+    <Compile Include="Items\Food\Corpses\Corpse.vb" />
+    <Compile Include="Items\Food\Corpses\OrcCorpse.vb" />
+    <Compile Include="Items\Food\Corpses\TrollCorpse.vb" />
+    <Compile Include="Items\Food\FoodBase.vb" />
+    <Compile Include="Items\Food\Ration.vb" />
+    <Compile Include="Items\Girdles\Girdle.vb" />
+    <Compile Include="Items\Girdles\LeatherGirdle.vb" />
+    <Compile Include="Items\Girdles\MetalGirdle.vb" />
+    <Compile Include="Items\ItemBase.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Items\ItemFactory.vb" />
+    <Compile Include="Items\ItemInterfaces.vb" />
+    <Compile Include="Items\Potions\PoExtraHealing.vb" />
+    <Compile Include="Items\Potions\PoHealing.vb" />
+    <Compile Include="Items\Potions\PoInvisibility.vb" />
+    <Compile Include="Items\Potions\PoPoison.vb" />
+    <Compile Include="Items\Potions\Potion.vb" />
+    <Compile Include="Items\Potions\PoWater.vb" />
+    <Compile Include="Items\Rings\Ring.vb" />
+    <Compile Include="Items\Rings\RoDexterity.vb" />
+    <Compile Include="Items\Rings\RoIntellect.vb" />
+    <Compile Include="Items\Rings\RoInvisibility.vb" />
+    <Compile Include="Items\Rings\RoProtection.vb" />
+    <Compile Include="Items\Rings\RoStrength.vb" />
+    <Compile Include="Items\Scrolls\Scroll.vb" />
+    <Compile Include="Items\Scrolls\SoAmnesia.vb" />
+    <Compile Include="Items\Scrolls\SoBlankScroll.vb" />
+    <Compile Include="Items\Scrolls\SoCureLight.vb" />
+    <Compile Include="Items\Scrolls\SoEnchantWeapon.vb" />
+    <Compile Include="Items\Scrolls\SoIdentify.vb" />
+    <Compile Include="Items\Scrolls\SoMagicMap.vb" />
+    <Compile Include="Items\Scrolls\SoMagicMissile.vb" />
+    <Compile Include="Items\Tools.vb" />
+    <Compile Include="Items\Treasure.vb" />
+    <Compile Include="Items\Wands\Wand.vb" />
+    <Compile Include="Items\Wands\WoLight.vb" />
+    <Compile Include="Items\Wands\WoMagicMap.vb" />
+    <Compile Include="Items\Wands\WoMagicMissile.vb" />
+    <Compile Include="Keybound.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainMenu.vb" />
+    <Compile Include="MiscRoutines.vb" />
+    <Compile Include="Main.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Monsters\Animal\Dog.vb" />
+    <Compile Include="Monsters\Animal\Lizard.vb" />
+    <Compile Include="Monsters\Animal\Spider.vb" />
+    <Compile Include="Monsters\Animal\Rat.vb" />
+    <Compile Include="Monsters\Animal\Snake.vb" />
+    <Compile Include="Monsters\Animal\Wolf.vb" />
+    <Compile Include="Monsters\Savage\Goblin.vb" />
+    <Compile Include="Monsters\Savage\Kobold.vb" />
+    <Compile Include="Monsters\Monster.vb" />
+    <Compile Include="Monsters\Savage\Ogre.vb" />
+    <Compile Include="Monsters\Savage\Orc.vb" />
+    <Compile Include="Monsters\Undead\Skeleton.vb" />
+    <Compile Include="Monsters\Savage\Troll.vb" />
+    <Compile Include="Monsters\Undead\Undead.vb" />
+    <Compile Include="Monsters\Undead\Zombie.vb" />
+    <Compile Include="My Project\MyApplication.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MyApplication.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyResources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MySettings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>MySettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Overland\TownFactory\AbandonedVillage.vb" />
+    <Compile Include="Overland\TownFactory\Fincastle.vb" />
+    <Compile Include="Overland\TownFactory\Lakeside.vb" />
+    <Compile Include="Overland\Overland.vb" />
+    <Compile Include="Overland\TownFactory\Sawtooth.vb" />
+    <Compile Include="Overland\TownFactory\StoneGate.vb" />
+    <Compile Include="Overland\TownFactory\TownFactory.vb" />
+    <Compile Include="Common\Tables.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Screens\Screens.vb" />
+    <Compile Include="Overland\Towns.vb" />
+    <Compile Include="Items\Weapons.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Overland\Wilderness.vb" />
+    <Content Include="HA.ico" />
+    <AppDesigner Include="My Project\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="English.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>English.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\MyResources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>MyResources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="HA_TemporaryKey.pfx" />
+    <BaseApplicationManifest Include="My Project\app.manifest" />
+    <None Include="My Project\MyApplication.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>MyApplication.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\MySettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>MySettings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperFile Include="Microsoft.Net.Framework.2.0">
+      <InProject>False</InProject>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperFile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Quests\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

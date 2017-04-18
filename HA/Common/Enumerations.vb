@@ -1,0 +1,220 @@
+﻿Namespace Common
+
+	Public Module Enumerations
+
+		Public Enum Race
+			Human = 1
+			Elf = 2
+			HalfElf = 3
+			Dwarf = 4
+			Gnome = 5
+			Halfling = 6
+			HalfOrc = 7
+			Ogre = 8
+			Pixie = 9
+		End Enum
+		Public Enum PCClass
+			None = 0
+			Warrior = 1
+			Barbarian = 5
+			Paladin = 9
+			Wizard = 2
+			Sorceror = 6
+			Thief = 3
+			Assassin = 7
+			Priest = 4
+			Druid = 8
+		End Enum
+		Public Enum ArmorType
+			Robes = 1
+			Clothing = 2
+			Padded = 3
+			Leather = 4
+			Furs = 5
+			StuddedLeather = 6
+			ChainShirt = 7
+			ScaleMail = 8
+			ChainMail = 9
+			Breastplate = 10
+			ElvenChain = 11
+			SplintMail = 12
+			BandedMail = 13
+			HalfPlate = 14
+			FullPlate = 15
+		End Enum
+		Public Enum ShieldType
+			Buckler = 1
+			Small = 1
+			Large = 2
+		End Enum
+		Public Enum MovementType
+			Walking = 1
+			Running = 2
+			Flying = 0
+		End Enum
+		Public Enum WeaponType
+			Dagger = 0
+			LightMace = 1
+			Club = 2
+			HalfSpear = 3
+			HeavyMace = 4
+			Quarterstaff = 5
+			ShortSpear = 6
+			ThrowingAxe = 7
+			LightHammer = 8
+			HandAxe = 9
+			Longsword = 10
+			HeavyPick = 11
+			Rapier = 12
+			Scimitar = 13
+			Trident = 14
+			Warhammer = 15
+			Falchion = 16
+			GreatAxe = 17
+			GreatClub = 18
+			GreatSword = 19
+			Halberd = 20
+			Scythe = 21
+			Morningstar = 22
+			ShortSword = 23
+			BattleAxe = 24
+
+			Unarmed = 50
+		End Enum
+		Public Enum MissleType
+			arrow = 1
+			rock = 2
+			slingstone = 3
+		End Enum
+		Public Enum AttackType
+			Bludgeoning = 1
+			Piercing = 2
+			Slashing = 3
+			SlashPierce = 4
+		End Enum
+
+		Public Enum ColorList
+			Black = 0
+			Navy = 1
+			DarkGreen = 2
+			Aquamarine = 3
+			Maroon = 4
+			Purple = 5
+			Olive = 6
+			LightGray = 7
+			DarkGray = 8
+			Blue = 9
+			Green = 10
+			Cyan = 11
+			Red = 12
+			Magenta = 13
+			Yellow = 14
+			White = 15
+		End Enum
+		Public Enum MetalList
+			Silver = 1
+			Gold = 2
+			Copper = 3
+			Brass = 4
+			Bronze = 5
+			Electrum = 6
+			Platinum = 7
+			Steel = 8
+			Aluminum = 9
+			Mithril = 10
+		End Enum
+		Public Enum GemList
+			Amethyst = 1
+			Diamond = 2
+			Emerald = 3
+			Garnet = 4
+			Ruby = 5
+			Sapphire = 6
+			Onyx = 7
+			Opal = 8
+			Pearl = 9
+			Topaz = 10
+		End Enum
+		Public Enum WandList
+			Pine = 1
+			Larch = 2
+			Petrified = 3
+			Twisted = 4
+			Willow = 5
+			Oak = 6
+		End Enum
+
+		Public Enum Gender
+			female = 1
+			male = 2
+		End Enum
+		Public Enum ItemType
+			Potion = 1
+			Scroll = 2
+			Gold = 3
+			Tool = 4
+			Armor = 5
+			Weapon = 6
+			Helmet = 7
+			Boots = 8
+			Shield = 9
+			Neck = 10
+			Girdle = 11
+			Cloak = 12
+			Ring = 13
+			Gloves = 14
+			Bracers = 15
+			MissleWeapon = 16
+			Missles = 17
+			Book = 18
+			Wand = 19
+			Gem = 20
+			Food = 21
+		End Enum
+		Public Enum PotionType
+			Healing = 1
+			ExtraHealing = 2
+			Poison = 3
+			Water = 4
+			Invisibility = 5
+		End Enum
+		Public Enum PCStats
+			strength = 1
+			intelligence
+			wisdom
+			dexterity
+			constitution
+			charisma
+		End Enum
+		Public Enum TrapType
+			None = 0
+			sleep = 1
+			poison = 2
+			explosion = 3
+			pit = 4
+			snake = 5
+			rock = 6
+			confusion = 7
+			teleport = 8
+		End Enum
+		Public Enum PoisonType
+			none = 0
+			sleep = 1
+			confusion = 2
+			paralytic = 3
+			strength = 4
+			constitution = 5
+			mild = 6
+			medium = 7
+			strong = 8
+		End Enum
+		Public Enum MagicType
+			None = 0
+			Arcane = 1
+			Divine = 2
+		End Enum
+
+
+	End Module
+
+End Namespace

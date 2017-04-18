@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="resArticleThe" xml:space="preserve">
+    <value>The </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resChatSelf" xml:space="preserve">
+    <value>You talk to yourself for a moment... pretty boring.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resCloseDoor" xml:space="preserve">
+    <value>You close the door.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resCloseDoorBlocked1" xml:space="preserve">
+    <value>You can't close the door. The </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resCloseDoorBlocked2" xml:space="preserve">
+    <value>is in the way.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resCloseDoorSelf" xml:space="preserve">
+    <value>Don't be silly, you can't close yourself!</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resCollideDoor" xml:space="preserve">
+    <value>Thud! You run into the door. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resCollideWall" xml:space="preserve">
+    <value>Thud! You run into the wall. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedAim" xml:space="preserve">
+    <value>You cannot think clearly enough to aim. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedCast" xml:space="preserve">
+    <value>You do not possess the necessary focus to cast spells. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedChat" xml:space="preserve">
+    <value>You attempt to speak, but can only babble. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedCloseDoor" xml:space="preserve">
+    <value>Closing the door proves to be too great a challenge right now. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedDefault" xml:space="preserve">
+    <value>Not while confused. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedInventory" xml:space="preserve">
+    <value>You see a bunch of stuff, but none of it makes sense. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedOpenDoor" xml:space="preserve">
+    <value>This door seems too complicated in your current state. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedSearch" xml:space="preserve">
+    <value>You search haphazardly, but find nothing. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resConfusedZap" xml:space="preserve">
+    <value>You are having trouble remembering the activation word. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resDoorStuck" xml:space="preserve">
+    <value>Ugh! The door is stuck. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resFloodedTunnel" xml:space="preserve">
+    <value>This tunnel has been flooded for some time...</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resImpassable" xml:space="preserve">
+    <value>You may not cross that terrain.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resItemsGround" xml:space="preserve">
+    <value>-------------------------------- Items on Ground --------------------------------</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resItemsPickup" xml:space="preserve">
+    <value>Pick up item </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resItemsZToExit" xml:space="preserve">
+    <value>or z to exit.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKeybindingsTitle" xml:space="preserve">
+    <value>Heroic Adventure! KeyBindings</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickDoor" xml:space="preserve">
+    <value>You kick the door, </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickDoorNothing" xml:space="preserve">
+    <value>but nothing happens.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickDoorSmash" xml:space="preserve">
+    <value>and smash it to pieces.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickMiss1" xml:space="preserve">
+    <value> You kick at the </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickMiss2" xml:space="preserve">
+    <value> but you miss. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickMonsterHit" xml:space="preserve">
+    <value>Wham! You kick the </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickNothing" xml:space="preserve">
+    <value> You kick at nothing with all your might. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickSelf" xml:space="preserve">
+    <value>You kick yourself. Feel better?</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickWall" xml:space="preserve">
+    <value>You kick the wall.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickWallFail" xml:space="preserve">
+    <value>Owww! You glare at the wall.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKickWallRubble" xml:space="preserve">
+    <value>You reduce the wall to rubble.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resLookDark" xml:space="preserve">
+    <value>This area is completely dark.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resLookItemsPile" xml:space="preserve">
+    <value>There is a pile of items here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resLookUnknown" xml:space="preserve">
+    <value>You don't know anything about this place.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resMonsterAboutToDie" xml:space="preserve">
+    <value> is about to die. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resMonsterDead" xml:space="preserve">
+    <value> is dead. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resMonsterDestroyed" xml:space="preserve">
+    <value> is destroyed. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resMonsterMinorWounds" xml:space="preserve">
+    <value> has minor wounds. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resMonsterScratches" xml:space="preserve">
+    <value> has a few scratches. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resMonsterSeriousWounds" xml:space="preserve">
+    <value> is seriously wounded.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resNobodyToChat" xml:space="preserve">
+    <value>There is nobody to talk to. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resNoClimbingYet" xml:space="preserve">
+    <value>You may not cross that terrain (yet).</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resNoSwimmingYet" xml:space="preserve">
+    <value>You do not know how to swim (yet). </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resNothingToKick" xml:space="preserve">
+    <value>Nothing to kick.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resNothingToPickup" xml:space="preserve">
+    <value>There is nothing here to pickup. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resNoVisitorsYet" xml:space="preserve">
+    <value>This town is not ready for visitors yet. Sorry.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resOpenDoor" xml:space="preserve">
+    <value>You open the door.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resOpenDoorSelf" xml:space="preserve">
+    <value>Don't be silly, you can't open yourself!</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPerhaps" xml:space="preserve">
+    <value>Perhaps you're looking in the wrong spot. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPitchBlack" xml:space="preserve">
+    <value>It is pitch black in here. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptKickDirection" xml:space="preserve">
+    <value>Kick something. Which direction? </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptPressAnyKey" xml:space="preserve">
+    <value>Press any key to return.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptQuit" xml:space="preserve">
+    <value>Are you sure you want to quit? (y,N)</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptReturnToWilderness" xml:space="preserve">
+    <value>Do you wish to return to the wilderness? (Y/n)</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptSelectDirection" xml:space="preserve">
+    <value>Please select a direction: (1-9)</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptWhichDirection" xml:space="preserve">
+    <value>Which direction?</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resReturnToGame" xml:space="preserve">
+    <value>return to game</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSearchArea" xml:space="preserve">
+    <value>You search the surrounding area.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSearchSecretDoor" xml:space="preserve">
+    <value>You discover a secret door.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsApply" xml:space="preserve">
+    <value>apply skill</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsBottomBorder" xml:space="preserve">
+    <value>--------------------------------------------------------------------------------</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgAwareness" xml:space="preserve">
+    <value>Passive - You are always aware of your surroundings. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgClimbing" xml:space="preserve">
+    <value>Passive - There is nothing for you to climb here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgConcentration" xml:space="preserve">
+    <value>Passive - Concentration is key to good spellcasting.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgFindWeak" xml:space="preserve">
+    <value>Passive - This skill ensures your strike is true.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgHealing" xml:space="preserve">
+    <value>Passive - You automatically take care of all wounds.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgListen" xml:space="preserve">
+    <value>For a brief moment, all is quiet.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgLiteracy" xml:space="preserve">
+    <value>Passive - This skill is best exercised by reading.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgSurvival" xml:space="preserve">
+    <value>Passive - This skill is handiest in the wilderness.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsMsgSwimming" xml:space="preserve">
+    <value>Passive - If you wish to swim, move through water.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsName" xml:space="preserve">
+    <value>Skill Name</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsNotImplemented" xml:space="preserve">
+    <value>This skill has not been implemented yet.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsRBT" xml:space="preserve">
+    <value>Ranks Bonus Total</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSkillsTitle" xml:space="preserve">
+    <value>------------------------------------ Skills ------------------------------------</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSnoring" xml:space="preserve">
+    <value>Zzzzz. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsNoDown" xml:space="preserve">
+    <value>There are no downward stairs here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsNoUp" xml:space="preserve">
+    <value>There are no upward stairs here. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTargetAim" xml:space="preserve">
+    <value>Use the movement keys to aim your weapon, press [t] to target. Abort with [space] or [z].</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resThereIsNoDoor" xml:space="preserve">
+    <value>There is no door within reach.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resUseMovementKeys" xml:space="preserve">
+    <value>Use the movement keys to position the cursor. Abort with [SPACE] or [Z].</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resWalking" xml:space="preserve">
+    <value>...and we're walking... </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resYouPickUp" xml:space="preserve">
+    <value>You pick up the </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSearchTrapDiscover" xml:space="preserve">
+    <value>You discover a </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSearchTrapObserve" xml:space="preserve">
+    <value>You observe the </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsDownEverEnd" xml:space="preserve">
+    <value> will it ever end? </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsFollowSeveral" xml:space="preserve">
+    <value> several creatures follow you. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsTheStairs" xml:space="preserve">
+    <value> the stairs... </value>
+    <comment>Keybound,vb</comment>
+  </data>
+  <data name="resStairsUpOverland" xml:space="preserve">
+    <value>You return to the overland map. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsUpSurface" xml:space="preserve">
+    <value>You return to the surface. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsUpWilderness" xml:space="preserve">
+    <value>You return to the wilderness. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsYouGo" xml:space="preserve">
+    <value>You go </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTrap" xml:space="preserve">
+    <value> trap. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTrapConfusion" xml:space="preserve">
+    <value>A magical confusion trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapExplosion" xml:space="preserve">
+    <value>An explosive trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="ResTrapPit" xml:space="preserve">
+    <value>A pit trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapPoison" xml:space="preserve">
+    <value>A poison trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapPoisonEffect" xml:space="preserve">
+    <value>Cough Cough... you set off a poison gas trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapRock" xml:space="preserve">
+    <value>A falling rock trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSleep" xml:space="preserve">
+    <value>A sleeping gas trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSnake" xml:space="preserve">
+    <value>A snake pit trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapTeleport" xml:space="preserve">
+    <value>A magical teleportation trap.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="strStairsFollowsYou" xml:space="preserve">
+    <value> follows you </value>
+    <comment>Keybound.vb</comment>
+  </data>
+</root>
