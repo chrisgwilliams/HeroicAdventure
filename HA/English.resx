@@ -541,4 +541,8 @@
     <value> follows you </value>
     <comment>Keybound.vb</comment>
   </data>
+  <data name="resTrapExplosionMsg" xml:space="preserve">
+    <value> BOOM! You are caught by an explosion. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
 </root>

@@ -55,8 +55,8 @@ Module m_MiscRoutines
 					TheHero.CurrentHP -= D6()
 				Next
 
-				strMessage = "BOOM! You are caught by an explosion. "
-				ShowExplosion(TheHero.LocX, TheHero.LocY, ConsoleColor.Red, ConsoleColor.Yellow)
+                strMessage = resTrapExplosionMsg
+                ShowExplosion(TheHero.LocX, TheHero.LocY, ConsoleColor.Red, ConsoleColor.Yellow)
 
 				'TODO: calculate possible damage to inventory
 

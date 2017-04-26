@@ -920,6 +920,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to  BOOM! You are caught by an explosion. .
+        '''</summary>
+        Friend Shared ReadOnly Property resTrapExplosionMsg() As String
+            Get
+                Return ResourceManager.GetString("resTrapExplosionMsg", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to A pit trap..
         '''</summary>
         Friend Shared ReadOnly Property ResTrapPit() As String
