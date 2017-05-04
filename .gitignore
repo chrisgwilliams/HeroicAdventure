@@ -3,3 +3,18 @@
 ################################################################################
 
 /DBuild
+/HA/bin
+/HA/bin
+/HA/bin/HA.pdb
+/HA/bin/HA.exe.config
+/HA/bin/HA.exe
+/HA/bin/DBuild.xml
+/HA/bin/DBuild.pdb
+/HA/bin/DBuild.dll
+/HA/obj/Debug
+/HA/obj/Debug
+/HA/obj/Debug/CoreCompileInputs.cache
+/HA/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/HA/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/HA/obj/Debug
+/.vs/HeroicAdventure/v15

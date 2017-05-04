@@ -458,7 +458,7 @@
     <comment>Keybound.vb</comment>
   </data>
   <data name="resYouPickUp" xml:space="preserve">
-    <value>You pick up the </value>
+    <value> You pick up the </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resSearchTrapDiscover" xml:space="preserve">
@@ -537,12 +537,92 @@
     <value>A magical teleportation trap.</value>
     <comment>MiscRoutines.vb</comment>
   </data>
-  <data name="strStairsFollowsYou" xml:space="preserve">
+  <data name="resStairsFollowsYou" xml:space="preserve">
     <value> follows you </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resTrapExplosionMsg" xml:space="preserve">
     <value> BOOM! You are caught by an explosion. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resMeasurementFeet" xml:space="preserve">
+    <value> feet. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resStatusConfused" xml:space="preserve">
+    <value>Confused</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resStatusPoisoned" xml:space="preserve">
+    <value>Poisoned</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resStatusSleeping" xml:space="preserve">
+    <value>Sleeping</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapBypass" xml:space="preserve">
+    <value> You bypass the </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapConfusionMsg" xml:space="preserve">
+    <value> Nothing makes sense any more, you are confused. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapExplosionEvade" xml:space="preserve">
+    <value> You hear a click-click-clicking sound. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapExplosionMonsterKilled" xml:space="preserve">
+    <value> is killed by the explosion. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapPitEvade" xml:space="preserve">
+    <value> You jump to safety as a pit opens at your feet. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapPitFall" xml:space="preserve">
+    <value> Surprise! A pit opens beneath you, and you fall </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapPoisonEvade" xml:space="preserve">
+    <value> You narrowly avoid a cloud of poisonous gas.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapRockEvade" xml:space="preserve">
+    <value> A huge rock falls from above, just missing you. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapRockMsg" xml:space="preserve">
+    <value> A huge rock drops on your head from above. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSleepEvade" xml:space="preserve">
+    <value> You feel sleepy for a moment, but it passes. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSleepResistElf" xml:space="preserve">
+    <value>A brief sensation passes over you. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSleepResistFail" xml:space="preserve">
+    <value> Uhoh, strange magic is... Zzzzzzzz... </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSleepResistHalfElf" xml:space="preserve">
+    <value>You feel sleepy for a moment, but it passes. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSnakeEvade" xml:space="preserve">
+    <value> You hear a muffled hissing sound nearby. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapSnakeMsg" xml:space="preserve">
+    <value> Suddenly you are surrounded by snakes. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resTrapTeleportMsg" xml:space="preserve">
+    <value> Suddenly you are somewhere else. </value>
     <comment>MiscRoutines.vb</comment>
   </data>
 </root>

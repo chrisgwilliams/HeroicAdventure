@@ -77,8 +77,8 @@ Module m_MiscRoutines
 							If D20() >= AC Then
 								m_arrMonster(intEncounter).CurrentHP -= iDam
 								If m_arrMonster(intEncounter).CurrentHP <= 0 Then
-									strMessage &= "The " & m_arrMonster(intEncounter).MonsterRace & " is killed by the explosion. "
-								End If
+                                    strMessage &= resArticleThe & m_arrMonster(intEncounter).MonsterRace & resTrapExplosionMonsterKilled
+                                End If
 							End If
 						End If
 					Next
@@ -90,8 +90,8 @@ Module m_MiscRoutines
 
 				' pit depth should not exceed 2X the current dungeon level depth
 				If iDepth > TheHero.CurrentLevel * 2 Then iDepth = TheHero.CurrentLevel * 2
-				strMessage = "Surprise! A pit opens beneath you, and you fall " & iDepth * 10 & " feet. "
-				For iCtr = 1 To iDepth
+                strMessage = resTrapPitFall & iDepth * 10 & resMeasurementFeet
+                For iCtr = 1 To iDepth
 					iDmg += D6()
 				Next
 
@@ -104,8 +104,8 @@ Module m_MiscRoutines
 				TheHero.CurrentHP -= iDmg
 
 			Case TrapType.snake
-				strMessage = "Suddenly you are surrounded by snakes. "
-				SummonMonster("trap")
+                strMessage = resTrapSnakeMsg
+                SummonMonster("trap")
 
 			Case TrapType.rock
 				Dim iDamageDice As Int16, iCtr As Int16
@@ -114,16 +114,16 @@ Module m_MiscRoutines
 				For iCtr = 1 To iDamageDice
 					TheHero.CurrentHP -= D6()
 				Next
-				strMessage = "A huge rock drops on your head from above. "
+                strMessage = resTrapRockMsg
 
-			Case TrapType.confusion
+            Case TrapType.confusion
 				ConfuseHero()
-				strMessage = "Nothing makes sense any more, you are confused. "
+                strMessage = resTrapConfusionMsg
 
-			Case TrapType.teleport
+            Case TrapType.teleport
 				TeleportHero()
-				strMessage = "Suddenly you are somewhere else. "
-		End Select
+                strMessage = resTrapTeleportMsg
+        End Select
 
 		' check damage to see if it killed the hero
 		If TheHero.CurrentHP <= 0 Then
@@ -139,19 +139,19 @@ Module m_MiscRoutines
 		Dim strMessage As String = ""
 		With TheHero
 			If D20() > .SleepResist Then
-				strMessage = "Uhoh, strange magic is... Zzzzzzzz... "
-				.Sleeping = True
+                strMessage = resTrapSleepResistFail
+                .Sleeping = True
 				.SleepDuration = 1 + D4() * D4()
-				If .Sleeping And .SleepDuration > 0 Then
-					WriteAt(61, 22, "Sleeping")
-				End If
-			Else
+                If .Sleeping And .SleepDuration > 0 Then
+                    WriteAt(61, 22, resStatusSleeping)
+                End If
+            Else
 				Select Case .HeroRace
 					Case Race.Elf
-						strMessage = "A brief sensation passes over you. "
-					Case Race.HalfElf
-						strMessage = "You feel sleepy for a moment, but it passes. "
-				End Select
+                        strMessage = resTrapSleepResistElf
+                    Case Race.HalfElf
+                        strMessage = resTrapSleepResistHalfElf
+                End Select
 			End If
 		End With
 		Return strMessage
@@ -164,8 +164,8 @@ Module m_MiscRoutines
 				.Poisoned = True
 				.PoisonDuration += ((10 - AbilityMod(.EConstitution)) * D6()) + (D20() * D12()) * .CurrentLevel
 				If .Poisoned And .PoisonDuration > 0 Then
-					WriteAt(61, 20, "Poisoned", ConsoleColor.Green)
-				End If
+                    WriteAt(61, 20, resStatusPoisoned, ConsoleColor.Green)
+                End If
 			Else
 				' do nothing
 			End If
@@ -176,8 +176,8 @@ Module m_MiscRoutines
 			.Confused = True
 			.ConfusionDuration += 6 + D8()
 			If .Confused = True And .ConfusionDuration > 0 Then
-				WriteAt(61, 21, "Confused")
-			End If
+                WriteAt(61, 21, resStatusConfused)
+            End If
 		End With
 	End Sub
 	Friend Sub TeleportHero()
@@ -264,8 +264,8 @@ Module m_MiscRoutines
 						' Hero failed the check, set off the trap again
 						strMessage = TriggerTrap()
 					Else
-						strMessage = "You bypass the " & GetTrap(Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapType) & " trap. "
-					End If
+                        strMessage = resTrapBypass & GetTrap(Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapType) & resTrap
+                    End If
 
 				Else ' trap not discovered before, it MIGHT be now (1 in 8 chance - modified by luck)
 					If D8() - TheHero.Luck <= 1 Then
@@ -289,18 +289,18 @@ Module m_MiscRoutines
 							' hero set off trap but managed to evade
 							Select Case .TrapType
 								Case TrapType.sleep
-									strMessage = "You feel sleepy for a moment, but it passes. "
-								Case TrapType.poison
-									strMessage = "You narrowly avoid a cloud of poisonous gas. "
-								Case TrapType.explosion
-									strMessage = "You hear a click-click-clicking sound. "
-								Case TrapType.pit
-									strMessage = "You jump to safety as a pit opens at your feet. "
-								Case TrapType.snake
-									strMessage = "You hear a muffled hissing sound nearby. "
-								Case TrapType.rock
-									strMessage = "A huge rock falls from above, just missing you. "
-									Dim iPile As Int16, intCtr As Int16
+                                    strMessage = resTrapSleepEvade
+                                Case TrapType.poison
+                                    strMessage = resTrapPoisonEvade
+                                Case TrapType.explosion
+                                    strMessage = resTrapExplosionEvade
+                                Case TrapType.pit
+                                    strMessage = resTrapPitEvade
+                                Case TrapType.snake
+                                    strMessage = resTrapSnakeEvade
+                                Case TrapType.rock
+                                    strMessage = resTrapRockEvade
+                                    Dim iPile As Int16, intCtr As Int16
 									iPile = D8()
 									For intCtr = 1 To iPile
 										Dim aRock As New Rock

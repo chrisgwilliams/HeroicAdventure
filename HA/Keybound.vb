@@ -2428,7 +2428,7 @@ Module m_Keybound
                         PlaceAdjacentMonster(arrAdjacentMonsters, arrMonsterPos)
 					Case 1
                         ' 1 creature followed you, so refer to it by race
-                        DoStairs = resArticleThe & arrAdjacentMonsters(0).monsterrace & strStairsFollowsYou & strDirection & resStairsTheStairs
+                        DoStairs = resArticleThe & arrAdjacentMonsters(0).monsterrace & resStairsFollowsYou & strDirection & resStairsTheStairs
                         PlaceAdjacentMonster(arrAdjacentMonsters, arrMonsterPos)
 					Case Else
                         ' nothing followed you up
