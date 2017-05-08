@@ -454,7 +454,7 @@
     <comment>Keybound.vb</comment>
   </data>
   <data name="resWalking" xml:space="preserve">
-    <value>...and we're walking... </value>
+    <value> ...and we're walking... </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resYouPickUp" xml:space="preserve">
@@ -624,5 +624,89 @@
   <data name="resTrapTeleportMsg" xml:space="preserve">
     <value> Suddenly you are somewhere else. </value>
     <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resStatusConfusedMsg" xml:space="preserve">
+    <value> You are confused. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStatusConfusedRecoverMsg" xml:space="preserve">
+    <value> Your head begins to clear. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStatusSleepingAction" xml:space="preserve">
+    <value> You are sleeping. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStatusSleepingWakeUp" xml:space="preserve">
+    <value> You wake up. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStatusVisibleMsg" xml:space="preserve">
+    <value> You are now visible again. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorDoor" xml:space="preserve">
+    <value> A closed door. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorFloor" xml:space="preserve">
+    <value> A section of floor. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorOpenDoor" xml:space="preserve">
+    <value> An open door. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorRock" xml:space="preserve">
+    <value> Impenetrable rock. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorStairsDown" xml:space="preserve">
+    <value> A stair leading down. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorStairsUp" xml:space="preserve">
+    <value> A stair leading upwards. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTileDescriptorStone" xml:space="preserve">
+    <value> Solid stone. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTrapConfusionEvade" xml:space="preserve">
+    <value> You feel confused for a brief moment, but it passes. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTrapTeleportEvade" xml:space="preserve">
+    <value> You briefly feel as though you belong somewhere else. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resDeathMsg" xml:space="preserve">
+    <value> You die. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resKilledByPoison" xml:space="preserve">
+    <value> poison </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptMore" xml:space="preserve">
+    <value> More... </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptPressKeyToCont" xml:space="preserve">
+    <value> Press a key to continue. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resPromptQuitOrRestart" xml:space="preserve">
+    <value> Quit entirely or Restart game? (q/R) </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resSecretDoorElf" xml:space="preserve">
+    <value> You have a funny feeling. </value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStatusPoisonDamage" xml:space="preserve">
+    <value> The poison continues to harm you. </value>
+    <comment>Keybound.vb</comment>
   </data>
 </root>

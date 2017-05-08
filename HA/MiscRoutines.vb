@@ -136,26 +136,27 @@ Module m_MiscRoutines
 	End Function
 
 	Friend Function SleepHero() As String
-		Dim strMessage As String = ""
-		With TheHero
-			If D20() > .SleepResist Then
-                strMessage = resTrapSleepResistFail
+        With TheHero
+            If D20() > .SleepResist Then
                 .Sleeping = True
-				.SleepDuration = 1 + D4() * D4()
+                .SleepDuration = 1 + D4() * D4()
                 If .Sleeping And .SleepDuration > 0 Then
                     WriteAt(61, 22, resStatusSleeping)
                 End If
+
+                Return resTrapSleepResistFail
             Else
-				Select Case .HeroRace
-					Case Race.Elf
-                        strMessage = resTrapSleepResistElf
+                Select Case .HeroRace
+                    Case Race.Elf
+                        Return resTrapSleepResistElf
                     Case Race.HalfElf
-                        strMessage = resTrapSleepResistHalfElf
+                        Return resTrapSleepResistHalfElf
                 End Select
-			End If
-		End With
-		Return strMessage
-	End Function
+            End If
+        End With
+
+        Return ""
+    End Function
 	Friend Sub PoisonHero()
 		With TheHero
 			Dim intRoll As Int16
@@ -240,109 +241,108 @@ Module m_MiscRoutines
 		End Select
 	End Sub
 
-	Friend Function CheckForTrap() As String
-		Dim strMessage As String = "", _
-			DieRoll As Int16
+    Friend Function CheckForTrap() As String
+        Dim DieRoll As Int16
 
-		With Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ)
+        With Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ)
 
-			' check to see if hero stepped on a trap
-			If .TrapType > 0 Then
-				' if trap was previously discovered, check for chance to bypass
-				If .TrapDiscovered Then
-					' already discovered trap is only DC5 to bypass (DC15 in the dark)
-					Dim DC As Integer = 5
-					' modify chance to bypass depending on lighting conditions
-					If .Illumination = IlluminationStrength.Dark Then
-						DC += 10
-					Else
-						DC -= .Illumination
-					End If
-
-					DieRoll = D20()
-					If (DieRoll = 1) Or (DieRoll + AbilityMod(TheHero.EDexterity) < DC) Then
-						' Hero failed the check, set off the trap again
-						strMessage = TriggerTrap()
-					Else
-                        strMessage = resTrapBypass & GetTrap(Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapType) & resTrap
+            ' check to see if hero stepped on a trap
+            If .TrapType > 0 Then
+                ' if trap was previously discovered, check for chance to bypass
+                If .TrapDiscovered Then
+                    ' already discovered trap is only DC5 to bypass (DC15 in the dark)
+                    Dim DC As Integer = 5
+                    ' modify chance to bypass depending on lighting conditions
+                    If .Illumination = IlluminationStrength.Dark Then
+                        DC += 10
+                    Else
+                        DC -= .Illumination
                     End If
 
-				Else ' trap not discovered before, it MIGHT be now (1 in 8 chance - modified by luck)
-					If D8() - TheHero.Luck <= 1 Then
-						.TrapDiscovered = True
-						.FloorType = SquareType.Trap
+                    DieRoll = D20()
+                    If (DieRoll = 1) Or (DieRoll + AbilityMod(TheHero.EDexterity) < DC) Then
+                        ' Hero failed the check, set off the trap again
+                        Return TriggerTrap()
+                    Else
+                        Return resTrapBypass & GetTrap(Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapType) & resTrap
+                    End If
 
-						' modify chance to evade depending on lighting conditions
-						' undiscovered trap is DC10 to detect
-						Dim DC As Integer = 10
-						If .Illumination = IlluminationStrength.Dark Then
-							DC += 10
-						Else
-							DC -= .Illumination
-						End If
+                Else ' trap not discovered before, it MIGHT be now (1 in 8 chance - modified by luck)
+                    If D8() - TheHero.Luck <= 1 Then
+                        .TrapDiscovered = True
+                        .FloorType = SquareType.Trap
 
-						DieRoll = D20()
-						If (DieRoll = 1) Or (DieRoll + AbilityMod(TheHero.EDexterity)) < (11 + D6() + DC) Then
-							' hero set off trap and did not evade
-							strMessage = TriggerTrap()
-						Else
-							' hero set off trap but managed to evade
-							Select Case .TrapType
-								Case TrapType.sleep
-                                    strMessage = resTrapSleepEvade
+                        ' modify chance to evade depending on lighting conditions
+                        ' undiscovered trap is DC10 to detect
+                        Dim DC As Integer = 10
+                        If .Illumination = IlluminationStrength.Dark Then
+                            DC += 10
+                        Else
+                            DC -= .Illumination
+                        End If
+
+                        DieRoll = D20()
+                        If (DieRoll = 1) Or (DieRoll + AbilityMod(TheHero.EDexterity)) < (11 + D6() + DC) Then
+                            ' hero set off trap and did not evade
+                            Return TriggerTrap()
+                        Else
+                            ' hero set off trap but managed to evade
+                            Select Case .TrapType
+                                Case TrapType.sleep
+                                    Return resTrapSleepEvade
                                 Case TrapType.poison
-                                    strMessage = resTrapPoisonEvade
+                                    Return resTrapPoisonEvade
                                 Case TrapType.explosion
-                                    strMessage = resTrapExplosionEvade
+                                    Return resTrapExplosionEvade
                                 Case TrapType.pit
-                                    strMessage = resTrapPitEvade
+                                    Return resTrapPitEvade
                                 Case TrapType.snake
-                                    strMessage = resTrapSnakeEvade
+                                    Return resTrapSnakeEvade
                                 Case TrapType.rock
-                                    strMessage = resTrapRockEvade
                                     Dim iPile As Int16, intCtr As Int16
-									iPile = D8()
-									For intCtr = 1 To iPile
-										Dim aRock As New Rock
-										.items.Add(aRock)
-										.itemcount += 1
-										aRock = Nothing
-									Next
-								Case TrapType.confusion
-									strMessage = "You feel confused for a brief moment, but it passes. "
-								Case TrapType.teleport
-									strMessage = "You briefly feel as though you belong somewhere else. "
-							End Select
-						End If
-					End If
-				End If
-			End If
-		End With
+                                    iPile = D8()
+                                    For intCtr = 1 To iPile
+                                        Dim aRock As New Rock
+                                        .items.Add(aRock)
+                                        .itemcount += 1
+                                        aRock = Nothing
+                                    Next
+                                    Return resTrapRockEvade
+                                Case TrapType.confusion
+                                    Return resTrapConfusionEvade
+                                Case TrapType.teleport
+                                    Return resTrapTeleportEvade
+                            End Select
+                        End If
+                    End If
+                End If
+            End If
+        End With
 
-		Return strMessage
-	End Function
+        Return ""
+    End Function
 
 #End Region
 
 #Region " Line of Sight Routines "
 
-	Friend Function TileDescriptor(ByVal tiletype As SquareType) As String
+    Friend Function TileDescriptor(ByVal tiletype As SquareType) As String
 		Select Case tiletype
 			Case SquareType.Door
-				Return "A closed door."
-			Case SquareType.OpenDoor
-				Return "An open door."
-			Case SquareType.Floor, SquareType.Trap
-				Return "A section of floor."
-			Case SquareType.NECorner, SquareType.NWCorner, SquareType.SECorner, SquareType.SWCorner, SquareType.Wall, SquareType.Secret
-				Return "Solid stone."
-			Case SquareType.Rock
-				Return "Impenetrable rock."
-			Case SquareType.StairsDn
-				Return "A stair leading down."
-			Case SquareType.StairsUp
-				Return "A stair leading upwards."
-			Case Else
+                Return resTileDescriptorDoor
+            Case SquareType.OpenDoor
+                Return resTileDescriptorOpenDoor
+            Case SquareType.Floor, SquareType.Trap
+                Return resTileDescriptorFloor
+            Case SquareType.NECorner, SquareType.NWCorner, SquareType.SECorner, SquareType.SWCorner, SquareType.Wall, SquareType.Secret
+                Return resTileDescriptorStone
+            Case SquareType.Rock
+                Return resTileDescriptorRock
+            Case SquareType.StairsDn
+                Return resTileDescriptorStairsDown
+            Case SquareType.StairsUp
+                Return resTileDescriptorStairsUp
+            Case Else
 				Return ""
 		End Select
 	End Function
@@ -385,12 +385,12 @@ Module m_MiscRoutines
 		' if hero is sleeping, decrement duration counter
 		With TheHero
 			If .Sleeping And .SleepDuration > 0 Then
-				strmessage &= "You are sleeping. "
-				.SleepDuration -= 1
+                strmessage &= resStatusSleepingAction
+                .SleepDuration -= 1
 				If .SleepDuration = 0 Then
-					WriteAt(61, 22, "Sleeping", ConsoleColor.Black)
-					strmessage &= "You wake up. "
-					.Sleeping = False
+                    WriteAt(61, 22, resStatusSleeping, ConsoleColor.Black)
+                    strmessage &= resStatusSleepingWakeUp
+                    .Sleeping = False
 				End If
 			End If
 		End With
@@ -405,8 +405,8 @@ Module m_MiscRoutines
 				.Icon = "_"
 				.InvisibilityDuration -= 1
 				If .InvisibilityDuration = 0 Then
-					strMessage &= "You are now visible again. "
-					.Invisible = False
+                    strMessage &= resStatusVisibleMsg
+                    .Invisible = False
 					.Icon = "@"
 				End If
 			End If
@@ -420,12 +420,12 @@ Module m_MiscRoutines
 		' if hero is confused, decrement duration counter
 		With TheHero
 			If .Confused And .ConfusionDuration > 0 Then
-				strMessage &= "You are confused. "
-				.ConfusionDuration -= 1
+                strMessage &= resStatusConfusedMsg
+                .ConfusionDuration -= 1
 				If .ConfusionDuration = 0 Then
-					WriteAt(61, 21, "Confused", ConsoleColor.Black)
-					strMessage &= "Your head begins to clear. "
-					.Confused = False
+                    WriteAt(61, 21, resStatusConfused, ConsoleColor.Black)
+                    strMessage &= resStatusConfusedRecoverMsg
+                    .Confused = False
 				End If
 			End If
 		End With
@@ -441,22 +441,22 @@ Module m_MiscRoutines
 			If .Poisoned And .PoisonDuration > 0 Then
 				If D10() = 1 Then
 					.CurrentHP -= D4()
-					strMessage &= "The poison continues to harm you. "
-				End If
+                    strMessage &= resStatusPoisonDamage
+                End If
 
 				.PoisonDuration -= 1
 				If .PoisonDuration = 0 Then
-					WriteAt(61, 20, "Poisoned", ConsoleColor.Black)
-					If D4() = 1 Then .PoisonResist += 1
+                    WriteAt(61, 20, resStatusPoisoned, ConsoleColor.Black)
+                    If D4() = 1 Then .PoisonResist += 1
 					.Poisoned = False
 				End If
 
 				If .CurrentHP <= 0 Then
 					.Dead = True
-					.KilledBy = "poison"
-					UpdateHPDisplay()
-					strMessage &= "You die. "
-				End If
+                    .KilledBy = resKilledByPoison
+                    UpdateHPDisplay()
+                    strMessage &= resDeathMsg
+                End If
 			End If
 		End With
 
@@ -486,8 +486,8 @@ Module m_MiscRoutines
 				OrElse Level(TheHero.LocX + 1, TheHero.LocY + 1, TheHero.LocZ).FloorType = SquareType.Secret Then
 
 				If D6() = 1 Then
-					strMessage &= "You have a funny feeling. "
-				End If
+                    strMessage &= resSecretDoorElf
+                End If
 			End If
 		End If
 		Return strMessage
@@ -502,9 +502,9 @@ Module m_MiscRoutines
 
 			WriteAt(1, 0, CLEARSPACE)
 			WriteAt(1, 1, CLEARSPACE)
-			WriteAt(1, 0, "Quit entirely or Restart game? (q/R)")
+            WriteAt(1, 0, resPromptQuitOrRestart)
 
-			strAnswer = ReadKey()
+            strAnswer = ReadKey()
 
 			Select Case strAnswer.KeyChar.ToString
 				Case Chr(13)
@@ -614,32 +614,32 @@ Module m_MiscRoutines
 		Debug.WriteLine("leaving PlaceItems routine")
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub More(Optional ByVal intX As Integer = 61, _
+    <DebuggerStepThrough()>
+    Friend Sub More(Optional ByVal intX As Integer = 61, _
 					 Optional ByVal intY As Integer = 1)
 		Dim strKeyPress As ConsoleKeyInfo
-		WriteAt(intX, intY, "More...", ConsoleColor.Yellow)
+        WriteAt(intX, intY, resPromptMore, ConsoleColor.Yellow)
 
-		strKeyPress = ReadKey(True)
+        strKeyPress = ReadKey(True)
 		If Asc(strKeyPress.KeyChar.ToString) <> 32 Then
 			More(intX, intY)
 		End If
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Function LevelLookup(ByVal level As Integer) As Integer
+    <DebuggerStepThrough()>
+    Friend Function LevelLookup(ByVal level As Integer) As Integer
 		Return level * (level - 1) * 500
 	End Function
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub PressAKey()
+    <DebuggerStepThrough()>
+    Friend Sub PressAKey()
 		CursorVisible = False
-		WriteAt(1, 24, "Press a key to continue.", ConsoleColor.Yellow)
-		ReadKey()
+        WriteAt(1, 24, resPromptPressKeyToCont, ConsoleColor.Yellow)
+        ReadKey()
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Function Top3of4(ByVal intDie1 As Integer, _
+    <DebuggerStepThrough()>
+    Friend Function Top3of4(ByVal intDie1 As Integer, _
 							 ByVal intDie2 As Integer, _
 							 ByVal intDie3 As Integer, _
 							 ByVal intDie4 As Integer) As Integer
