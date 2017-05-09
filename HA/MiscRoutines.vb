@@ -685,8 +685,8 @@ Module m_MiscRoutines
 		End Select
 	End Function
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub PlaceAvatar(ByVal intDirection As Integer)
+    <DebuggerStepThrough()>
+    Friend Sub PlaceAvatar(ByVal intDirection As Integer)
 		Debug.WriteLine("Entering PlaceAvatar routine")
 
 		' if no stairs up were generated for whatever reason
@@ -760,8 +760,8 @@ Module m_MiscRoutines
 		WriteAt(TheHero.LocX, TheHero.LocY, TheHero.Icon, TheHero.Color)
 
 		If Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).Illumination < IlluminationStrength.Torch Then
-			WriteAt(1, 0, "It is pitch black in here.")
-		End If
+            WriteAt(1, 0, resPitchBlack)
+        End If
 
 		Debug.WriteLine("Exiting PlaceAvatar routine")
 	End Sub
@@ -825,8 +825,8 @@ Module m_MiscRoutines
 		Debug.WriteLine("m_arrMonster.count = " & m_arrMonster.Count)
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub RedrawMonsters(Optional ByVal ShowAll As Boolean = False)
+    <DebuggerStepThrough()>
+    Friend Sub RedrawMonsters(Optional ByVal ShowAll As Boolean = False)
 		Dim intCtr As Integer
 
 		' set these up so we can check for obstacles in the LOS
@@ -858,153 +858,94 @@ Module m_MiscRoutines
 
 							' determine Monster location relative to Hero
 							If x1 < x2 Then
-								If y1 < y2 Then
-									' NW
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathX += 1
-										pathY += 1
-									Loop
-								ElseIf y1 = y2 Then
-									' W
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathX += 1
-									Loop
-								ElseIf y1 > y2 Then
-									' SW
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathX += 1
-										pathY -= 1
-									Loop
-								End If
-							ElseIf x1 = x2 Then
-								If y1 < y2 Then
-									' N
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathY += 1
-									Loop
-								ElseIf y1 > y2 Then
-									' S
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathY += 1
-									Loop
-								End If
-							ElseIf x1 > x2 Then
-								If y1 < y2 Then
-									' NE
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathX -= 1
-										pathY += 1
-									Loop
-								ElseIf y1 = y2 Then
-									' E
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathX -= 1
-									Loop
-								ElseIf y1 > y2 Then
-									' SE
-									Do Until pathX = x2 And pathY = y2
-										If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
-										Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
-											' obstacle encountered
-											bolObstacle = True
-											Exit Do
-										End If
-										pathX -= 1
-										pathY -= 1
-									Loop
-								End If
-							End If
+                                If y1 < y2 Then
+                                    ' NW
+                                    bolObstacle = CheckLOSObstacle("NW", x1, y1, x2, y2, Z, pathX, pathY)
+                                ElseIf y1 = y2 Then
+                                    ' W
+                                    bolObstacle = CheckLOSObstacle("W", x1, y1, x2, y2, Z, pathX, pathY)
+                                ElseIf y1 > y2 Then
+                                    ' SW
+                                    bolObstacle = CheckLOSObstacle("SW", x1, y1, x2, y2, Z, pathX, pathY)
+                                End If
+                            ElseIf x1 = x2 Then
+                                If y1 < y2 Then
+                                    ' N
+                                    bolObstacle = CheckLOSObstacle("N", x1, y1, x2, y2, Z, pathX, pathY)
+                                ElseIf y1 > y2 Then
+                                    ' S
+                                    bolObstacle = CheckLOSObstacle("S", x1, y1, x2, y2, Z, pathX, pathY)
+                                End If
+                            ElseIf x1 > x2 Then
+                                If y1 < y2 Then
+                                    ' NE
+                                    bolObstacle = CheckLOSObstacle("NE", x1, y1, x2, y2, Z, pathX, pathY)
+                                ElseIf y1 = y2 Then
+                                    ' E
+                                    bolObstacle = CheckLOSObstacle("E", x1, y1, x2, y2, Z, pathX, pathY)
+                                ElseIf y1 > y2 Then
+                                    ' SE
+                                    bolObstacle = CheckLOSObstacle("SE", x1, y1, x2, y2, Z, pathX, pathY)
+                                End If
+                            End If
 
-							' obstacle not encountered, so redraw
-							If Not bolObstacle Then
-								WriteAt(m_arrMonster(intCtr).LocX, m_arrMonster(intCtr).LocY, m_arrMonster(intCtr).Character, m_arrMonster(intCtr).Color)
-							End If
-						End If
-					End If
-				End If
-			End If
-		Next
-	End Sub
+                            ' obstacle not encountered, so redraw
+                            If Not bolObstacle Then
+                                WriteAt(m_arrMonster(intCtr).LocX, m_arrMonster(intCtr).LocY, m_arrMonster(intCtr).Character, m_arrMonster(intCtr).Color)
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        Next
+    End Sub
 
-	Friend Sub RedrawItems(Optional ByVal All As Boolean = True)
+    Private Function CheckLOSObstacle(direction As String, x1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer, Z As Integer, pathX As Integer, pathY As Integer) As Boolean
+        Do Until pathX = x2 And pathY = y2
+            If Level(pathX, pathY, Z).FloorType = SquareType.Wall _
+            Or Level(pathX, pathY, Z).FloorType = SquareType.NWCorner _
+            Or Level(pathX, pathY, Z).FloorType = SquareType.NECorner _
+            Or Level(pathX, pathY, Z).FloorType = SquareType.SECorner _
+            Or Level(pathX, pathY, Z).FloorType = SquareType.SWCorner _
+            Or Level(pathX, pathY, Z).FloorType = SquareType.Door Then
+                ' obstacle encountered
+                Return True
+            End If
+
+            Select Case direction
+                Case "NW"
+                    pathX += 1
+                    pathY += 1
+                Case "W"
+                    pathX += 1
+                Case "SW"
+                    pathX += 1
+                    pathY -= 1
+                Case "N"
+                    pathY += 1
+                Case "S"
+                    pathY += 1
+                Case "NE"
+                    pathX -= 1
+                    pathY += 1
+                Case "E"
+                    pathX -= 1
+                Case "SE"
+                    pathX -= 1
+                    pathY -= 1
+            End Select
+        Loop
+
+        Return False
+
+    End Function
+
+    Friend Sub RedrawItems(Optional ByVal All As Boolean = True)
 		Dim intXCtr As Integer, _
 			intYCtr As Integer
 
-		For intYCtr = 0 To CInt(22)
+        'TODO: Get Rid of "magic" numbers
+        For intYCtr = 0 To CInt(22)
 			For intXCtr = 0 To CInt(60)
 				' refresh items on floor
 				If All Then

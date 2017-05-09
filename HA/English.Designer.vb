@@ -569,7 +569,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to It is pitch black in here. .
+        '''  Looks up a localized string similar to  It is pitch black in here. .
         '''</summary>
         Friend Shared ReadOnly Property resPitchBlack() As String
             Get
@@ -578,7 +578,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Kick something. Which direction? .
+        '''  Looks up a localized string similar to  Kick something. Which direction? .
         '''</summary>
         Friend Shared ReadOnly Property resPromptKickDirection() As String
             Get
@@ -596,7 +596,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Press any key to return..
+        '''  Looks up a localized string similar to  Press any key to return. .
         '''</summary>
         Friend Shared ReadOnly Property resPromptPressAnyKey() As String
             Get
@@ -614,7 +614,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Are you sure you want to quit? (y,N).
+        '''  Looks up a localized string similar to  Are you sure you want to quit? (y,N) .
         '''</summary>
         Friend Shared ReadOnly Property resPromptQuit() As String
             Get

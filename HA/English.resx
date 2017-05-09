@@ -330,19 +330,19 @@
     <comment>Keybound.vb</comment>
   </data>
   <data name="resPitchBlack" xml:space="preserve">
-    <value>It is pitch black in here. </value>
+    <value> It is pitch black in here. </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resPromptKickDirection" xml:space="preserve">
-    <value>Kick something. Which direction? </value>
+    <value> Kick something. Which direction? </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resPromptPressAnyKey" xml:space="preserve">
-    <value>Press any key to return.</value>
+    <value> Press any key to return. </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resPromptQuit" xml:space="preserve">
-    <value>Are you sure you want to quit? (y,N)</value>
+    <value> Are you sure you want to quit? (y,N) </value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resPromptReturnToWilderness" xml:space="preserve">
