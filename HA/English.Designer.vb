@@ -236,6 +236,33 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to There is something on the floor here..
+        '''</summary>
+        Friend Shared ReadOnly Property resDungeonFloorItem() As String
+            Get
+                Return ResourceManager.GetString("resDungeonFloorItem", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to There are several items here..
+        '''</summary>
+        Friend Shared ReadOnly Property resDungeonFloorItems() As String
+            Get
+                Return ResourceManager.GetString("resDungeonFloorItems", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to I&apos;m sorry, this feature has not been completed yet..
+        '''</summary>
+        Friend Shared ReadOnly Property resFeatureNotComplete() As String
+            Get
+                Return ResourceManager.GetString("resFeatureNotComplete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to This tunnel has been flooded for some time....
         '''</summary>
         Friend Shared ReadOnly Property resFloodedTunnel() As String
@@ -250,6 +277,231 @@ Namespace My.Resources
         Friend Shared ReadOnly Property resImpassable() As String
             Get
                 Return ResourceManager.GetString("resImpassable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to In ages past, before the rise of modern.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine1() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to only to be rebuilt anew..
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine10() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine10", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to But one day a great evil rose and all the.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine11() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine11", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to kingdoms of the land fell to darkness....
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine12() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine12", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ancient prophecies foretold the fall, but.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine13() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine13", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to the world of man was not without hope..
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine14() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine14", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The prophecy spoke of a hero. A child born.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine15() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine15", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to unto the world with a curious mark on his.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine16() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine16", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to person, possessed of great courage, would.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine17() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine17", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to one day rise to overthrow the dark lord..
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine18() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine18", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to But the dark lord was not afraid. Twice a.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine19() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine19", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to man and all his technological miracles....
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine2() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to year, he sent out his inquisitors to every.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine20() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine20", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to kingdom with orders to inspect all the.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine21() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine21", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to newborn children, and return with any who.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine22() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine22", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to bore such a mark..
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine23() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine23", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to For 300 years, the dark lord has ruled the.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine24() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine24", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to land unchallenged....
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine25() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine25", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to There existed a world of magic and wonder..
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine3() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine3", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A place where mighty sorcerors and noble.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine4() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine4", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to warriors walked the lands in search of.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine5() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine5", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to glory and adventure..
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine6() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine6", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to With these adventures, many battles were.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine7() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine7", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to fought. Good clashed with Evil, and great.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine8() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine8", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to kingdoms on both sides trembled and fell.
+        '''</summary>
+        Friend Shared ReadOnly Property resIntroLine9() As String
+            Get
+                Return ResourceManager.GetString("resIntroLine9", resourceCulture)
             End Get
         End Property
         
@@ -434,6 +686,96 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to choices.  What action shall you take?.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuChoices() As String
+            Get
+                Return ResourceManager.GetString("resMenuChoices", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to As your destiny unfolds before you, you are presented with the first of many.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuDestiny() As String
+            Get
+                Return ResourceManager.GetString("resMenuDestiny", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [ ] read the FAQ.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuFAQ() As String
+            Get
+                Return ResourceManager.GetString("resMenuFAQ", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Welcome to the first episode of.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuFirstEpisode() As String
+            Get
+                Return ResourceManager.GetString("resMenuFirstEpisode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [ ] read the intro story.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuIntro() As String
+            Get
+                Return ResourceManager.GetString("resMenuIntro", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [ ] read the manual.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuManual() As String
+            Get
+                Return ResourceManager.GetString("resMenuManual", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [ ] create a new hero.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuNew() As String
+            Get
+                Return ResourceManager.GetString("resMenuNew", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [ ] quit, before it gets too tough.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuQuit() As String
+            Get
+                Return ResourceManager.GetString("resMenuQuit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [ ] resume a previous game.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuResume() As String
+            Get
+                Return ResourceManager.GetString("resMenuResume", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Your choice:.
+        '''</summary>
+        Friend Shared ReadOnly Property resMenuYourChoice() As String
+            Get
+                Return ResourceManager.GetString("resMenuYourChoice", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to  is about to die. .
         '''</summary>
         Friend Shared ReadOnly Property resMonsterAboutToDie() As String
@@ -556,6 +898,240 @@ Namespace My.Resources
         Friend Shared ReadOnly Property resOpenDoorSelf() As String
             Get
                 Return ResourceManager.GetString("resOpenDoorSelf", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flooded.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonFlooded() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonFlooded", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A partially flooded tunnel..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonFloodedDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonFloodedDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Forbidden.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonForbidden() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonForbidden", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  A dark and forbidding passage into the mountains. .
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonForbiddenDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonForbiddenDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Mysterious.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonMysterious() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonMysterious", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A dark and mysterious looking cave entrance..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonMysteriousDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonMysteriousDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ruins.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonRuins() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonRuins", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Overgrown ruins..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonRuinsDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonRuinsDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Temple.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonTemple() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonTemple", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  An ancient temple. .
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonTempleDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonTempleDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Volcanic.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonVolcanic() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonVolcanic", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A smoking fissure in the side of the mountain..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandDungeonVolcanicDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandDungeonVolcanicDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  A dark forest. .
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandForest() As String
+            Get
+                Return ResourceManager.GetString("resOverlandForest", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  A hilly region. .
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandHills() As String
+            Get
+                Return ResourceManager.GetString("resOverlandHills", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  The plains. .
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandPlains() As String
+            Get
+                Return ResourceManager.GetString("resOverlandPlains", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  A road. .
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandRoad() As String
+            Get
+                Return ResourceManager.GetString("resOverlandRoad", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An abandoned village..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownAbandonedDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownAbandonedDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Fincastle.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownFincastle() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownFincastle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to , a small town..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownFincastleDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownFincastleDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Lakeside.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownLakeside() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownLakeside", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to , a fishing community..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownLakesideDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownLakesideDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sawtooth.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownSawtooth() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownSawtooth", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to , a small town..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownSawtoothDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownSawtoothDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Stonegate.
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownStonegate() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownStonegate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to , a remote settlement..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandTownStonegateDesc() As String
+            Get
+                Return ResourceManager.GetString("resOverlandTownStonegateDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The volcano..
+        '''</summary>
+        Friend Shared ReadOnly Property resOverlandVolcano() As String
+            Get
+                Return ResourceManager.GetString("resOverlandVolcano", resourceCulture)
             End Get
         End Property
         
@@ -857,6 +1433,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to There are stairs leading down here..
+        '''</summary>
+        Friend Shared ReadOnly Property resStairsDown() As String
+            Get
+                Return ResourceManager.GetString("resStairsDown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to  will it ever end? .
         '''</summary>
         Friend Shared ReadOnly Property resStairsDownEverEnd() As String
@@ -911,6 +1496,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to There are stairs leading up here..
+        '''</summary>
+        Friend Shared ReadOnly Property resStairsUp() As String
+            Get
+                Return ResourceManager.GetString("resStairsUp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to You return to the overland map. .
         '''</summary>
         Friend Shared ReadOnly Property resStairsUpOverland() As String
@@ -943,6 +1537,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property resStairsYouGo() As String
             Get
                 Return ResourceManager.GetString("resStairsYouGo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to constitution.
+        '''</summary>
+        Friend Shared ReadOnly Property resStatCon() As String
+            Get
+                Return ResourceManager.GetString("resStatCon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to strength.
+        '''</summary>
+        Friend Shared ReadOnly Property resStatStr() As String
+            Get
+                Return ResourceManager.GetString("resStatStr", resourceCulture)
             End Get
         End Property
         
@@ -1028,6 +1640,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Against the Dark Lord.
+        '''</summary>
+        Friend Shared ReadOnly Property resSubtitle() As String
+            Get
+                Return ResourceManager.GetString("resSubtitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Use the movement keys to aim your weapon, press [t] to target. Abort with [space] or [z]..
         '''</summary>
         Friend Shared ReadOnly Property resTargetAim() As String
@@ -1105,6 +1726,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property resTileDescriptorStone() As String
             Get
                 Return ResourceManager.GetString("resTileDescriptorStone", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Heroic Adventure!.
+        '''</summary>
+        Friend Shared ReadOnly Property resTitle() As String
+            Get
+                Return ResourceManager.GetString("resTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to  You pass beneath a beautiful tree. .
+        '''</summary>
+        Friend Shared ReadOnly Property resTownTree() As String
+            Get
+                Return ResourceManager.GetString("resTownTree", resourceCulture)
             End Get
         End Property
         
@@ -1217,7 +1856,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A poison trap..
+        '''  Looks up a localized string similar to  A poison trap..
         '''</summary>
         Friend Shared ReadOnly Property resTrapPoison() As String
             Get
@@ -1226,7 +1865,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Cough Cough... you set off a poison gas trap..
+        '''  Looks up a localized string similar to  Cough Cough... you set off a poison gas trap..
         '''</summary>
         Friend Shared ReadOnly Property resTrapPoisonEffect() As String
             Get
@@ -1244,7 +1883,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A falling rock trap..
+        '''  Looks up a localized string similar to  A falling rock trap..
         '''</summary>
         Friend Shared ReadOnly Property resTrapRock() As String
             Get
@@ -1271,7 +1910,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A sleeping gas trap..
+        '''  Looks up a localized string similar to  A sleeping gas trap..
         '''</summary>
         Friend Shared ReadOnly Property resTrapSleep() As String
             Get
@@ -1289,7 +1928,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A brief sensation passes over you. .
+        '''  Looks up a localized string similar to  A brief sensation passes over you. .
         '''</summary>
         Friend Shared ReadOnly Property resTrapSleepResistElf() As String
             Get
@@ -1307,7 +1946,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to You feel sleepy for a moment, but it passes. .
+        '''  Looks up a localized string similar to  You feel sleepy for a moment, but it passes. .
         '''</summary>
         Friend Shared ReadOnly Property resTrapSleepResistHalfElf() As String
             Get
@@ -1316,7 +1955,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A snake pit trap..
+        '''  Looks up a localized string similar to  A snake pit trap. .
         '''</summary>
         Friend Shared ReadOnly Property resTrapSnake() As String
             Get
@@ -1343,7 +1982,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A magical teleportation trap..
+        '''  Looks up a localized string similar to  A magical teleportation trap. .
         '''</summary>
         Friend Shared ReadOnly Property resTrapTeleport() As String
             Get
@@ -1370,7 +2009,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Use the movement keys to position the cursor. Abort with [SPACE] or [Z]..
+        '''  Looks up a localized string similar to  Use the movement keys to position the cursor. Abort with [SPACE] or [Z]..
         '''</summary>
         Friend Shared ReadOnly Property resUseMovementKeys() As String
             Get

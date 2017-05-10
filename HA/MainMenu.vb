@@ -1,6 +1,7 @@
 Imports System.Console
 Imports HA.Common
 Imports HA.Common.Helper
+Imports HA.My.Resources.English
 
 Module m_MainMenu
 
@@ -11,23 +12,22 @@ Module m_MainMenu
 
 		Clear()
 
-		WriteAt(34, 2, "Heroic Adventure!", ConsoleColor.Yellow)
+        WriteAt(34, 2, resTitle, ConsoleColor.Yellow)
+        WriteAt(30, 4, resSubtitle, ConsoleColor.Red)
 
-		WriteAt(30, 4, "Against the Dark Lord", ConsoleColor.Red)
+        WriteAt(2, 2, resMenuFirstEpisode, ConsoleColor.Gray)
+        WriteAt(2, 6, resMenuDestiny, ConsoleColor.Gray)
+        WriteAt(2, 7, resMenuChoices, ConsoleColor.Gray)
+        WriteAt(20, 10, resMenuNew, ConsoleColor.Gray)
+        WriteAt(20, 11, resMenuFAQ, ConsoleColor.Gray)
+        WriteAt(20, 12, resMenuIntro, ConsoleColor.Gray)
+        WriteAt(20, 13, resMenuManual, ConsoleColor.Gray)
+        WriteAt(20, 14, resMenuResume, ConsoleColor.Gray)
+        WriteAt(20, 15, resMenuQuit, ConsoleColor.Gray)
 
-		WriteAt(2, 2, "Welcome to the first episode of", ConsoleColor.Gray)
-		WriteAt(2, 6, "As your destiny unfolds before you, you are presented with the first of many", ConsoleColor.Gray)
-		WriteAt(2, 7, "choices.  What action shall you take?", ConsoleColor.Gray)
-		WriteAt(20, 10, "[ ] create a new hero", ConsoleColor.Gray)
-		WriteAt(20, 11, "[ ] read the FAQ", ConsoleColor.Gray)
-		WriteAt(20, 12, "[ ] read the intro story", ConsoleColor.Gray)
-		WriteAt(20, 13, "[ ] read the manual", ConsoleColor.Gray)
-		WriteAt(20, 14, "[ ] resume a previous game", ConsoleColor.Gray)
-		WriteAt(20, 15, "[ ] quit, before it gets too tough", ConsoleColor.Gray)
+        WriteAt(20, 19, resMenuYourChoice, ConsoleColor.Gray)
 
-		WriteAt(20, 19, "Your choice: ", ConsoleColor.Gray)
-
-		WriteAt(21, 10, "c")
+        WriteAt(21, 10, "c")
 		WriteAt(21, 11, "f")
 		WriteAt(21, 12, "i")
 		WriteAt(21, 13, "m")
@@ -94,16 +94,16 @@ Module m_MainMenu
 	End Sub
 
 	Private Function CheckForBaseStat(ByVal CheckStat As String) As ConsoleColor
-		' these races have at least one "base" stat plus a modifier, so we gray out the base stat
-		If TheHero.HeroRace = Race.HalfOrc And CheckStat = "strength" Then Return ConsoleColor.DarkGray
-		If TheHero.HeroRace = Race.HalfOrc And CheckStat = "constitution" Then Return ConsoleColor.DarkGray
+        ' these races have at least one "base" stat plus a modifier, so we gray out the base stat
+        If TheHero.HeroRace = Race.HalfOrc And CheckStat = resStatStr Then Return ConsoleColor.DarkGray
+        If TheHero.HeroRace = Race.HalfOrc And CheckStat = resStatCon Then Return ConsoleColor.DarkGray
 
-		If TheHero.HeroRace = Race.Dwarf And CheckStat = "constitution" Then Return ConsoleColor.DarkGray
+        If TheHero.HeroRace = Race.Dwarf And CheckStat = resStatCon Then Return ConsoleColor.DarkGray
 
-		If TheHero.HeroRace = Race.Ogre And CheckStat = "strength" Then Return ConsoleColor.DarkGray
-		If TheHero.HeroRace = Race.Ogre And CheckStat = "constitution" Then Return ConsoleColor.DarkGray
+        If TheHero.HeroRace = Race.Ogre And CheckStat = resStatStr Then Return ConsoleColor.DarkGray
+        If TheHero.HeroRace = Race.Ogre And CheckStat = resStatCon Then Return ConsoleColor.DarkGray
 
-		Return ConsoleColor.White
+        Return ConsoleColor.White
 	End Function
 
 	Friend Sub CreateHero()
@@ -134,8 +134,8 @@ Module m_MainMenu
 			WriteAt(35, 4, "@", TheHero.Color)
 
 			WriteAt(2, 10, "Strength:", ConsoleColor.Gray)
-			WriteAt(16, 10, arrStat(0, 0), CheckForBaseStat("strength"))
-			modColor = ConsoleColor.White
+            WriteAt(16, 10, arrStat(0, 0), CheckForBaseStat(resStatStr))
+            modColor = ConsoleColor.White
 			If arrStat(0, 1) > arrStat(0, 0) Then modColor = ConsoleColor.Green
 			If arrStat(0, 1) < arrStat(0, 0) Then modColor = ConsoleColor.Red
 			If arrStat(0, 1) > 0 Then
@@ -368,9 +368,9 @@ Module m_MainMenu
 	End Sub
 	Friend Sub DisplayFAQ()
 		Clear()
-		WriteAt(8, 10, "I'm sorry, this feature has not been completed yet.")
+        WriteAt(8, 10, resFeatureNotComplete)
 
-		PressAKey()
+        PressAKey()
 		MainMenu()
 	End Sub
 	Friend Sub DisplayIntro()
@@ -378,84 +378,84 @@ Module m_MainMenu
 			intX As Integer = 5
 
 		Clear()
-		WriteAt(intX, intY, "In ages past, before the rise of modern", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "man and all his technological miracles...", ConsoleColor.Gray)
-		intY += 3
+        WriteAt(intX, intY, resIntroLine1, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine2, ConsoleColor.Gray)
 
-		WriteAt(intX, intY, "There existed a world of magic and wonder.", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "A place where mighty sorcerors and noble", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "warriors walked the lands in search of", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "adventure.", ConsoleColor.Gray)
-		intY += 3
+        intY += 3
+        WriteAt(intX, intY, resIntroLine3, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine4, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine5, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine6, ConsoleColor.Gray)
 
-		WriteAt(intX, intY, "With these adventures, many battles were", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "fought. Good clashed with Evil, and great", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "kingdoms on both sides trembled and fell", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "only to be rebuilt anew.", ConsoleColor.Gray)
-		intY += 3
+        intY += 3
+        WriteAt(intX, intY, resIntroLine7, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine8, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine9, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine10, ConsoleColor.Gray)
 
-		WriteAt(intX, intY, "But one day a great evil rose and all the", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "kingdoms of the land fell to darkness...", ConsoleColor.Gray)
-		intY += 3
+        intY += 3
+        WriteAt(intX, intY, resIntroLine11, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine12, ConsoleColor.Gray)
 
-		PressAKey()
-		intY = 2
+        intY += 3
+        PressAKey()
 
-		Clear()
-		WriteAt(intX, intY, "Ancient prophecies foretold the fall, but", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "the world of man was not without hope.", ConsoleColor.Gray)
-		intY += 3
+        intY = 2
+        Clear()
+        WriteAt(intX, intY, resIntroLine13, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine14, ConsoleColor.Gray)
 
-		WriteAt(intX, intY, "The prophecy spoke of a hero. A child born", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "unto the world with a curious mark on his", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "person, possessed of great courage, would", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "one day rise to overthrow the dark lord.", ConsoleColor.Gray)
-		intY += 3
+        intY += 3
+        WriteAt(intX, intY, resIntroLine15, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine16, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine17, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine18, ConsoleColor.Gray)
 
-		WriteAt(intX, intY, "But the dark lord was not afraid. Twice a", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "year, he sent out his inquisitors to every", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "kingdom with orders to inspect all the", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "newborn children, and return with any who", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "bore a mark.", ConsoleColor.Gray)
-		intY += 3
+        intY += 3
+        WriteAt(intX, intY, resIntroLine19, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine20, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine21, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine22, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine23, ConsoleColor.Gray)
 
-		WriteAt(intX, intY, "For 300 years, the dark lord has ruled the", ConsoleColor.Gray)
-		intY += 1
-		WriteAt(intX, intY, "land unchallenged...", ConsoleColor.Gray)
-		intY += 3
+        intY += 3
+        WriteAt(intX, intY, resIntroLine24, ConsoleColor.Gray)
+        intY += 1
+        WriteAt(intX, intY, resIntroLine25, ConsoleColor.Gray)
 
-		PressAKey()
+        intY += 3
+        PressAKey()
 
-		MainMenu()
+        MainMenu()
 	End Sub
 	Friend Sub DisplayManual()
 		Clear()
-		WriteAt(8, 10, "I'm sorry, this feature has not been completed yet.")
+        WriteAt(8, 10, resFeatureNotComplete)
 
-		PressAKey()
+        PressAKey()
 		MainMenu()
 	End Sub
 	Friend Sub ResumeGame()
 		Clear()
-		WriteAt(8, 10, "I'm sorry, this feature has not been completed yet.")
+        WriteAt(8, 10, resFeatureNotComplete)
 
-		PressAKey()
+        PressAKey()
 		MainMenu()
 	End Sub
 

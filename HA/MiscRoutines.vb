@@ -1118,8 +1118,8 @@ Module m_MiscRoutines
 		If TheHero.InTown Then
 			Select Case m_TownMap(TheHero.LocX, TheHero.LocY, TheHero.Town).CellType
 				Case HA.Towns.CellType.tree
-					WalkoverMsg = "You pass beneath a beautiful tree."
-			End Select
+                    WalkoverMsg = resTownTree
+            End Select
 		ElseIf TheHero.Overland Then
 			' reset the current dungeon & town labels since we are overland
 			TheHero.CurrentDungeon = ""
@@ -1127,80 +1127,80 @@ Module m_MiscRoutines
 
 			Select Case OverlandMap(TheHero.OverX, TheHero.OverY).TerrainType
 				Case TerrainType.Road
-					WalkoverMsg = "A road."
+                    WalkoverMsg = resOverlandRoad
 
-				Case TerrainType.Plains
-					WalkoverMsg = "The plains."
+                Case TerrainType.Plains
+                    WalkoverMsg = resOverlandPlains
 
-				Case TerrainType.Forest
-					WalkoverMsg = "A dark forest."
+                Case TerrainType.Forest
+                    WalkoverMsg = resOverlandForest
 
-				Case TerrainType.Hills
-					WalkoverMsg = "A hilly region."
+                Case TerrainType.Hills
+                    WalkoverMsg = resOverlandHills
 
-				Case TerrainType.Special
+                Case TerrainType.Special
 					' add coordinates here for various special encounters
 					If TheHero.OverX = 29 And TheHero.OverY = 14 Then
-						WalkoverMsg = "A dark and forbidding passage into the mountains."
-						TheHero.CurrentDungeon = "Forbidden"
-					End If
+                        WalkoverMsg = resOverlandDungeonForbiddenDesc
+                        TheHero.CurrentDungeon = resOverlandDungeonForbidden
+                    End If
 					If TheHero.OverX = 21 And TheHero.OverY = 11 Then
-						WalkoverMsg = "An ancient temple."
-						TheHero.CurrentDungeon = "Temple"
-					End If
+                        WalkoverMsg = resOverlandDungeonTempleDesc
+                        TheHero.CurrentDungeon = resOverlandDungeonTemple
+                    End If
 					If TheHero.OverX = 5 And TheHero.OverY = 10 Then
-						WalkoverMsg = "A dark and mysterious looking cave entrance."
-						TheHero.CurrentDungeon = "Mysterious"
-					End If
+                        WalkoverMsg = resOverlandDungeonMysteriousDesc
+                        TheHero.CurrentDungeon = resOverlandDungeonMysterious
+                    End If
 					If TheHero.OverX = 49 And TheHero.OverY = 10 Then
-						WalkoverMsg = "A smoking fissure in the side of the mountain."
-						TheHero.CurrentDungeon = "Volcanic"
-					End If
+                        WalkoverMsg = resOverlandDungeonVolcanicDesc
+                        TheHero.CurrentDungeon = resOverlandDungeonVolcanic
+                    End If
 					If TheHero.OverX = 41 And TheHero.OverY = 8 Then
-						WalkoverMsg = "Overgrown ruins."
-						TheHero.CurrentDungeon = "Ruins"
-					End If
+                        WalkoverMsg = resOverlandDungeonRuinsDesc
+                        TheHero.CurrentDungeon = resOverlandDungeonRuins
+                    End If
 					If TheHero.OverX = 11 And TheHero.OverY = 5 Then
-						WalkoverMsg = "A partially flooded tunnel."
-						TheHero.CurrentDungeon = "Flooded"
-					End If
+                        WalkoverMsg = resOverlandDungeonFloodedDesc
+                        TheHero.CurrentDungeon = resOverlandDungeonFlooded
+                    End If
 
 				Case TerrainType.Town
 					If TheHero.OverX = 8 And TheHero.OverY = 14 Then
-						WalkoverMsg = Chr(34) & "Fincastle" & Chr(34) & ", a small town."
-						TheHero.Town = Town.Fincastle
+                        WalkoverMsg = Chr(34) & resOverlandTownFincastle & Chr(34) & resOverlandTownFincastleDesc
+                        TheHero.Town = Town.Fincastle
 					End If
 					If TheHero.OverX = 58 And TheHero.OverY = 14 Then
-						WalkoverMsg = Chr(34) & "Stonegate" & Chr(34) & ", a remote settlement."
-						TheHero.Town = Town.Stonegate
+                        WalkoverMsg = Chr(34) & resOverlandTownStonegate & Chr(34) & resOverlandTownStonegateDesc
+                        TheHero.Town = Town.Stonegate
 					End If
 					If TheHero.OverX = 25 And TheHero.OverY = 6 Then
-						WalkoverMsg = Chr(34) & "Lakeside" & Chr(34) & ", a fishing community."
-						TheHero.Town = Town.Lakeside
+                        WalkoverMsg = Chr(34) & resOverlandTownLakeside & Chr(34) & resOverlandTownLakesideDesc
+                        TheHero.Town = Town.Lakeside
 					End If
 					If TheHero.OverX = 49 And TheHero.OverY = 6 Then
-						WalkoverMsg = Chr(34) & "Sawtooth" & Chr(34) & ", a small town."
-						TheHero.Town = Town.Sawtooth
+                        WalkoverMsg = Chr(34) & resOverlandTownSawtooth & Chr(34) & resOverlandTownSawtoothDesc
+                        TheHero.Town = Town.Sawtooth
 					End If
 					If TheHero.OverX = 17 And TheHero.OverY = 3 Then
-						WalkoverMsg = "An abandoned village."
-						TheHero.Town = Town.Abandoned
+                        WalkoverMsg = resOverlandTownAbandonedDesc
+                        TheHero.Town = Town.Abandoned
 					End If
 
 				Case TerrainType.Volcano
-					WalkoverMsg = "The volcano."
-				Case Else
+                    WalkoverMsg = resOverlandVolcano
+                Case Else
 					WalkoverMsg = ""
 			End Select
 		Else
 			Select Case Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).FloorType
 				Case SquareType.StairsUp
-					WalkoverMsg = "There are stairs leading up here. "
+                    WalkoverMsg = resStairsUp
 
-				Case SquareType.StairsDn
-					WalkoverMsg = "There are stairs leading down here. "
+                Case SquareType.StairsDn
+                    WalkoverMsg = resStairsDown
 
-				Case SquareType.Floor, SquareType.OpenDoor, SquareType.Trap
+                Case SquareType.Floor, SquareType.OpenDoor, SquareType.Trap
 					WalkoverMsg = ""
 					Select Case Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount
 						Case 1
@@ -1218,11 +1218,11 @@ Module m_MiscRoutines
 									WalkoverMsg &= Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items(0).walkover & " here. "
 								End If
 							Else
-								WalkoverMsg = "There is something on the floor here. "
-							End If
+                                WalkoverMsg = resDungeonFloorItem
+                            End If
 						Case Is > 1
-							WalkoverMsg = "There are several items here. "
-					End Select
+                            WalkoverMsg = resDungeonFloorItems
+                    End Select
 
 					'If Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapType > 0 And Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapDiscovered Then
 					'    WalkoverMsg += "You bypass the " & GetTrap(Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).TrapType) & " trap. "
@@ -1250,8 +1250,8 @@ Module m_MiscRoutines
 		End With
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub RedrawDisplay()
+    <DebuggerStepThrough()>
+    Friend Sub RedrawDisplay()
 		UpdateEffectiveStats()
 
 		If TheHero.Overland Then
@@ -1382,21 +1382,21 @@ Module m_MiscRoutines
 
 	End Function
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Public Sub WriteAt(ByVal x As Integer, ByVal y As Integer, ByVal s As String, Optional ByVal ForeColor As Integer = 15, Optional ByVal BackColor As Integer = 0)
-		Try
-			Console.ForegroundColor = ForeColor
-			Console.BackgroundColor = BackColor
+    <DebuggerStepThrough()>
+    Public Sub WriteAt(ByVal x As Integer, ByVal y As Integer, ByVal s As String, Optional ByVal ForeColor As ConsoleColor = ConsoleColor.White, Optional ByVal BackColor As ConsoleColor = ConsoleColor.Black)
+        Try
+            Console.ForegroundColor = ForeColor
+            Console.BackgroundColor = BackColor
 
-			Console.SetCursorPosition(x, y)
-			Console.Write(s)
-		Catch e As ArgumentOutOfRangeException
-			Console.Clear()
-			Console.WriteLine(e.Message)
-		End Try
-	End Sub	'WriteAt
+            Console.SetCursorPosition(x, y)
+            Console.Write(s)
+        Catch e As ArgumentOutOfRangeException
+            Console.Clear()
+            Console.WriteLine(e.Message)
+        End Try
+    End Sub 'WriteAt
 
-	Friend Sub DrawLine(ByVal LinePoints As List(Of coord))
+    Friend Sub DrawLine(ByVal LinePoints As List(Of coord))
 		For iCtr As Integer = 0 To LinePoints.Count - 1
 			With LinePoints(iCtr)
 				If Level(.x, .y, TheHero.LocZ).Observed AndAlso Level(.x, .y, TheHero.LocZ).Illumination > IlluminationStrength.Dark Then

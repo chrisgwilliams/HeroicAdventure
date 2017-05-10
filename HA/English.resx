@@ -450,7 +450,7 @@
     <comment>Keybound.vb</comment>
   </data>
   <data name="resUseMovementKeys" xml:space="preserve">
-    <value>Use the movement keys to position the cursor. Abort with [SPACE] or [Z].</value>
+    <value> Use the movement keys to position the cursor. Abort with [SPACE] or [Z].</value>
     <comment>Keybound.vb</comment>
   </data>
   <data name="resWalking" xml:space="preserve">
@@ -514,27 +514,27 @@
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapPoison" xml:space="preserve">
-    <value>A poison trap.</value>
+    <value> A poison trap.</value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapPoisonEffect" xml:space="preserve">
-    <value>Cough Cough... you set off a poison gas trap.</value>
+    <value> Cough Cough... you set off a poison gas trap.</value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapRock" xml:space="preserve">
-    <value>A falling rock trap.</value>
+    <value> A falling rock trap.</value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapSleep" xml:space="preserve">
-    <value>A sleeping gas trap.</value>
+    <value> A sleeping gas trap.</value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapSnake" xml:space="preserve">
-    <value>A snake pit trap.</value>
+    <value> A snake pit trap. </value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapTeleport" xml:space="preserve">
-    <value>A magical teleportation trap.</value>
+    <value> A magical teleportation trap. </value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resStairsFollowsYou" xml:space="preserve">
@@ -602,7 +602,7 @@
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapSleepResistElf" xml:space="preserve">
-    <value>A brief sensation passes over you. </value>
+    <value> A brief sensation passes over you. </value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapSleepResistFail" xml:space="preserve">
@@ -610,7 +610,7 @@
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapSleepResistHalfElf" xml:space="preserve">
-    <value>You feel sleepy for a moment, but it passes. </value>
+    <value> You feel sleepy for a moment, but it passes. </value>
     <comment>MiscRoutines.vb</comment>
   </data>
   <data name="resTrapSnakeEvade" xml:space="preserve">
@@ -708,5 +708,289 @@
   <data name="resStatusPoisonDamage" xml:space="preserve">
     <value> The poison continues to harm you. </value>
     <comment>Keybound.vb</comment>
+  </data>
+  <data name="resOverlandDungeonFlooded" xml:space="preserve">
+    <value>Flooded</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonFloodedDesc" xml:space="preserve">
+    <value>A partially flooded tunnel.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonForbidden" xml:space="preserve">
+    <value>Forbidden</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonForbiddenDesc" xml:space="preserve">
+    <value> A dark and forbidding passage into the mountains. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonMysterious" xml:space="preserve">
+    <value>Mysterious</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonMysteriousDesc" xml:space="preserve">
+    <value>A dark and mysterious looking cave entrance.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonRuins" xml:space="preserve">
+    <value>Ruins</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonRuinsDesc" xml:space="preserve">
+    <value>Overgrown ruins.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonTemple" xml:space="preserve">
+    <value>Temple</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonTempleDesc" xml:space="preserve">
+    <value> An ancient temple. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonVolcanic" xml:space="preserve">
+    <value>Volcanic</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandDungeonVolcanicDesc" xml:space="preserve">
+    <value>A smoking fissure in the side of the mountain.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandForest" xml:space="preserve">
+    <value> A dark forest. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandHills" xml:space="preserve">
+    <value> A hilly region. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandPlains" xml:space="preserve">
+    <value> The plains. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandRoad" xml:space="preserve">
+    <value> A road. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownAbandonedDesc" xml:space="preserve">
+    <value>An abandoned village.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownFincastle" xml:space="preserve">
+    <value>Fincastle</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownFincastleDesc" xml:space="preserve">
+    <value>, a small town.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownLakeside" xml:space="preserve">
+    <value>Lakeside</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownLakesideDesc" xml:space="preserve">
+    <value>, a fishing community.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownSawtooth" xml:space="preserve">
+    <value>Sawtooth</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownSawtoothDesc" xml:space="preserve">
+    <value>, a small town.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownStonegate" xml:space="preserve">
+    <value>Stonegate</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandTownStonegateDesc" xml:space="preserve">
+    <value>, a remote settlement.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resOverlandVolcano" xml:space="preserve">
+    <value>The volcano.</value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resStairsDown" xml:space="preserve">
+    <value>There are stairs leading down here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resStairsUp" xml:space="preserve">
+    <value>There are stairs leading up here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resTownTree" xml:space="preserve">
+    <value> You pass beneath a beautiful tree. </value>
+    <comment>MiscRoutines.vb</comment>
+  </data>
+  <data name="resDungeonFloorItem" xml:space="preserve">
+    <value>There is something on the floor here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resDungeonFloorItems" xml:space="preserve">
+    <value>There are several items here.</value>
+    <comment>Keybound.vb</comment>
+  </data>
+  <data name="resFeatureNotComplete" xml:space="preserve">
+    <value>I'm sorry, this feature has not been completed yet.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resStatCon" xml:space="preserve">
+    <value>constitution</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resStatStr" xml:space="preserve">
+    <value>strength</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resSubtitle" xml:space="preserve">
+    <value>Against the Dark Lord</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resTitle" xml:space="preserve">
+    <value>Heroic Adventure!</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine1" xml:space="preserve">
+    <value>In ages past, before the rise of modern</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine10" xml:space="preserve">
+    <value>only to be rebuilt anew.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine11" xml:space="preserve">
+    <value>But one day a great evil rose and all the</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine12" xml:space="preserve">
+    <value>kingdoms of the land fell to darkness...</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine13" xml:space="preserve">
+    <value>Ancient prophecies foretold the fall, but</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine14" xml:space="preserve">
+    <value>the world of man was not without hope.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine15" xml:space="preserve">
+    <value>The prophecy spoke of a hero. A child born</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine16" xml:space="preserve">
+    <value>unto the world with a curious mark on his</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine17" xml:space="preserve">
+    <value>person, possessed of great courage, would</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine18" xml:space="preserve">
+    <value>one day rise to overthrow the dark lord.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine19" xml:space="preserve">
+    <value>But the dark lord was not afraid. Twice a</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine2" xml:space="preserve">
+    <value>man and all his technological miracles...</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine20" xml:space="preserve">
+    <value>year, he sent out his inquisitors to every</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine21" xml:space="preserve">
+    <value>kingdom with orders to inspect all the</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine22" xml:space="preserve">
+    <value>newborn children, and return with any who</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine23" xml:space="preserve">
+    <value>bore such a mark.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine24" xml:space="preserve">
+    <value>For 300 years, the dark lord has ruled the</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine25" xml:space="preserve">
+    <value>land unchallenged...</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine3" xml:space="preserve">
+    <value>There existed a world of magic and wonder.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine4" xml:space="preserve">
+    <value>A place where mighty sorcerors and noble</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine5" xml:space="preserve">
+    <value>warriors walked the lands in search of</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine6" xml:space="preserve">
+    <value>glory and adventure.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine7" xml:space="preserve">
+    <value>With these adventures, many battles were</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine8" xml:space="preserve">
+    <value>fought. Good clashed with Evil, and great</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resIntroLine9" xml:space="preserve">
+    <value>kingdoms on both sides trembled and fell</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuChoices" xml:space="preserve">
+    <value>choices.  What action shall you take?</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuDestiny" xml:space="preserve">
+    <value>As your destiny unfolds before you, you are presented with the first of many</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuFAQ" xml:space="preserve">
+    <value>[ ] read the FAQ</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuFirstEpisode" xml:space="preserve">
+    <value>Welcome to the first episode of</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuIntro" xml:space="preserve">
+    <value>[ ] read the intro story</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuManual" xml:space="preserve">
+    <value>[ ] read the manual</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuNew" xml:space="preserve">
+    <value>[ ] create a new hero</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuQuit" xml:space="preserve">
+    <value>[ ] quit, before it gets too tough</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuResume" xml:space="preserve">
+    <value>[ ] resume a previous game</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuYourChoice" xml:space="preserve">
+    <value>Your choice:</value>
+    <comment>MainMenu.vb</comment>
   </data>
 </root>
