@@ -1283,10 +1283,14 @@ Module m_MiscRoutines
         Dim OK As Boolean = False
         Dim i As Integer = 0
 
-
         While Not OK
             i = strMessage.IndexOf(".")
-            If strMessage.Substring(i + 1) <> " " Then strMessage.Insert(" ", i + 1)
+            If i = -1 Then OK = True
+
+            If i > 0 And strMessage.Substring(i + 1) <> " " Then
+                strMessage.Insert(" ", i + 1)
+            End If
+            If i >= strMessage.Length Then OK = True
 
         End While
 

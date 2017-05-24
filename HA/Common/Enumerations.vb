@@ -223,7 +223,18 @@
 			Divine = 2
 		End Enum
 
+        Public Enum CompassDirection As Integer
+            NorthWest = 7
+            North = 8
+            NorthEast = 9
+            West = 4
+            StandStill = 5
+            East = 6
+            SouthWest = 1
+            South = 2
+            SouthEast = 3
+        End Enum
 
-	End Module
+    End Module
 
 End Namespace
