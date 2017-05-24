@@ -993,4 +993,240 @@
     <value>Your choice:</value>
     <comment>MainMenu.vb</comment>
   </data>
+  <data name="resBuilderExcavating" xml:space="preserve">
+    <value>Excavating a new dungeon level, please wait...</value>
+    <comment>Main.vb</comment>
+  </data>
+  <data name="resErrorCaveIn" xml:space="preserve">
+    <value>Massive cave in! Many dwarves were killed.</value>
+    <comment>Main.vb</comment>
+  </data>
+  <data name="resErrorMissingSelections" xml:space="preserve">
+    <value>You must select Gender, Race &amp; Class before proceeding.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resErrorOgrePixieClass" xml:space="preserve">
+    <value>Ogres and Pixies may not start with a Class.</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resErrorWhereBuild" xml:space="preserve">
+    <value>BuildDungeon:</value>
+    <comment>Main.vb</comment>
+  </data>
+  <data name="resFixedStatPlusd6" xml:space="preserve">
+    <value>Base stat fixed, plus d6</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resFixedStatPlusd8" xml:space="preserve">
+    <value>Base stat fixed, plus d8</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelCharisma" xml:space="preserve">
+    <value>Charisma:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelConstitution" xml:space="preserve">
+    <value>Constitution:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelDescription" xml:space="preserve">
+    <value>Description:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelDexterity" xml:space="preserve">
+    <value>Dexterity:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelIntelligence" xml:space="preserve">
+    <value>Intelligence:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelPortrait" xml:space="preserve">
+    <value>Portrait:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelRaceMod" xml:space="preserve">
+    <value>Race Mod:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelStrength" xml:space="preserve">
+    <value>Strength:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resLabelWisdom" xml:space="preserve">
+    <value>Wisdom:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resMenuGenerationTitle" xml:space="preserve">
+    <value>Character Generation Menu:</value>
+    <comment>MainMenu.vb</comment>
+  </data>
+  <data name="resPromptInventoryScreen" xml:space="preserve">
+    <value>Press z to return to main inventory screen.</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resPromptPressPlus" xml:space="preserve">
+    <value>Press + for more.</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackAmuTal" xml:space="preserve">
+    <value>Amulets &amp; Talismans:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackArmor" xml:space="preserve">
+    <value>Armor:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackBoots" xml:space="preserve">
+    <value>Boots:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackBracers" xml:space="preserve">
+    <value>Bracers:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackCloaks" xml:space="preserve">
+    <value>Cloaks:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackGirdles" xml:space="preserve">
+    <value>Girdles:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackGloves" xml:space="preserve">
+    <value>Gloves:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackGold" xml:space="preserve">
+    <value>Gold:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackHelmets" xml:space="preserve">
+    <value>Helmets:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackMissiles" xml:space="preserve">
+    <value>Missles:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackMissileWpns" xml:space="preserve">
+    <value>Missle Weapons:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackNoMatchingItems" xml:space="preserve">
+    <value>No items of this type.</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackPotions" xml:space="preserve">
+    <value>Potions:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackRings" xml:space="preserve">
+    <value>Rings:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackShields" xml:space="preserve">
+    <value>Shields:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackTitle" xml:space="preserve">
+    <value>---------------------------------- My Backpack ---------------------------------</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackTools" xml:space="preserve">
+    <value>Tools:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackWands" xml:space="preserve">
+    <value>Wands:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackWeapons" xml:space="preserve">
+    <value>Weapons:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedArmor" xml:space="preserve">
+    <value>] Armor        |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedBoots" xml:space="preserve">
+    <value>] Boots        |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedBracers" xml:space="preserve">
+    <value>] Bracers      |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedCloak" xml:space="preserve">
+    <value>] Cloak        |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedGirdle" xml:space="preserve">
+    <value>] Girdle       |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedGloves" xml:space="preserve">
+    <value>] Gloves       |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedHead" xml:space="preserve">
+    <value>] Head         |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedLeftHand" xml:space="preserve">
+    <value>] Left Hand    |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedLeftRing" xml:space="preserve">
+    <value>] Left Ring    |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedMissiles" xml:space="preserve">
+    <value>] Missles      |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedMissileWpn" xml:space="preserve">
+    <value>] Missle Weapon|</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedNeck" xml:space="preserve">
+    <value>] Neck         |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedRightHand" xml:space="preserve">
+    <value>] Right Hand   |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedRightRing" xml:space="preserve">
+    <value>] Right Ring   |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedTitle" xml:space="preserve">
+    <value>------------------------------- Readied Equipment ------------------------------</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedTool" xml:space="preserve">
+    <value>] Tool         |</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resEquippedWeight" xml:space="preserve">
+    <value>Weight</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackBooks" xml:space="preserve">
+    <value>Books:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackFood" xml:space="preserve">
+    <value>Food:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackGems" xml:space="preserve">
+    <value>Gems:</value>
+    <comment>Inventory.vb</comment>
+  </data>
+  <data name="resBackpackScrolls" xml:space="preserve">
+    <value>Scrolls:</value>
+    <comment>Inventory.vb</comment>
+  </data>
 </root>

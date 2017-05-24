@@ -3,6 +3,7 @@ Imports System.Console
 Imports System.Collections.Generic
 Imports HA.Common
 Imports HA.Screens
+Imports HA.My.Resources.English
 
 Module MainModule
 
@@ -183,16 +184,16 @@ Module MainModule
 
 		' clear the screen
 		Clear()
-		WriteAt(1, 1, "Excavating a new dungeon level, please wait...")
+        WriteAt(1, 1, resBuilderExcavating)
 
-		' call the DLL to build the level, DLL returns an array
-		Try
+        ' call the DLL to build the level, DLL returns an array
+        Try
 			Level = dungeon.BuildDungeon
 			BuildIt = True
 		Catch ex As Exception
-			WriteAt(1, 2, "Massive cave in! Many dwarves were killed.")
-			WriteAt(1, 24, "BuildDungeon: " & ex.Message)
-			BuildIt = False
+            WriteAt(1, 2, resErrorCaveIn)
+            WriteAt(1, 24, resErrorWhereBuild & ex.Message)
+            BuildIt = False
 		End Try
 
 	End Function
@@ -318,7 +319,7 @@ Module MainModule
 
 #Region " Status Panel Subs and Functions "
 
-	<System.Diagnostics.DebuggerStepThrough()> Friend Sub DisplayStats()
+    <DebuggerStepThrough()> Friend Sub DisplayStats()
 
 		WriteAt(61, 2, "Name:", ConsoleColor.Gray)
 		WriteAt(61, 3, "Class:", ConsoleColor.Gray)
@@ -344,8 +345,11 @@ Module MainModule
 			If .Poisoned And .PoisonDuration > 0 Then
 				WriteAt(61, 21, "Poisoned", ConsoleColor.Green)
 			End If
-		End With
-	End Sub
+
+            'ToDo: Display other status messages here:  Confused, Asleep, etc
+
+        End With
+    End Sub
 	Friend Sub DisplayValues()
 
 		WriteAt(68, 2, TheHero.Name)

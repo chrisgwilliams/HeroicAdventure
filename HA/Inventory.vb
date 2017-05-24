@@ -3,6 +3,7 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 
 Imports HA.Common
+Imports HA.My.Resources.English
 
 Module Inventory
 #Region " Inventory & Backpack Subs and Functions "
@@ -10,28 +11,28 @@ Module Inventory
 	Private Sub EquippedLocationLayout()
 
 		Clear()
-		WriteAt(0, 0, "------------------------------- Readied Equipment ------------------------------", ConsoleColor.DarkYellow)
+        WriteAt(0, 0, resEquippedTitle, ConsoleColor.DarkYellow)
 
-		WriteAt(68, 2, "Weight", ConsoleColor.DarkYellow)
+        WriteAt(68, 2, resEquippedWeight, ConsoleColor.DarkYellow)
 
-		WriteAt(2, 4, "] Head         |", ConsoleColor.DarkYellow)
-		WriteAt(2, 5, "] Neck         |", ConsoleColor.DarkYellow)
-		WriteAt(2, 6, "] Cloak        |", ConsoleColor.DarkYellow)
-		WriteAt(2, 7, "] Girdle       |", ConsoleColor.DarkYellow)
-		WriteAt(2, 8, "] Armor        |", ConsoleColor.DarkYellow)
-		WriteAt(2, 9, "] Left Hand    |", ConsoleColor.DarkYellow)
-		WriteAt(2, 10, "] Right Hand   |", ConsoleColor.DarkYellow)
-		WriteAt(2, 11, "] Left Ring    |", ConsoleColor.DarkYellow)
-		WriteAt(2, 12, "] Right Ring   |", ConsoleColor.DarkYellow)
-		WriteAt(2, 13, "] Gloves       |", ConsoleColor.DarkYellow)
-		WriteAt(2, 14, "] Bracers      |", ConsoleColor.DarkYellow)
-		WriteAt(2, 15, "] Boots        |", ConsoleColor.DarkYellow)
-		WriteAt(2, 16, "] Missle Weapon|", ConsoleColor.DarkYellow)
-		WriteAt(2, 17, "] Missles      |", ConsoleColor.DarkYellow)
-		WriteAt(2, 18, "] Tool         |", ConsoleColor.DarkYellow)
+        WriteAt(2, 4, resEquippedHead, ConsoleColor.DarkYellow)
+        WriteAt(2, 5, resEquippedNeck, ConsoleColor.DarkYellow)
+        WriteAt(2, 6, resEquippedCloak, ConsoleColor.DarkYellow)
+        WriteAt(2, 7, resEquippedGirdle, ConsoleColor.DarkYellow)
+        WriteAt(2, 8, resEquippedArmor, ConsoleColor.DarkYellow)
+        WriteAt(2, 9, resEquippedLeftHand, ConsoleColor.DarkYellow)
+        WriteAt(2, 10, resEquippedRightHand, ConsoleColor.DarkYellow)
+        WriteAt(2, 11, resEquippedLeftRing, ConsoleColor.DarkYellow)
+        WriteAt(2, 12, resEquippedRightRing, ConsoleColor.DarkYellow)
+        WriteAt(2, 13, resEquippedGloves, ConsoleColor.DarkYellow)
+        WriteAt(2, 14, resEquippedBracers, ConsoleColor.DarkYellow)
+        WriteAt(2, 15, resEquippedBoots, ConsoleColor.DarkYellow)
+        WriteAt(2, 16, resEquippedMissileWpn, ConsoleColor.DarkYellow)
+        WriteAt(2, 17, resEquippedMissiles, ConsoleColor.DarkYellow)
+        WriteAt(2, 18, resEquippedTool, ConsoleColor.DarkYellow)
 
-		' display the a - o menu options in WHITE
-		Dim intCtr As Integer
+        ' display the a - o menu options in WHITE
+        Dim intCtr As Integer
 		For intCtr = 0 To 14
 			WriteAt(1, intCtr + 4, Chr(Asc("a") + intCtr))
 		Next
@@ -138,754 +139,390 @@ Module Inventory
 
 	End Sub
 
-	Private Function ShowAllItems(ByVal intCtr As Integer, _
-								  ByVal itemtype As Integer, _
-								  ByRef yPos As Integer, _
-								  ByRef ItemArray As ArrayList, _
-								  ByVal MaxRows As Integer, _
-								  ByRef startletter As String, _
-								  ByRef itemcount As Integer, _
-								  ByVal category As String, _
-						 Optional ByVal action As String = "") As String
-
-		ShowAllItems = ""
-
-		Dim thing As Object, _
-			intQty As Integer, strDash As String = "", _
-			strSelection As ConsoleKeyInfo, _
-			ok As Boolean, i As Integer, _
-			intTitlePos As Integer, intTypeCtr As Integer = 0
-
-		itemcount += intCtr
-
-		For i = 1 To category.Length
-			strDash = strDash & "-"
-		Next
-
-		If intCtr > 0 Then
-			' yPos will only equal 5 if it's below an empty category, which 
-			' shouldn't be displayed. this was an error that popped up on the
-			' second + page(s) of backpack
-			If yPos = 5 Then
-				WriteAt(0, 2, CLEARSPACE, ConsoleColor.DarkYellow)
-				WriteAt(0, 3, CLEARSPACE, ConsoleColor.DarkYellow)
-				yPos = 2
-			End If
-
-			WriteAt(0, yPos, category, ConsoleColor.DarkYellow)
-			intTitlePos = yPos
-
-			yPos += 1
-			WriteAt(0, yPos, strDash, ConsoleColor.DarkYellow)
-
-			yPos += 1
-			For Each thing In TheHero.Equipped.BackPack
-				If thing.type = itemtype Then
-					intQty = thing.quantity
-					Dim strItem As New StringBuilder
-
-					strItem.Append(String.Format("{0}] {1}", startletter, thing.Name))
-					If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
-					strItem.Append("               ")
-					WriteAt(1, yPos, strItem.ToString)
-					startletter = Chr(Asc(startletter) + 1)
-
-					yPos += 1
-					ItemArray.Add(thing)
-					intTypeCtr += 1
-				End If
-
-				' wrap the list
-				If yPos >= MaxRows And action = "" Then
-					If intTypeCtr > 0 Then
-						' nothing
-					Else
-						If yPos - intTitlePos = 2 Then
-							WriteAt(0, intTitlePos, CLEARSPACE)
-							WriteAt(0, intTitlePos + 1, CLEARSPACE)
-							itemcount -= 1
-						End If
-					End If
-
-					WriteAt(0, MaxRows + 2, "Press z to return to main inventory screen.")
-					'check for more items after this point
-
-					Dim plus As Boolean
-					If itemcount < TheHero.Equipped.BackPack.Count Then
-						WriteAt(44, MaxRows + 2, "Press + for more.")
-						plus = True
-					End If
-
-					ok = False
-					Do While Not ok
-						strSelection = ReadKey()
-						Select Case strSelection.KeyChar.ToString
-							Case "z"
-								Return 9999
-							Case "+"
-								If plus Then
-									ok = True
-									yPos = 2
-									For intCtr = yPos To MaxRows
-										WriteAt(0, intCtr, CLEARSPACE)
-									Next
-
-									WriteAt(0, yPos, category, ConsoleColor.DarkYellow)
-									yPos += 1
-									WriteAt(0, yPos, strDash, ConsoleColor.DarkYellow)
-									yPos += 1
-								End If
-						End Select
-					Loop
-				End If
-			Next
-			yPos += 1
-
-		End If
-
-	End Function
-
-	Private Function CheckBackpack(ByVal item As Integer) As Integer
-		' This checks to see if there are ANY of a specific item type in the backpack
-
-		Dim thing As Object, intCtr As Integer = 0
-
-		For Each thing In TheHero.Equipped.BackPack
-			If thing.type = item Then
-				intCtr += 1
-			End If
-		Next
-
-		Return intCtr
-
-	End Function
-
-	Friend Function ShowBackpack(ByVal action As String, Optional ByVal intCategory As Integer = 0) As Object
-		Dim yPos As Integer = 2, _
-			startLetter As String = "a", _
-			itemArray As New ArrayList, _
-			strSelection As ConsoleKeyInfo, _
-			ok As Boolean, _
-			intQty As Integer, _
-			MaxRows As Integer = 21, _
-			itemcount As Integer
-
-		Clear()
-
-		WriteAt(0, 0, "---------------------------------- My Backpack ---------------------------------")
-
-		Select Case intCategory
-			Case 0 ' show EVERYTHING in the backpack
-				Dim thing As Object
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Helmet), ItemType.Helmet, yPos, itemArray, MaxRows, startLetter, itemcount, "Helmets:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Neck), ItemType.Neck, yPos, itemArray, MaxRows, startLetter, itemcount, "Amulets & Talismans:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Cloak), ItemType.Cloak, yPos, itemArray, MaxRows, startLetter, itemcount, "Cloaks:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Girdle), ItemType.Girdle, yPos, itemArray, MaxRows, startLetter, itemcount, "Girdles:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Armor), ItemType.Armor, yPos, itemArray, MaxRows, startLetter, itemcount, "Armor:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Weapon), ItemType.Weapon, yPos, itemArray, MaxRows, startLetter, itemcount, "Weapons:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Shield), ItemType.Shield, yPos, itemArray, MaxRows, startLetter, itemcount, "Shields:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Gloves), ItemType.Gloves, yPos, itemArray, MaxRows, startLetter, itemcount, "Gloves:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Bracers), ItemType.Bracers, yPos, itemArray, MaxRows, startLetter, itemcount, "Bracers:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Boots), ItemType.Boots, yPos, itemArray, MaxRows, startLetter, itemcount, "Boots:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.MissleWeapon), ItemType.MissleWeapon, yPos, itemArray, MaxRows, startLetter, itemcount, "Missle Weapons:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Missles), ItemType.Missles, yPos, itemArray, MaxRows, startLetter, itemcount, "Missles:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Tool), ItemType.Tool, yPos, itemArray, MaxRows, startLetter, itemcount, "Tools:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Ring), ItemType.Ring, yPos, itemArray, MaxRows, startLetter, itemcount, "Rings:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Potion), ItemType.Potion, yPos, itemArray, MaxRows, startLetter, itemcount, "Potions:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Scroll), ItemType.Scroll, yPos, itemArray, MaxRows, startLetter, itemcount, "Scrolls:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Book), ItemType.Book, yPos, itemArray, MaxRows, startLetter, itemcount, "Books:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Wand), ItemType.Wand, yPos, itemArray, MaxRows, startLetter, itemcount, "Wands:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				ShowBackpack = ShowAllItems(CheckBackpack(ItemType.Gem), ItemType.Gem, yPos, itemArray, MaxRows, startLetter, itemcount, "Gems:", action)
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-				Dim gpCount As Integer = 0
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Gold Then
-						gpCount += thing.quantity
-					End If
-				Next
-
-				TheHero.GP = gpCount
-
-				If TheHero.GP > 0 Then
-					If yPos = 5 Then yPos = 2
-					WriteAt(0, yPos, CLEARSPACE)
-					WriteAt(0, yPos + 1, CLEARSPACE)
-
-					WriteAt(0, yPos, "Gold:", ConsoleColor.DarkYellow)
-					yPos += 1
-					WriteAt(0, yPos, "-----", ConsoleColor.DarkYellow)
-					yPos += 1
-					WriteAt(1, yPos, TheHero.GP & "GP               ")
-					startLetter = Chr(Asc(startLetter) + 1)
-
-					yPos += 1
-					itemArray.Add(thing)
-				End If
-
-				If ShowBackpack = "9999" Then
-					Exit Function
-				End If
-
-			Case ItemType.Helmet
-				Dim thing As Object
-				WriteAt(0, yPos, "Helmets:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Helmet Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(String.Format("{0}] {1}", startLetter, thing.Name))
-						If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Neck
-				Dim thing As Object
-				WriteAt(0, yPos, "Amulets & Talismans:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------------------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Neck Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(String.Format("{0}] {1}", startLetter, thing.Name))
-						If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Cloak
-				Dim thing As Object
-				WriteAt(0, yPos, "Cloaks:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "-------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Cloak Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(String.Format("{0}] {1}", startLetter, thing.Name))
-						If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Girdle
-				Dim thing As Object
-				WriteAt(0, yPos, "Girdles:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Girdle Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(String.Format("{0}] {1}", startLetter, thing.Name))
-						If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Armor
-				Dim thing As Object
-				WriteAt(0, yPos, "Armor:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Armor Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Weapon
-				Dim thing As Object
-				WriteAt(0, yPos, "Weapons:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Weapon Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-
-				yPos += 2
-				WriteAt(0, yPos, "Shields:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Shield Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Ring
-				Dim thing As Object
-				WriteAt(0, yPos, "Rings:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.Type = ItemType.Ring Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Gloves
-				Dim thing As Object
-				WriteAt(0, yPos, "Gloves:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "-------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Gloves Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Bracers
-				Dim thing As Object
-				WriteAt(0, yPos, "Bracers:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Bracers Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Boots
-				Dim thing As Object
-				WriteAt(0, yPos, "Boots:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Boots Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.MissleWeapon
-				Dim thing As Object
-				WriteAt(0, yPos, "Missle Weapons:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "---------------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.MissleWeapon Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Missles
-				action = "throw"
-				Dim thing As Object
-				WriteAt(0, yPos, "Missles:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Missles Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Tool
-				action = "use"
-				Dim thing As Object
-				WriteAt(0, yPos, "Tools:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Tool _
-					Or thing.type = ItemType.Gem _
-					Or thing.type = ItemType.Potion Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Potion
-				action = "drink"
-				Dim thing As Object
-				WriteAt(0, yPos, "Potions:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "--------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Potion Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-			Case ItemType.Wand
-				action = "zap"
-				Dim thing As Object
-				WriteAt(0, yPos, "Wands:", ConsoleColor.DarkYellow)
-				yPos += 1
-				WriteAt(0, yPos, "------", ConsoleColor.DarkYellow)
-				yPos += 1
-
-				WriteAt(1, yPos, "No items of this type.")
-				For Each thing In TheHero.Equipped.BackPack
-					If thing.type = ItemType.Wand Then
-						intQty = thing.quantity
-						Dim strItem As New StringBuilder
-
-						strItem.Append(startLetter & "] " & thing.Name)
-						If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
-						strItem.Append("               ")
-						WriteAt(1, yPos, strItem.ToString)
-
-						yPos += 1
-						startLetter = Chr(Asc(startLetter) + 1)
-						itemArray.Add(thing)
-					End If
-				Next
-				yPos += 2
-
-		End Select
-
-		If itemArray.Count > 0 And (intCategory > 0 Or action = "drop") Then
-			startLetter = Chr(Asc(startLetter) - 1)
-			WriteAt(0, MaxRows + 2, "Please make a selection [a - " & startLetter & "] or z to exit.")
-		Else
-			If action = "drop" Then
-				WriteAt(0, MaxRows + 2, "Press z to cancel drop and return to game.")
-			Else
-				WriteAt(0, MaxRows + 2, "Press z to return to main inventory screen.")
-			End If
-			WriteAt(44, MaxRows + 2, "                      ")
-		End If
-
-		' Use regular expressions to validate input
-		Dim ValidInput As Match
-
-		ok = False
-		Do While Not ok
-			strSelection = ReadKey()
-			ValidInput = Regex.Match(strSelection.KeyChar.ToString, "[a-z]")
-
-			' if they entered an appropriate value, then continue
-			If ValidInput.Success Then
-				If strSelection.KeyChar.ToString = "z" Then
-					ShowBackpack = Nothing
-					ok = True
-				ElseIf intCategory > 0 Or action = "drop" Then
-					Dim intItemIndex As Integer = Asc(strSelection.KeyChar.ToString) - Asc("a")
-
-					If intItemIndex > itemArray.Count - 1 Then
-						' user pressed a letter not onscreen, so do nothing
-					Else
-						ShowBackpack = itemArray(intItemIndex)
-
-						' drink the potion, then remove it from the backpack
-						If action = "drink" Then
-							Dim strMessage As String
-
-							TheHero.DrinkPotion(ShowBackpack.ptype)
-
-							strMessage = ShowBackpack.message
-							ShowBackpack = strMessage
-						End If
-
-						' drop the item, then remove it from the backpack
-						If action = "drop" Then
-							' place the item in the current tile Hero is occupying
-							Dim item As ItemBase = itemArray(intItemIndex)
-
-							If Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount = 0 Then
-								Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items = New ArrayList
-							End If
-
-							Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items.Add(item)
-							Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount += 1
-							ShowBackpack = "You drop the " & itemArray(intItemIndex).walkover & "."
-
-							' subtract item weight from backpack on drop
-							TheHero.BackpackWeight -= item.Weight
-						End If
-
-						' TODO: Should this be inside the drop block?
-						If itemArray(intItemIndex).quantity = 1 Then
-							TheHero.Equipped.BackPack.Remove(itemArray(intItemIndex))
-							itemArray.RemoveAt(intItemIndex)
-
-						ElseIf itemArray(intItemIndex).quantity > 1 Then
-							TheHero.Equipped.BackPack.Remove(itemArray(intItemIndex))
-							itemArray(intItemIndex).quantity -= 1
-							TheHero.Equipped.BackPack.Add(itemArray(intItemIndex))
-						End If
-
-						ok = True
-					End If
-				End If
-			End If
-		Loop
-
-	End Function
+    Private Function ShowAllItems(ByVal intCtr As Integer,
+                                  ByVal itemtype As ItemType,
+                                  ByRef yPos As Integer,
+                                  ByRef ItemArray As ArrayList,
+                                  ByVal MaxRows As Integer,
+                                  ByRef startletter As String,
+                                  ByRef itemcount As Integer,
+                                  ByVal category As String,
+                         Optional ByVal action As String = "") As String
+
+        ShowAllItems = ""
+
+        Dim thing As Object,
+            intQty As Integer, strDash As String = "",
+            strSelection As ConsoleKeyInfo,
+            ok As Boolean, i As Integer,
+            intTitlePos As Integer, intTypeCtr As Integer = 0
+
+        itemcount += intCtr
+
+        For i = 1 To category.Length
+            strDash = strDash & "-"
+        Next
+
+        If intCtr > 0 Then
+            ' yPos will only equal 5 if it's below an empty category, which 
+            ' shouldn't be displayed. this was an error that popped up on the
+            ' second + page(s) of backpack
+            If yPos = 5 Then
+                WriteAt(0, 2, CLEARSPACE, ConsoleColor.DarkYellow)
+                WriteAt(0, 3, CLEARSPACE, ConsoleColor.DarkYellow)
+                yPos = 2
+            End If
+
+            WriteAt(0, yPos, category, ConsoleColor.DarkYellow)
+            intTitlePos = yPos
+
+            yPos += 1
+            WriteAt(0, yPos, strDash, ConsoleColor.DarkYellow)
+
+            yPos += 1
+            For Each thing In TheHero.Equipped.BackPack
+                If thing.type = itemtype Then
+                    intQty = thing.quantity
+                    Dim strItem As New StringBuilder
+
+                    strItem.Append(String.Format("{0}] {1}", startletter, thing.Name))
+                    If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
+                    strItem.Append("               ")
+                    WriteAt(1, yPos, strItem.ToString)
+                    startletter = Chr(Asc(startletter) + 1)
+
+                    yPos += 1
+                    ItemArray.Add(thing)
+                    intTypeCtr += 1
+                End If
+
+                ' wrap the list
+                If yPos >= MaxRows And action = "" Then
+                    If intTypeCtr > 0 Then
+                        ' nothing
+                    Else
+                        If yPos - intTitlePos = 2 Then
+                            WriteAt(0, intTitlePos, CLEARSPACE)
+                            WriteAt(0, intTitlePos + 1, CLEARSPACE)
+                            itemcount -= 1
+                        End If
+                    End If
+
+                    WriteAt(0, MaxRows + 2, resPromptInventoryScreen)
+                    'check for more items after this point
+
+                    Dim plus As Boolean
+                    If itemcount < TheHero.Equipped.BackPack.Count Then
+                        WriteAt(44, MaxRows + 2, resPromptPressPlus)
+                        plus = True
+                    End If
+
+                    ok = False
+                    Do While Not ok
+                        strSelection = ReadKey()
+                        Select Case strSelection.KeyChar.ToString
+                            Case "z"
+                                Return 9999
+                            Case "+"
+                                If plus Then
+                                    ok = True
+                                    yPos = 2
+                                    For intCtr = yPos To MaxRows
+                                        WriteAt(0, intCtr, CLEARSPACE)
+                                    Next
+
+                                    WriteAt(0, yPos, category, ConsoleColor.DarkYellow)
+                                    yPos += 1
+                                    WriteAt(0, yPos, strDash, ConsoleColor.DarkYellow)
+                                    yPos += 1
+                                End If
+                        End Select
+                    Loop
+                End If
+            Next
+            yPos += 1
+
+        End If
+
+    End Function
+
+    Private Function CheckBackpack(ByVal itemType As ItemType) As Integer
+        ' This checks to see if there are ANY of a specific item type in the backpack
+
+        Dim thing As Object, intCtr As Integer = 0
+
+        For Each thing In TheHero.Equipped.BackPack
+            If thing.type = itemType Then
+                intCtr += 1
+            End If
+        Next
+
+        Return intCtr
+
+    End Function
+
+    Friend Function ShowBackpack(ByVal action As ActionType, Optional ByVal itemCategory As ItemType = 0) As Object
+        Dim yPos As Integer = 2,
+            startLetter As String = "a",
+            itemArray As New ArrayList,
+            strSelection As ConsoleKeyInfo,
+            ok As Boolean,
+            intQty As Integer,
+            MaxRows As Integer = 21,
+            itemcount As Integer
+
+        Clear()
+
+        WriteAt(0, 0, resBackpackTitle)
+
+        Select Case itemCategory
+            Case ItemType.Unspecified ' show EVERYTHING in the backpack
+
+                'Dim types As Array = [Enum].GetValues(GetType(ItemType))
+                'For i As Integer = 1 To types.GetLength(0) - 1
+
+                'Next
+
+                If ShowAllItems(CheckBackpack(ItemType.Helmet), ItemType.Helmet, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackHelmets, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Neck), ItemType.Neck, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackAmuTal, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Cloak), ItemType.Cloak, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackCloaks, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Girdle), ItemType.Girdle, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackGirdles, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Armor), ItemType.Armor, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackArmor, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Weapon), ItemType.Weapon, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackWeapons, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Shield), ItemType.Shield, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackShields, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Gloves), ItemType.Gloves, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackGloves, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Bracers), ItemType.Bracers, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackBracers, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Boots), ItemType.Boots, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackBoots, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.MissleWeapon), ItemType.MissleWeapon, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackMissileWpns, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Missles), ItemType.Missles, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackMissiles, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Tool), ItemType.Tool, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackTools, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Ring), ItemType.Ring, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackRings, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Potion), ItemType.Potion, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackPotions, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Scroll), ItemType.Scroll, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackScrolls, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Book), ItemType.Book, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackBooks, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Wand), ItemType.Wand, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackWands, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Gem), ItemType.Gem, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackGems, action) = "9999" Then Return "9999"
+
+                Dim gpCount As Integer = 0
+                Dim thing As Object
+
+                For Each thing In TheHero.Equipped.BackPack
+                    If thing.type = ItemType.Gold Then
+                        gpCount += thing.quantity
+                    End If
+                Next
+
+                TheHero.GP = gpCount
+
+                If TheHero.GP > 0 Then
+                    If yPos = 5 Then yPos = 2
+                    WriteAt(0, yPos, CLEARSPACE)
+                    WriteAt(0, yPos + 1, CLEARSPACE)
+
+                    WriteAt(0, yPos, resBackpackGold, ConsoleColor.DarkYellow)
+                    yPos += 1
+                    WriteAt(0, yPos, "-----", ConsoleColor.DarkYellow)
+                    yPos += 1
+                    WriteAt(1, yPos, TheHero.GP & "GP               ")
+                    startLetter = Chr(Asc(startLetter) + 1)
+
+                    yPos += 1
+                    itemArray.Add(thing)
+                End If
+
+            Case ItemType.Helmet
+                WriteItemHeading(yPos, resBackpackHelmets)
+                UpdateItemQuantity(ItemType.Helmet, itemArray, startLetter, yPos)
+
+            Case ItemType.Neck
+                WriteItemHeading(yPos, resBackpackAmuTal)
+                UpdateItemQuantity(ItemType.Neck, itemArray, startLetter, yPos)
+
+            Case ItemType.Cloak
+                WriteItemHeading(yPos, resBackpackCloaks)
+                UpdateItemQuantity(ItemType.Cloak, itemArray, startLetter, yPos)
+
+            Case ItemType.Girdle
+                WriteItemHeading(yPos, resBackpackGirdles)
+                UpdateItemQuantity(ItemType.Girdle, itemArray, startLetter, yPos)
+
+            Case ItemType.Armor
+                WriteItemHeading(yPos, resBackpackArmor)
+                UpdateItemQuantity(ItemType.Armor, itemArray, startLetter, yPos)
+
+            Case ItemType.Weapon
+                WriteItemHeading(yPos, resBackpackWeapons)
+                UpdateItemQuantity(ItemType.Weapon, itemArray, startLetter, yPos)
+
+                WriteItemHeading(yPos, resBackpackShields)
+                UpdateItemQuantity(ItemType.Shield, itemArray, startLetter, yPos)
+
+            Case ItemType.Ring
+                WriteItemHeading(yPos, resBackpackRings)
+                UpdateItemQuantity(ItemType.Ring, itemArray, startLetter, yPos)
+
+            Case ItemType.Gloves
+                WriteItemHeading(yPos, resBackpackGloves)
+                UpdateItemQuantity(ItemType.Gloves, itemArray, startLetter, yPos)
+
+            Case ItemType.Bracers
+                WriteItemHeading(yPos, resBackpackBracers)
+                UpdateItemQuantity(ItemType.Bracers, itemArray, startLetter, yPos)
+
+            Case ItemType.Boots
+                WriteItemHeading(yPos, resBackpackBoots)
+                UpdateItemQuantity(ItemType.Boots, itemArray, startLetter, yPos)
+
+            Case ItemType.MissleWeapon
+                WriteItemHeading(yPos, resBackpackMissileWpns)
+                UpdateItemQuantity(ItemType.MissleWeapon, itemArray, startLetter, yPos)
+
+            Case ItemType.Missles
+                action = ActionType.Throw
+                WriteItemHeading(yPos, resBackpackMissiles)
+                UpdateItemQuantity(ItemType.Missles, itemArray, startLetter, yPos)
+
+            Case ItemType.Tool
+                action = ActionType.Use
+                WriteItemHeading(yPos, resBackpackTools)
+
+                For Each thing As Object In TheHero.Equipped.BackPack
+                    If thing.type = ItemType.Tool _
+                    Or thing.type = ItemType.Gem _
+                    Or thing.type = ItemType.Potion Then
+                        intQty = thing.quantity
+                        Dim strItem As New StringBuilder
+
+                        strItem.Append(startLetter & "] " & thing.Name)
+                        If intQty > 1 Then strItem.Append(" (Qty: " & thing.quantity & ")")
+                        strItem.Append("               ")
+                        WriteAt(1, yPos, strItem.ToString)
+
+                        yPos += 1
+                        startLetter = Chr(Asc(startLetter) + 1)
+                        itemArray.Add(thing)
+                    End If
+                Next
+                yPos += 2
+
+            Case ItemType.Potion
+                action = ActionType.Drink
+                WriteItemHeading(yPos, resBackpackPotions)
+                UpdateItemQuantity(ItemType.Potion, itemArray, startLetter, yPos)
+
+            Case ItemType.Wand
+                action = ActionType.Zap
+                WriteItemHeading(yPos, resBackpackWands)
+                UpdateItemQuantity(ItemType.Wand, itemArray, startLetter, yPos)
+        End Select
+
+        If itemArray.Count > 0 And (itemCategory > 0 Or action = "drop") Then
+            startLetter = Chr(Asc(startLetter) - 1)
+            WriteAt(0, MaxRows + 2, "Please make a selection [a - " & startLetter & "] or z to exit.")
+        Else
+            If action = ActionType.Drop Then
+                WriteAt(0, MaxRows + 2, "Press z to cancel drop and return to game.")
+            Else
+                WriteAt(0, MaxRows + 2, "Press z to return to main inventory screen.")
+            End If
+            WriteAt(44, MaxRows + 2, "                      ")
+        End If
+
+        ' Use regular expressions to validate input
+        Dim ValidInput As Match
+
+        ok = False
+        Do While Not ok
+            strSelection = ReadKey()
+            ValidInput = Regex.Match(strSelection.KeyChar.ToString, "[a-z]")
+
+            ' if they entered an appropriate value, then continue
+            If ValidInput.Success Then
+                If strSelection.KeyChar.ToString = "z" Then
+                    ShowBackpack = Nothing
+                    ok = True
+                ElseIf itemCategory > 0 Or action = ActionType.Drop Then
+                    Dim intItemIndex As Integer = Asc(strSelection.KeyChar.ToString) - Asc("a")
+
+                    If intItemIndex > itemArray.Count - 1 Then
+                        ' user pressed a letter not onscreen, so do nothing
+                    Else
+                        ShowBackpack = itemArray(intItemIndex)
+
+                        ' drink the potion, then remove it from the backpack
+                        If action = ActionType.Drink Then
+                            Dim strMessage As String
+
+                            TheHero.DrinkPotion(ShowBackpack.ptype)
+
+                            strMessage = ShowBackpack.message
+                            ShowBackpack = strMessage
+                        End If
+
+                        ' drop the item, then remove it from the backpack
+                        If action = ActionType.Drop Then
+                            ' place the item in the current tile Hero is occupying
+                            Dim item As ItemBase = itemArray(intItemIndex)
+
+                            If Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount = 0 Then
+                                Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items = New ArrayList
+                            End If
+
+                            Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items.Add(item)
+                            Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount += 1
+                            ShowBackpack = "You drop the " & itemArray(intItemIndex).walkover & "."
+
+                            ' subtract item weight from backpack on drop
+                            TheHero.BackpackWeight -= item.Weight
+                        End If
+
+                        ' TODO: Should this be inside the drop block?
+                        If itemArray(intItemIndex).quantity = 1 Then
+                            TheHero.Equipped.BackPack.Remove(itemArray(intItemIndex))
+                            itemArray.RemoveAt(intItemIndex)
+
+                        ElseIf itemArray(intItemIndex).quantity > 1 Then
+                            TheHero.Equipped.BackPack.Remove(itemArray(intItemIndex))
+                            itemArray(intItemIndex).quantity -= 1
+                            TheHero.Equipped.BackPack.Add(itemArray(intItemIndex))
+                        End If
+
+                        ok = True
+                    End If
+                End If
+            End If
+        Loop
+
+    End Function
+
+    Sub WriteItemHeading(ByRef yPos As Integer, heading As String)
+        WriteAt(0, yPos, heading, ConsoleColor.DarkYellow)
+        yPos += 1
+        WriteAt(0, yPos, "--------------------", ConsoleColor.DarkYellow)
+        yPos += 1
+        WriteAt(1, yPos, resBackpackNoMatchingItems)
+    End Sub
+
+    Sub UpdateItemQuantity(itemType As ItemType, ByRef itemArray As ArrayList, ByRef startLetter As String, ByRef yPos As Integer)
+
+        For Each thing As Object In TheHero.Equipped.BackPack
+            If thing.type = ItemType.Helmet Then
+                Dim intQty As Integer = thing.quantity
+                Dim strItem As New StringBuilder
+
+                strItem.Append(String.Format("{0}] {1}", startLetter, thing.Name))
+                If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
+                strItem.Append("               ")
+                WriteAt(1, yPos, strItem.ToString)
+
+                yPos += 1
+                startLetter = Chr(Asc(startLetter) + 1)
+                itemArray.Add(thing)
+            End If
+        Next
+
+        yPos += 2
+    End Sub
 
 #End Region
 

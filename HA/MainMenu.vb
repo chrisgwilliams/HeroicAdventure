@@ -128,13 +128,13 @@ Module m_MainMenu
 			WriteAt(2, 8, "ATTRIBUTES   DIE  MOD  BONUS  COMMENTS", ConsoleColor.White)
 			WriteAt(2, 9, "-------------------------------------------------------", ConsoleColor.Gray)
 
-			WriteAt(25, 2, "Description: ", ConsoleColor.Gray)
-			WriteAt(38, 2, RaceDescription())
-			WriteAt(25, 4, "Portrait:", ConsoleColor.Gray)
-			WriteAt(35, 4, "@", TheHero.Color)
+            WriteAt(25, 2, resLabelDescription, ConsoleColor.Gray)
+            WriteAt(38, 2, RaceDescription())
+            WriteAt(25, 4, resLabelPortrait, ConsoleColor.Gray)
+            WriteAt(35, 4, "@", TheHero.Color)
 
-			WriteAt(2, 10, "Strength:", ConsoleColor.Gray)
-            WriteAt(16, 10, arrStat(0, 0), CheckForBaseStat(resStatStr))
+            WriteAt(2, 10, resLabelStrength, ConsoleColor.Gray)
+            WriteAt(16, 10, arrStat(0, 0), CheckForBaseStat("strength"))
             modColor = ConsoleColor.White
 			If arrStat(0, 1) > arrStat(0, 0) Then modColor = ConsoleColor.Green
 			If arrStat(0, 1) < arrStat(0, 0) Then modColor = ConsoleColor.Red
@@ -142,11 +142,11 @@ Module m_MainMenu
 				WriteAt(21, 10, arrStat(0, 1), modColor)
 				WriteAt(IIf(AbilityMod(arrStat(0, 1)) >= 0, 27, 26), 10, AbilityMod(arrStat(0, 1)), ConsoleColor.White)
 			End If
-			If TheHero.HeroRace = Race.HalfOrc Then WriteAt(32, 10, "Base stat fixed, plus d8", ConsoleColor.White)
-			If TheHero.HeroRace = Race.Ogre Then WriteAt(32, 10, "Base stat fixed, plus d6", ConsoleColor.White)
+            If TheHero.HeroRace = Race.HalfOrc Then WriteAt(32, 10, resFixedStatPlusd8, ConsoleColor.White)
+            If TheHero.HeroRace = Race.Ogre Then WriteAt(32, 10, resFixedStatPlusd6, ConsoleColor.White)
 
-			WriteAt(2, 11, "Intelligence:", ConsoleColor.Gray)
-			WriteAt(16, 11, arrStat(1, 0), CheckForBaseStat("intelligence"))
+            WriteAt(2, 11, resLabelIntelligence, ConsoleColor.Gray)
+            WriteAt(16, 11, arrStat(1, 0), CheckForBaseStat("intelligence"))
 			modColor = ConsoleColor.White
 			If arrStat(1, 1) > arrStat(1, 0) Then modColor = ConsoleColor.Green
 			If arrStat(1, 1) < arrStat(1, 0) Then modColor = ConsoleColor.Red
@@ -155,8 +155,8 @@ Module m_MainMenu
 				WriteAt(IIf(AbilityMod(arrStat(1, 1)) >= 0, 27, 26), 11, AbilityMod(arrStat(1, 1)), ConsoleColor.White)
 			End If
 
-			WriteAt(2, 12, "Wisdom:", ConsoleColor.Gray)
-			WriteAt(16, 12, arrStat(2, 0), CheckForBaseStat("wisdom"))
+            WriteAt(2, 12, resLabelWisdom, ConsoleColor.Gray)
+            WriteAt(16, 12, arrStat(2, 0), CheckForBaseStat("wisdom"))
 			modColor = ConsoleColor.White
 			If arrStat(2, 1) > arrStat(2, 0) Then modColor = ConsoleColor.Green
 			If arrStat(2, 1) < arrStat(2, 0) Then modColor = ConsoleColor.Red
@@ -165,8 +165,8 @@ Module m_MainMenu
 				WriteAt(IIf(AbilityMod(arrStat(2, 1)) >= 0, 27, 26), 12, AbilityMod(arrStat(2, 1)), ConsoleColor.White)
 			End If
 
-			WriteAt(2, 13, "Dexterity:", ConsoleColor.Gray)
-			WriteAt(16, 13, arrStat(3, 0), CheckForBaseStat("dexterity"))
+            WriteAt(2, 13, resLabelDexterity, ConsoleColor.Gray)
+            WriteAt(16, 13, arrStat(3, 0), CheckForBaseStat("dexterity"))
 			modColor = ConsoleColor.White
 			If arrStat(3, 1) > arrStat(3, 0) Then modColor = ConsoleColor.Green
 			If arrStat(3, 1) < arrStat(3, 0) Then modColor = ConsoleColor.Red
@@ -175,8 +175,8 @@ Module m_MainMenu
 				WriteAt(IIf(AbilityMod(arrStat(3, 1)) >= 0, 27, 26), 13, AbilityMod(arrStat(3, 1)), ConsoleColor.White)
 			End If
 
-			WriteAt(2, 14, "Constitution:", ConsoleColor.Gray)
-			WriteAt(16, 14, arrStat(4, 0), CheckForBaseStat("constitution"))
+            WriteAt(2, 14, resLabelConstitution, ConsoleColor.Gray)
+            WriteAt(16, 14, arrStat(4, 0), CheckForBaseStat("constitution"))
 			modColor = ConsoleColor.White
 			If arrStat(4, 1) > arrStat(4, 0) Then modColor = ConsoleColor.Green
 			If arrStat(4, 1) < arrStat(4, 0) Then modColor = ConsoleColor.Red
@@ -184,10 +184,10 @@ Module m_MainMenu
 				WriteAt(21, 14, arrStat(4, 1), modColor)
 				WriteAt(IIf(AbilityMod(arrStat(4, 1)) >= 0, 27, 26), 14, AbilityMod(arrStat(4, 1)), ConsoleColor.White)
 			End If
-			If TheHero.HeroRace = Race.Dwarf Or TheHero.HeroRace = Race.Ogre Or TheHero.HeroRace = Race.HalfOrc Then WriteAt(32, 14, "Base stat fixed, plus d8", ConsoleColor.White)
+            If TheHero.HeroRace = Race.Dwarf Or TheHero.HeroRace = Race.Ogre Or TheHero.HeroRace = Race.HalfOrc Then WriteAt(32, 14, resFixedStatPlusd8, ConsoleColor.White)
 
-			WriteAt(2, 15, "Charisma:", ConsoleColor.Gray)
-			WriteAt(16, 15, arrStat(5, 0), CheckForBaseStat("charisma"))
+            WriteAt(2, 15, resLabelCharisma, ConsoleColor.Gray)
+            WriteAt(16, 15, arrStat(5, 0), CheckForBaseStat("charisma"))
 			modColor = ConsoleColor.White
 			If arrStat(5, 1) > arrStat(5, 0) Then modColor = ConsoleColor.Green
 			If arrStat(5, 1) < arrStat(5, 0) Then modColor = ConsoleColor.Red
@@ -196,13 +196,13 @@ Module m_MainMenu
 				WriteAt(IIf(AbilityMod(arrStat(5, 1)) >= 0, 27, 26), 15, AbilityMod(arrStat(5, 1)), ConsoleColor.White)
 			End If
 
-			WriteAt(2, 0, "Character Generation Menu: ", ConsoleColor.Gray)
+            WriteAt(2, 0, resMenuGenerationTitle, ConsoleColor.Gray)
 
-			WriteAt(4, 2, "[g]ender: ", ConsoleColor.Gray)
-			WriteAt(4, 3, "[r]ace:  ", ConsoleColor.Gray)
-			WriteAt(4, 4, "[c]lass:  ", ConsoleColor.Gray)
+            WriteAt(4, 2, "[ ]ender: ", ConsoleColor.Gray)
+            WriteAt(4, 3, "[ ]ace:  ", ConsoleColor.Gray)
+            WriteAt(4, 4, "[ ]lass:  ", ConsoleColor.Gray)
 
-			WriteAt(5, 2, "g")
+            WriteAt(5, 2, "g")
 			WriteAt(5, 3, "r")
 			WriteAt(5, 4, "c")
 
@@ -216,8 +216,8 @@ Module m_MainMenu
 			WriteAt(15, 3, GetRace(TheHero.HeroRace))
 			WriteAt(15, 4, GetClass(TheHero.HeroClass))
 
-			WriteAt(25, 3, "Race Mod:", ConsoleColor.Gray)
-			RaceMods = GetRaceMods(TheHero.HeroRace)
+            WriteAt(25, 3, resLabelRaceMod, ConsoleColor.Gray)
+            RaceMods = GetRaceMods(TheHero.HeroRace)
 			WriteAt(35, 3, RaceMods, ConsoleColor.Yellow)
 
 			CursorLeft = 74
@@ -333,14 +333,14 @@ Module m_MainMenu
 							GrabStats(arrStat, 1)
 
 						ElseIf .HeroRace >= Race.Ogre AndAlso .HeroClass > 0 Then
-							errMsg = "Ogres and Pixies may not start with a Class."
+                            errMsg = resErrorOgrePixieClass
 
-						ElseIf .Gender > 0 AndAlso .HeroRace >= Race.Ogre AndAlso .HeroClass = 0 Then
+                        ElseIf .Gender > 0 AndAlso .HeroRace >= Race.Ogre AndAlso .HeroClass = 0 Then
 							ok = True
 							errMsg = ""
 						Else
-							errMsg = "You must select Gender, Race & Class before proceeding."
-						End If
+                            errMsg = resErrorMissingSelections
+                        End If
 					End With
 			End Select
 

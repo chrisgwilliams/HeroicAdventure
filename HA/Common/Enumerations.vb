@@ -92,8 +92,16 @@
 			Slashing = 3
 			SlashPierce = 4
 		End Enum
+        Public Enum ActionType
+            None = 0
+            Drink = 1
+            Drop = 2
+            [Throw] = 3
+            Use = 4
+            Zap = 5
+        End Enum
 
-		Public Enum ColorList
+        Public Enum ColorList
 			Black = 0
 			Navy = 1
 			DarkGreen = 2
@@ -148,8 +156,9 @@
 			female = 1
 			male = 2
 		End Enum
-		Public Enum ItemType
-			Potion = 1
+        Public Enum ItemType
+            Unspecified = 0
+            Potion = 1
 			Scroll = 2
 			Gold = 3
 			Tool = 4

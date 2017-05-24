@@ -758,12 +758,12 @@ Module m_Keybound
         qCreatureQueue = Nothing
 
     End Function
-    <System.Diagnostics.DebuggerStepThrough()> Friend Function kbDrink() As String
-        kbDrink = ShowBackpack("", Enumerations.ItemType.Potion)
+    <DebuggerStepThrough()> Friend Function kbDrink() As String
+        kbDrink = ShowBackpack(ActionType.Drink, Enumerations.ItemType.Potion)
         RedrawDisplay()
     End Function
     Friend Function kbDrop() As String
-        kbDrop = ShowBackpack("drop")
+        kbDrop = ShowBackpack(ActionType.Drop)
         If kbDrop = "9999" Then kbDrop = ""
         RedrawDisplay()
     End Function
@@ -879,7 +879,7 @@ Module m_Keybound
 
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Helmet = ShowBackpack("", ItemType.Helmet)
+                        TheHero.Equipped.Helmet = ShowBackpack(ActionType.None, ItemType.Helmet)
                         InventoryScreen()
                     End If
 
@@ -905,7 +905,7 @@ Module m_Keybound
                         TheHero.Equipped.Neck = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Neck = ShowBackpack("", ItemType.Neck)
+                        TheHero.Equipped.Neck = ShowBackpack(ActionType.None, ItemType.Neck)
                         InventoryScreen()
                     End If
 
@@ -931,7 +931,7 @@ Module m_Keybound
                         TheHero.Equipped.Cloak = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Cloak = ShowBackpack("", ItemType.Cloak)
+                        TheHero.Equipped.Cloak = ShowBackpack(ActionType.None, ItemType.Cloak)
                         InventoryScreen()
                     End If
 
@@ -957,7 +957,7 @@ Module m_Keybound
                         TheHero.Equipped.Girdle = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Girdle = ShowBackpack("", ItemType.Girdle)
+                        TheHero.Equipped.Girdle = ShowBackpack(ActionType.None, ItemType.Girdle)
                         InventoryScreen()
                     End If
 
@@ -983,7 +983,7 @@ Module m_Keybound
                         TheHero.Equipped.Armor = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Armor = ShowBackpack("", ItemType.Armor)
+                        TheHero.Equipped.Armor = ShowBackpack(ActionType.None, ItemType.Armor)
                         InventoryScreen()
                     End If
 
@@ -1009,7 +1009,7 @@ Module m_Keybound
                         TheHero.Equipped.LeftHand = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.LeftHand = ShowBackpack("", ItemType.Weapon)
+                        TheHero.Equipped.LeftHand = ShowBackpack(ActionType.None, ItemType.Weapon)
                         InventoryScreen()
                     End If
 
@@ -1035,7 +1035,7 @@ Module m_Keybound
                         TheHero.Equipped.RightHand = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.RightHand = ShowBackpack("", ItemType.Weapon)
+                        TheHero.Equipped.RightHand = ShowBackpack(ActionType.None, ItemType.Weapon)
                         InventoryScreen()
                     End If
 
@@ -1061,7 +1061,7 @@ Module m_Keybound
                         TheHero.Equipped.LeftRing = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.LeftRing = ShowBackpack("", ItemType.Ring)
+                        TheHero.Equipped.LeftRing = ShowBackpack(ActionType.None, ItemType.Ring)
                         InventoryScreen()
                     End If
 
@@ -1087,7 +1087,7 @@ Module m_Keybound
                         TheHero.Equipped.RightRing = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.RightRing = ShowBackpack("", ItemType.Ring)
+                        TheHero.Equipped.RightRing = ShowBackpack(ActionType.None, ItemType.Ring)
                         InventoryScreen()
                     End If
 
@@ -1113,7 +1113,7 @@ Module m_Keybound
                         TheHero.Equipped.Gloves = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Gloves = ShowBackpack("", ItemType.Gloves)
+                        TheHero.Equipped.Gloves = ShowBackpack(ActionType.None, ItemType.Gloves)
                         InventoryScreen()
                     End If
 
@@ -1139,7 +1139,7 @@ Module m_Keybound
                         TheHero.Equipped.Bracers = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Bracers = ShowBackpack("", ItemType.Bracers)
+                        TheHero.Equipped.Bracers = ShowBackpack(ActionType.None, ItemType.Bracers)
                         InventoryScreen()
                     End If
 
@@ -1165,7 +1165,7 @@ Module m_Keybound
                         TheHero.Equipped.Boots = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Boots = ShowBackpack("", ItemType.Boots)
+                        TheHero.Equipped.Boots = ShowBackpack(ActionType.None, ItemType.Boots)
                         InventoryScreen()
                     End If
 
@@ -1191,7 +1191,7 @@ Module m_Keybound
                         TheHero.Equipped.MissleWeapon = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.MissleWeapon = ShowBackpack("", ItemType.MissleWeapon)
+                        TheHero.Equipped.MissleWeapon = ShowBackpack(ActionType.None, ItemType.MissleWeapon)
                         InventoryScreen()
                     End If
 
@@ -1217,7 +1217,7 @@ Module m_Keybound
                         TheHero.Equipped.Missles = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Missles = ShowBackpack("", ItemType.Missles)
+                        TheHero.Equipped.Missles = ShowBackpack(ActionType.None, ItemType.Missles)
                         InventoryScreen()
                     End If
 
@@ -1243,7 +1243,7 @@ Module m_Keybound
                         TheHero.Equipped.Tool = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Tool = ShowBackpack("", ItemType.Tool)
+                        TheHero.Equipped.Tool = ShowBackpack(ActionType.None, ItemType.Tool)
                         InventoryScreen()
                     End If
 
