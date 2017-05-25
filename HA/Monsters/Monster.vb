@@ -2,7 +2,7 @@ Imports System.Math
 Imports DBuild.DunGen3
 Imports HA.Common
 
-<System.Diagnostics.DebuggerStepThrough()> Public MustInherit Class Monster
+<DebuggerStepThrough()> Public MustInherit Class Monster
     Inherits Avatar
 
     Private sCR As Single
@@ -213,7 +213,10 @@ Private Function MonsterAttack(ByVal intEncounter As Integer, _
     AC = TheHero.AC
     MonsterAttack = ""
 
-    For intCtr = 0 To m_arrMonster(intMID).attacklist.count - 1
+        'TODO: add check for Monster in a dark room, should affect their ability to hit hero
+        'TODO: add check for Monster in a dark room, should affect combat status messages, UNLESS hero saw the monster before entering a dark room (maybe?)
+
+        For intCtr = 0 To m_arrMonster(intMID).attacklist.count - 1
 
         ' start building the combat message...
         MonsterAttack += "The " & m_arrMonster(intMID).monsterrace
@@ -300,686 +303,668 @@ Private Function MonsterAttack(ByVal intEncounter As Integer, _
 
     ' is the hero dead?
     If TheHero.CurrentHP <= 0 And Not AlreadyDead Then
-        intRoll = D8()
-        Select Case intRoll
-            Case 1
-                MonsterAttack += " You have died."
-            Case 2
-                MonsterAttack += " You are dead."
-            Case 3
-                MonsterAttack += " You are deceased."
-            Case 4
-                MonsterAttack += " You have been killed."
-            Case 5
-                MonsterAttack += " Death takes you."
-            Case 6
-                MonsterAttack += " You take a dirt nap."
-            Case 7
-                MonsterAttack += " Your adventure has ended."
-            Case 8
-                MonsterAttack += " Darkness claims you."
-        End Select
-        AlreadyDead = True
-        TheHero.KilledBy = m_arrMonster(intMID).monsterrace
+            MonsterAttack += RandomDeathMessage()
+            AlreadyDead = True
+            TheHero.KilledBy = m_arrMonster(intMID).monsterrace
     End If
 
 End Function
 
 Friend Function MonsterAction(ByVal strMessage As String) As String
-    Dim HeroIsNoticed As Boolean, _
-        intObstacle As Integer, _
-        intEncounter As Integer, _
-        intCtr As Integer
+        Dim HeroIsNoticed As Boolean
+        Dim intObstacle As Integer
+        Dim intEncounter As Integer
+        Dim intCtr As Integer
 
-    ' we need to check each monster on this level
-    For intCtr = 0 To m_arrMonster.Count - 1
-        With m_arrMonster(intCtr)
+        ' we need to check each monster on this level
+        For intCtr = 0 To m_arrMonster.Count - 1
+            With m_arrMonster(intCtr)
 
-            ' has the monster been killed?
-            If .dead = False Then
+                ' has the monster been killed?
+                If .dead = False Then
 
-                ' check to see if PC is within range of vision
-                HeroIsNoticed = MonsterLOS(intCtr)
+                    ' check to see if PC is within range of vision
+                    HeroIsNoticed = MonsterLOS(intCtr)
 
-                ' Trolls regenerate d4 HP every other round
-                ' currently we don't differentiate between regular damage and fire/acid/magic damage.
-                If (.monsterrace = "troll" And TheHero.TurnCount Mod 2 = 0) Then
-                    If .CurrentHP < .HP Then
-                        If Abs(.locx - TheHero.LocX) <= TheHero.Sight _
-                            And Abs(.locy - TheHero.LocY) <= TheHero.Sight Then
-                            strMessage &= "Some of the troll's wounds close. "
-                        End If
-                        .currenthp += D4()
-                        If .currenthp > .hp Then
-                            .currenthp = .hp
-                            strMessage &= "The troll is completely healed. "
+                    ' Trolls regenerate d4 HP every other round
+                    ' TODO: we don't differentiate between regular damage and fire/acid/magic damage.
+                    If (.monsterrace = "troll" And TheHero.TurnCount Mod 2 = 0) Then
+                        If .CurrentHP < .HP Then
+                            If Abs(.locx - TheHero.LocX) <= TheHero.Sight _
+                        And Abs(.locy - TheHero.LocY) <= TheHero.Sight Then
+                                strMessage &= "Some of the troll's wounds close. "
+                            End If
+                            .currenthp += D4()
+                            If .currenthp > .hp Then
+                                .currenthp = .hp
+                                strMessage &= "The troll is completely healed. "
+                            End If
                         End If
                     End If
-                End If
 
-                If HeroIsNoticed Then
-                    Dim intDirection As Integer
+                    If HeroIsNoticed Then
+                        Dim intDirection As Integer
 
-                    intDirection = MonsterFindDirection(intCtr)
+                        intDirection = MonsterFindDirection(intCtr)
 
-                    ' We have a direction, see if anything is in the way
-                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, intDirection)
-                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, intDirection)
+                        ' We have a direction, see if anything is in the way
+                        intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, intDirection)
+                        intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, intDirection)
 
-                    ' nothing is in the way, so go ahead and move
-                    If intObstacle = 0 And intEncounter = 0 Then
-                        Level(.locX, .locY, TheHero.LocZ).Monster = 0
+                        ' nothing is in the way, so go ahead and move
+                        If intObstacle = 0 And intEncounter = 0 Then
+                            Level(.locX, .locY, TheHero.LocZ).Monster = 0
 
-                        ' if its a square we've seen before, tidy it up, otherwise dont worry about it
-                        If Level(.locX, .locY, TheHero.LocZ).Observed = True Then
-                            FixFloor(.locX, .locY, TheHero.LocZ)
-                        End If
+                            ' if its a square we've seen before, tidy it up, otherwise dont worry about it
+                            If Level(.locX, .locY, TheHero.LocZ).Observed = True Then
+                                FixFloor(.locX, .locY, TheHero.LocZ)
+                            End If
 
-                        If Not (.monsterrace = "zombie") Then
-                            .walk(intDirection)
-                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                            .walk(intDirection)
-                        Else
-                            ' zombies only walk every other turn
-                        End If
+                            If Not (.monsterrace = "zombie") Then
+                                .walk(intDirection)
+                            ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                .walk(intDirection)
+                            Else
+                                ' zombies only walk every other turn
+                            End If
 
-                        Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
-                        RedrawMonsters()
-                        HeroLOS()
+                            Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
+                            RedrawMonsters()
+                            HeroLOS()
 
-                    ElseIf intObstacle = SquareType.Wall _
+                        ElseIf intObstacle = SquareType.Wall _
                             Or intObstacle = SquareType.NWCorner _
                             Or intObstacle = SquareType.NECorner _
                             Or intObstacle = SquareType.SECorner _
                             Or intObstacle = SquareType.SWCorner Then
-                        Level(.locX, .locY, TheHero.LocZ).Monster = 0
+                            Level(.locX, .locY, TheHero.LocZ).Monster = 0
 
-                        ' if its a square we've seen before, tidy it up, otherwise dont worry about it
-                        If Level(.locX, .locY, TheHero.LocZ).Observed Then
-                            FixFloor(.locX, .locY, TheHero.LocZ)
-                        End If
-
-                        ' pick a new direction that follows the passage (or room) wall instead of 
-                        ' going directly towards the hero
-                        Select Case intDirection
-                            Case 1
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(4)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(4)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(4)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(4, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(2)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(2)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(2)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(2, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 2
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(1)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(1)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(1)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(1, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(3)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(3)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(3)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(3, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 3
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(2)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(2)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(2)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(2, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(6)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(6)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(6)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(6, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 4
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(7)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(7)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(7)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(7, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(1)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(1)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(1)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(1, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 6
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(3)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(3)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(3)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(3, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(9)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(9)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(9)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(9, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 7
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(8)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(8)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(8)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(8, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(4)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(4)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(4)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(4, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 8
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(7)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(7)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(7)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(7, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(9)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(9)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(9)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(9, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                            Case 9
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(6)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(6)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(6)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(6, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    If Not (.monsterrace = "zombie") Then
-                                        .walk(8)
-                                    ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
-                                        .walk(8)
-                                    Else
-                                        ' zombies only walk every other turn
-                                    End If
-                                    'm_arrMonster(intCtr).walk(8)
-                                    Exit Select
-                                ElseIf intObstacle = SquareType.Door Then
-                                    If .hashands And .intelligence > 0 Then
-                                        strMessage += MonsterOpenDoor(8, intCtr)
-                                    ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                                        ' probably animal (dog, rat, lizard, etc)
-                                        strMessage += "You hear a scratching noise. "
-                                    Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                                        ' these things don't make any noise
-                                    End If
-                                End If
-                        End Select
-
-                        Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
-                        RedrawMonsters()
-
-                    ElseIf intObstacle = SquareType.Door Then
-                        If .hashands And .intelligence > 0 Then
-                            ' if the monster has hands AND a brain, open the door
-                            strMessage += MonsterOpenDoor(intDirection, intCtr)
-                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
-                            ' probably animal (dog, rat, lizard, etc)
-                            strMessage += "You hear a scratching noise. "
-                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
-                            ' these things don't make any noise
-                        End If
-
-                    ElseIf intEncounter = 9999 Then
-                        ' don't let critters attack the round our hero appears on a new level
-                        If TheHero.TurnCountAtDungeonLevelChange < TheHero.TurnCount Then
-                            Debug.WriteLine(.monsterrace & " is attacking.")
-
-                            ' start building the combat messages
-                            strMessage += MonsterAttack(intEncounter, intCtr)
-
-                            ' is the hero dead?
-                            If TheHero.CurrentHP <= 0 Then
-                                ' set the hero status to dead
-                                TheHero.Dead = True
-                                ' debug messages
-                                Debug.WriteLine("Hero has been killed.")
-                                Exit For
+                            ' if its a square we've seen before, tidy it up, otherwise dont worry about it
+                            If Level(.locX, .locY, TheHero.LocZ).Observed Then
+                                FixFloor(.locX, .locY, TheHero.LocZ)
                             End If
+
+                            ' pick a new direction that follows the passage (or room) wall instead of 
+                            ' going directly towards the hero
+                            Select Case intDirection
+                                Case 1
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(4)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(4)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(4)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(4, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(2)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(2)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(2)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(2, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 2
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(1)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(1)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(1)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(1, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(3)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(3)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(3)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(3, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 3
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(2)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(2)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(2)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(2, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(6)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(6)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(6)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(6, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 4
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(7)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(7)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(7)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(7, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(1)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(1)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(1)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(1, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 6
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(3)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(3)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(3)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(3, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(9)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(9)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(9)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(9, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 7
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(8)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(8)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(8)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(8, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(4)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(4)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(4)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(4, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 8
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(7)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(7)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(7)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(7, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(9)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(9)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(9)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(9, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                Case 9
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(6)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(6)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(6)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(6, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        If Not (.monsterrace = "zombie") Then
+                                            .walk(8)
+                                        ElseIf (.monsterrace = "zombie" And TheHero.TurnCount Mod 2 = 0) Then
+                                            .walk(8)
+                                        Else
+                                            ' zombies only walk every other turn
+                                        End If
+                                        'm_arrMonster(intCtr).walk(8)
+                                        Exit Select
+                                    ElseIf intObstacle = SquareType.Door Then
+                                        If .hashands And .intelligence > 0 Then
+                                            strMessage += MonsterOpenDoor(8, intCtr)
+                                        ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                            ' probably animal (dog, rat, lizard, etc)
+                                            strMessage += "You hear a scratching noise. "
+                                        Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                            ' these things don't make any noise
+                                        End If
+                                    End If
+                            End Select
+
+                            Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
+                            RedrawMonsters()
+
+                        ElseIf intObstacle = SquareType.Door Then
+                            If .hashands And .intelligence > 0 Then
+                                ' if the monster has hands AND a brain, open the door
+                                strMessage += MonsterOpenDoor(intDirection, intCtr)
+                            ElseIf .intelligence > 0 And LCase(.ToString).Contains("spider") = False Then
+                                ' probably animal (dog, rat, lizard, etc)
+                                strMessage += "You hear a scratching noise. "
+                            Else ' must be non-sentient (undead, ooze, jelly, etc), or its a spider!
+                                ' these things don't make any noise
+                            End If
+
+                        ElseIf intEncounter = 9999 Then
+                            ' don't let critters attack the round our hero appears on a new level
+                            If TheHero.TurnCountAtDungeonLevelChange < TheHero.TurnCount Then
+                                Debug.WriteLine(.monsterrace & " is attacking.")
+
+                                ' start building the combat messages
+                                strMessage += MonsterAttack(intEncounter, intCtr)
+
+                                ' is the hero dead?
+                                If TheHero.CurrentHP <= 0 Then
+                                    ' set the hero status to dead
+                                    TheHero.Dead = True
+                                    ' debug messages
+                                    Debug.WriteLine("Hero has been killed.")
+                                    Exit For
+                                End If
+                            End If
+
+                        ElseIf intEncounter > 0 Then
+                            Debug.WriteLine("Monster in the way, sidestepping")
+
+                            Level(.locX, .locY, TheHero.LocZ).Monster = 0
+
+                            ' if its a square we've seen before, tidy it up, otherwise dont worry about it
+                            If Level(.locX, .locY, TheHero.LocZ).Observed = True Then
+                                FixFloor(.locX, .locY, TheHero.LocZ)
+                            End If
+
+                            ' pick a new direction that goes around the monster in the way
+                            Select Case intDirection
+                                Case 1
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(4)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(2)
+                                        Exit Select
+                                    End If
+
+                                Case 2
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(1)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(3)
+                                        Exit Select
+                                    End If
+
+                                Case 3
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(2)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(6)
+                                        Exit Select
+                                    End If
+
+                                Case 4
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(7)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(1)
+                                        Exit Select
+                                    End If
+
+                                Case 6
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(3)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(9)
+                                        Exit Select
+                                    End If
+
+                                Case 7
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(8)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(4)
+                                        Exit Select
+                                    End If
+
+                                Case 8
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(7)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(9)
+                                        Exit Select
+                                    End If
+
+                                Case 9
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(6)
+                                        Exit Select
+                                    End If
+
+                                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
+                                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
+                                    If intObstacle = 0 And intEncounter = 0 Then
+                                        .walk(8)
+                                        Exit Select
+                                    End If
+                            End Select
+
+                            Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
+                            RedrawMonsters()
+
                         End If
 
-                    ElseIf intEncounter > 0 Then
-                        Debug.WriteLine("Monster in the way, sidestepping")
+                        'TODO: have monster pick up item on floor if any
 
-                        Level(.locX, .locY, TheHero.LocZ).Monster = 0
+                        ' attack pc if in range
 
-                        ' if its a square we've seen before, tidy it up, otherwise dont worry about it
-                        If Level(.locX, .locY, TheHero.LocZ).Observed = True Then
-                            FixFloor(.locX, .locY, TheHero.LocZ)
+                    Else
+                        Dim intDirection As Integer
+                        intDirection = RND.Next(1, 9)
+
+                        ' We have a direction, see if anything is in the way
+                        intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, intDirection)
+                        intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, intDirection)
+
+                        If intObstacle = 0 And intEncounter = 0 Then
+                            ' move randomly
+                            Level(.locX, .locY, TheHero.LocZ).Monster = 0
+                            If Level(.locX, .locY, TheHero.LocZ).Observed = True Then
+                                FixFloor(.locX, .locY, TheHero.LocZ)
+                            End If
+
+                            ' move the monster 1 square
+                            .walk(intDirection)
+
+                            Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
+                            RedrawMonsters()
                         End If
-
-                        ' pick a new direction that goes around the monster in the way
-                        Select Case intDirection
-                            Case 1
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(4)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(2)
-                                    Exit Select
-                                End If
-
-                            Case 2
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(1)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(3)
-                                    Exit Select
-                                End If
-
-                            Case 3
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 2)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 2)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(2)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(6)
-                                    Exit Select
-                                End If
-
-                            Case 4
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(7)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 1)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 1)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(1)
-                                    Exit Select
-                                End If
-
-                            Case 6
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 3)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 3)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(3)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(9)
-                                    Exit Select
-                                End If
-
-                            Case 7
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(8)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 4)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 4)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(4)
-                                    Exit Select
-                                End If
-
-                            Case 8
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 7)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 7)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(7)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 9)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 9)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(9)
-                                    Exit Select
-                                End If
-
-                            Case 9
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 6)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 6)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(6)
-                                    Exit Select
-                                End If
-
-                                intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, 8)
-                                intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, 8)
-                                If intObstacle = 0 And intEncounter = 0 Then
-                                    .walk(8)
-                                    Exit Select
-                                End If
-                        End Select
-
-                        Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
-                        RedrawMonsters()
 
                     End If
-
-                    'TODO: have monster pick up item on floor if any
-
-                    ' attack pc if in range
-
-                Else
-                    Dim intDirection As Integer
-                    intDirection = RND.Next(1, 9)
-
-                    ' We have a direction, see if anything is in the way
-                    intObstacle = CheckForCollision(.locX, .locY, TheHero.LocZ, intDirection)
-                    intEncounter = CheckForMonster(.locX, .locY, TheHero.LocZ, intDirection)
-
-                    If intObstacle = 0 And intEncounter = 0 Then
-                        ' move randomly
-                        Level(.locX, .locY, TheHero.LocZ).Monster = 0
-                        If Level(.locX, .locY, TheHero.LocZ).Observed = True Then
-                            FixFloor(.locX, .locY, TheHero.LocZ)
-                        End If
-
-                        ' move the monster 1 square
-                        .walk(intDirection)
-
-                        Level(.locX, .locY, TheHero.LocZ).Monster = intCtr + 1
-                        RedrawMonsters()
-                    End If
-
                 End If
-            End If
-        End With
-    Next
-    MonsterAction = strMessage
+            End With
+        Next
+        MonsterAction = strMessage
 
 End Function
 

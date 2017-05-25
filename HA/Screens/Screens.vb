@@ -152,6 +152,8 @@ Namespace Screens
         Or Left(strKilledBy.ToLower, 1) = "o" _
         Or Left(strKilledBy.ToLower, 1) = "u" Then strArticle += "n"
 
+            'TODO: Rewrite Death Screen to use proper word wrapping.  See MessageHandler for example.
+
             WriteAt(2, 2, String.Format("Here lies {0}{1} killed{2} on level {3} by {4} {5}.", strName, strClass, strSleep, intDeathLevel, strArticle, strKilledBy))
             WriteAt(2, 4, "------------------------------------------------------------------------")
             WriteAt(2, 5, String.Format("Most folks agreed, {0} was a pretty decent {1}!", strName, strRace))
@@ -180,22 +182,19 @@ Namespace Screens
 
             WriteAt(2, 9, "------------------------------------------------------------------------")
 
-            WriteAt(20, 12, "________", ConsoleColor.DarkGray)
-            WriteAt(19, 13, "/        \", ConsoleColor.DarkGray)
-            WriteAt(19, 14, "| R.I.P. |", ConsoleColor.DarkGray)
-            WriteAt(19, 15, "|        |", ConsoleColor.DarkGray)
-            WriteAt(19, 16, "|  /||\  |", ConsoleColor.DarkGray)
-            WriteAt(19, 17, "|  ----  |", ConsoleColor.DarkGray)
-            WriteAt(19, 18, "|  \||/  |", ConsoleColor.DarkGray)
-            WriteAt(19, 19, "|        |", ConsoleColor.DarkGray)
+            WriteAt(19, 12, " __________", ConsoleColor.DarkGray)
+            WriteAt(19, 13, "/    IN    \", ConsoleColor.DarkGray)
+            WriteAt(19, 14, "| MEMORIAM |", ConsoleColor.DarkGray)
+            WriteAt(19, 15, "|          |", ConsoleColor.DarkGray)
+            WriteAt(19, 16, "|   /||\   |", ConsoleColor.DarkGray)
+            WriteAt(19, 17, "|  - -- -  |", ConsoleColor.DarkGray)
+            WriteAt(19, 18, "|   \||/   |", ConsoleColor.DarkGray)
+            WriteAt(19, 19, "|          |", ConsoleColor.DarkGray)
 
             WriteAt(31, 19, "\|/", ConsoleColor.Green)
-
             WriteAt(16, 20, "~~~~~~~~~~~~~~~~~~~~~~", ConsoleColor.DarkYellow)
-
             WriteAt(30, 19, "o", ConsoleColor.Gray)
             WriteAt(34, 19, "o", ConsoleColor.Gray)
-
             WriteAt(32, 18, "@")
 
             PressAKey()

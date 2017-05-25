@@ -168,25 +168,24 @@ Module m_Generation
 		TheHero.Name = ReadLine()
 		TheHero.Name = Left(TheHero.Name, 11)
 
-		If TheHero.Name = "" Then
-			Select Case D6()
-				Case 1
-					TheHero.Name = "Pat"
-				Case 2
-					TheHero.Name = "Robin"
-				Case 3
-					TheHero.Name = "Tinky Winky"
-				Case 4
-					TheHero.Name = "Butt Ugly"
-				Case 5
-					TheHero.Name = "Troll Bait"
-				Case 6
-					TheHero.Name = "Ineeda Name"
-			End Select
-			RND = Nothing
-		End If
+        If TheHero.Name = "" Then
+            Select Case D6()
+                Case 1
+                    TheHero.Name = "Pat"
+                Case 2
+                    TheHero.Name = "Robin"
+                Case 3
+                    TheHero.Name = "Tinky Winky"
+                Case 4
+                    TheHero.Name = "Butt Ugly"
+                Case 5
+                    TheHero.Name = "Troll Bait"
+                Case 6
+                    TheHero.Name = "Ineeda Name"
+            End Select
+        End If
 
-	End Sub
+    End Sub
 	Friend Sub RollStats()
 
 		' roll the dice for all attributes (the Top3of4 function takes the highest 3 rolls)

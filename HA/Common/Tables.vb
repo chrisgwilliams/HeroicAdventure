@@ -386,6 +386,30 @@ Namespace Common
 
 #End Region
 
+        Friend Function RandomDeathMessage() As String
+            'TODO: Customize Death Message further based on alignment, race, class, etc
+            Dim intRoll As Integer = D12()
+            Select Case intRoll
+                Case 1
+                    Return " You have died."
+                Case 2
+                    Return " Your light has been extinguished."
+                Case 3
+                    Return " You are deceased."
+                Case 4
+                    Return " You have been killed."
+                Case 5
+                    Return " Death takes you."
+                Case 6
+                    Return " You take a dirt nap."
+                Case 7
+                    Return " Your adventure has ended."
+                Case 8
+                    Return " Darkness claims you."
+                Case Else
+                    Return " You are dead."
+            End Select
+        End Function
 
     End Module
 End Namespace

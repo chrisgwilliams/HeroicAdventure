@@ -1272,9 +1272,11 @@ Module m_MiscRoutines
 	End Sub
 
 	Friend Sub MessageHandler(ByVal strMessage As String, Optional ByVal StartY As Integer = 0, Optional ByVal Color As ConsoleColor = ConsoleColor.White)
+        ' TODO: in cases where only one word is left after a line wrap in the message handler, that word is not displayed.
 
         ' fix spacing in the message string
         strMessage = strMessage.Replace(".", ". ")
+        strMessage = strMessage.Replace(". . .", "...")
         strMessage = strMessage.Replace(",", ", ")
         strMessage = strMessage.Replace(".  ", ". ")
         strMessage = strMessage.Replace(",  ", ", ")
@@ -1283,22 +1285,30 @@ Module m_MiscRoutines
         Dim OK As Boolean = False
         Dim i As Integer = 0
 
-        While Not OK
-            i = strMessage.IndexOf(".")
-            If i = -1 Then OK = True
+        i = strMessage.IndexOf(".")
+        If i > -1 Then
+            While Not OK
+                If strMessage.Substring(i + 1) <> " " Then
+                    If strMessage.Substring(i + 1, 3) = "..." Then
+                        i += 3
+                    Else
+                        strMessage.Insert(i + 1, " ")
+                    End If
+                End If
 
-            If i > 0 And strMessage.Substring(i + 1) <> " " Then
-                strMessage.Insert(" ", i + 1)
-            End If
-            If i >= strMessage.Length Then OK = True
+                i = strMessage.IndexOf(".", i + 1)
+                If i = -1 Then OK = True
+                If i >= strMessage.Length Then OK = True
+            End While
+        End If
 
-        End While
+        strMessage = Trim(strMessage)
 
         ' add this most recent message to the queue (if it's not empty)
-        If Trim(strMessage).Length > 0 Then m_qMessage.Enqueue(strMessage)
+        If strMessage.Length > 0 Then m_qMessage.Enqueue(strMessage)
 
-		' if the queue contains > 15 messages, trim it down
-		If m_qMessage.Count = 16 Then m_qMessage.Dequeue()
+        ' if the queue contains > 15 messages, trim it down
+        If m_qMessage.Count = 16 Then m_qMessage.Dequeue()
 
 		' clear the message space at top of screen
 		WriteAt(1, StartY, CLEARSPACE)
