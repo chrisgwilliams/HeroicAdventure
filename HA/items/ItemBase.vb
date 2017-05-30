@@ -1,12 +1,13 @@
+Imports HA.Common.Enumerations
 
 #Region " Item Base Class "
 
 Public MustInherit Class ItemBase
 
-	'TODO: Add code to increase / decrease weight in equippedweight and backpackweight whenever an equippable item is activated / deactivated
-	Private intType As Integer
-	Private intColor As Integer
-	Private strSymbol As String
+    'TODO: Add code to increase / decrease weight in equippedweight and backpackweight whenever an equippable item is activated / deactivated
+    Private intType As ItemType
+    Private intColor As ConsoleColor
+    Private strSymbol As String
 	Private bolBreakable As Boolean
 	Private bolPaper As Boolean
 	Private bolRustable As Boolean
@@ -31,23 +32,23 @@ Public MustInherit Class ItemBase
 	Private intACBonus As Integer
 	Private intAtkBonus As Integer
 
-	Public Property Type() As Integer
-		Get
-			Type = intType
-		End Get
-		Set(ByVal Value As Integer)
-			intType = Value
-		End Set
-	End Property
-	Public Property Color() As Integer
-		Get
-			Color = intColor
-		End Get
-		Set(ByVal Value As Integer)
-			intColor = Value
-		End Set
-	End Property
-	Public Property Symbol() As String
+    Public Property Type() As ItemType
+        Get
+            Type = intType
+        End Get
+        Set(ByVal Value As ItemType)
+            intType = Value
+        End Set
+    End Property
+    Public Property Color() As ConsoleColor
+        Get
+            Color = intColor
+        End Get
+        Set(ByVal Value As ConsoleColor)
+            intColor = Value
+        End Set
+    End Property
+    Public Property Symbol() As String
 		Get
 			Symbol = strSymbol
 		End Get

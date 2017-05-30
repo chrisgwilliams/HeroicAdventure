@@ -147,7 +147,7 @@ Module Inventory
                                   ByRef startletter As String,
                                   ByRef itemcount As Integer,
                                   ByVal category As String,
-                         Optional ByVal action As String = "") As String
+                         Optional ByVal action As ActionType = ActionType.None) As String
 
         ShowAllItems = ""
 
@@ -197,7 +197,7 @@ Module Inventory
                 End If
 
                 ' wrap the list
-                If yPos >= MaxRows And action = "" Then
+                If yPos >= MaxRows And action = ActionType.None Then
                     If intTypeCtr > 0 Then
                         ' nothing
                     Else
@@ -416,7 +416,7 @@ Module Inventory
                 UpdateItemQuantity(ItemType.Wand, itemArray, startLetter, yPos)
         End Select
 
-        If itemArray.Count > 0 And (itemCategory > 0 Or action = "drop") Then
+        If itemArray.Count > 0 AndAlso (itemCategory > 0 Or action = ActionType.Drop) Then
             startLetter = Chr(Asc(startLetter) - 1)
             WriteAt(0, MaxRows + 2, "Please make a selection [a - " & startLetter & "] or z to exit.")
         Else
@@ -506,7 +506,7 @@ Module Inventory
     Sub UpdateItemQuantity(itemType As ItemType, ByRef itemArray As ArrayList, ByRef startLetter As String, ByRef yPos As Integer)
 
         For Each thing As Object In TheHero.Equipped.BackPack
-            If thing.type = ItemType.Helmet Then
+            If thing.type = itemType Then
                 Dim intQty As Integer = thing.quantity
                 Dim strItem As New StringBuilder
 

@@ -127,8 +127,8 @@ End Class
 
 		AttackList.Clear()
 
-		Dim hugegreataxe As Structures.MonsterAttackType
-		hugegreataxe.Name = "huge greataxe"
+        Dim hugegreataxe As MonsterAttackType
+        hugegreataxe.Name = "huge greataxe"
 		hugegreataxe.Verb = "cleaves"
 		hugegreataxe.Bonus = 7
 		hugegreataxe.MinDamage = 9

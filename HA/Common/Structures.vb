@@ -1,27 +1,25 @@
 ﻿Namespace Common
 
-	Public Module Structures
+    Public Structure BodyLocations
+        Dim Helmet As Helmet
+        Dim Neck As Amulet
+        Dim Cloak As Cloak
+        Dim Girdle As Girdle
+        Dim Armor As Armor
+        Dim LeftHand As Object
+        Dim RightHand As Object
+        Dim LeftRing As Ring
+        Dim RightRing As Ring
+        Dim Gloves As Gloves
+        Dim Bracers As Bracers
+        Dim Boots As Boots
 
-		Public Structure BodyLocations
-			Dim Helmet As Object
-			Dim Neck As Object
-			Dim Cloak As Object
-			Dim Girdle As Object
-			Dim Armor As Object
-			Dim LeftHand As Object
-			Dim RightHand As Object
-			Dim LeftRing As Object
-			Dim RightRing As Object
-			Dim Gloves As Object
-			Dim Bracers As Object
-			Dim Boots As Object
+        Dim MissleWeapon As Object
+        Dim Missles As Object
 
-			Dim MissleWeapon As Object
-			Dim Missles As Object
-
-			Dim Tool As Object
-			Dim BackPack As ArrayList
-		End Structure
+        Dim Tool As Tool
+        Dim BackPack As ArrayList
+    End Structure
 
 		Public Structure MonsterAttackType
 			Dim Name As String
@@ -45,6 +43,5 @@
 			Public Points As Integer
 			Public Achieved As Boolean
 		End Structure
-	End Module
 
 End Namespace

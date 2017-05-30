@@ -32,8 +32,8 @@ Imports HA.Common
 
 		AttackList.Clear()
 
-		Dim slam As Structures.MonsterAttackType
-		slam.Name = "powerful fists"
+        Dim slam As MonsterAttackType
+        slam.Name = "powerful fists"
 		slam.Verb = "beats"
 		slam.Bonus = 2
 		slam.MinDamage = 2

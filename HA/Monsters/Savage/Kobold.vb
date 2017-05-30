@@ -30,8 +30,8 @@ Imports HA.Common
 		Initiative = 1
 		Attacks = 1
 
-		Dim halfspear As Structures.MonsterAttackType
-		halfspear.Name = "halfspear"
+        Dim halfspear As MonsterAttackType
+        halfspear.Name = "halfspear"
 		halfspear.Verb = "stabs"
 		halfspear.Bonus = -1
 		halfspear.MinDamage = 0

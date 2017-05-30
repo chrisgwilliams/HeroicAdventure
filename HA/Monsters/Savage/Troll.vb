@@ -41,8 +41,8 @@ Imports HA.Common
 		claw.MinDamage = 7
 		claw.MaxDamage = 12
 
-		Dim bite As Structures.MonsterAttackType
-		bite.Name = "nasty teeth"
+        Dim bite As MonsterAttackType
+        bite.Name = "nasty teeth"
 		bite.Verb = "bites"
 		bite.Bonus = 4
 		bite.MinDamage = 4

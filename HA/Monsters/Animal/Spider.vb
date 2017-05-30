@@ -89,8 +89,8 @@ Public Class HugeSpider
 
 		AttackList.Clear()
 
-		Dim bite As Structures.MonsterAttackType
-		bite.Name = "huge teeth"
+        Dim bite As MonsterAttackType
+        bite.Name = "huge teeth"
 		bite.Verb = "bites"
 		bite.Bonus = 9
 		bite.MinDamage = 8

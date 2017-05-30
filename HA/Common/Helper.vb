@@ -29,25 +29,25 @@ Namespace Common
             End Select
         End Function
 
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetStat(ByVal s As PCStats) As String
+        <DebuggerStepThrough()> Public Shared Function GetStat(ByVal s As PCStats) As String
             Return s.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetRace(ByVal r As Race) As String
+        <DebuggerStepThrough()> Public Shared Function GetRace(ByVal r As Race) As String
             If r = 0 Then Return "" Else Return r.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetClass(ByVal c As PCClass) As String
+        <DebuggerStepThrough()> Public Shared Function GetClass(ByVal c As PCClass) As String
             If c = 0 Then Return "" Else Return c.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetWeapon(ByVal w As WeaponType) As String
+        <DebuggerStepThrough()> Public Shared Function GetWeapon(ByVal w As WeaponType) As String
             Return w.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetArmor(ByVal a As ArmorType) As String
+        <DebuggerStepThrough()> Public Shared Function GetArmor(ByVal a As ArmorType) As String
             Return a.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetGender(ByVal g As Gender) As String
+        <DebuggerStepThrough()> Public Shared Function GetGender(ByVal g As Gender) As String
             If g = 0 Then Return "" Else Return g.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetPronoun(ByVal g As Gender) As String
+        <DebuggerStepThrough()> Public Shared Function GetPronoun(ByVal g As Gender) As String
             Select Case g
                 Case Gender.female
                     Return "she"
@@ -57,19 +57,16 @@ Namespace Common
                     Return "it"
             End Select
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetColor(ByVal c As ColorList) As String
+        <DebuggerStepThrough()> Public Shared Function GetColor(ByVal c As ColorList) As String
             Return c.ToString
         End Function
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetItem(ByVal i As ItemType) As String
+        <DebuggerStepThrough()> Public Shared Function GetItem(ByVal i As ItemType) As String
             Return i.ToString
         End Function
-        'Cullen Modify
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function AbilityMod(ByVal stat As Integer) As Integer
+        <DebuggerStepThrough()> Public Shared Function AbilityMod(ByVal stat As Integer) As Integer
             Return Math.Floor(stat / 2) - 5
         End Function
-        'End Modify
-
-        <System.Diagnostics.DebuggerStepThrough()> Public Shared Function GetTrap(ByVal t As TrapType) As String
+        <DebuggerStepThrough()> Public Shared Function GetTrap(ByVal t As TrapType) As String
             Return t.ToString
         End Function
 #End Region

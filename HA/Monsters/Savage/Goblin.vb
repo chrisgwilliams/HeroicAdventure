@@ -28,8 +28,8 @@ Imports HA.Common
 		Initiative = 1
 		Attacks = 1
 
-		Dim morningstar As Structures.MonsterAttackType
-		morningstar.Name = "morningstar"
+        Dim morningstar As MonsterAttackType
+        morningstar.Name = "morningstar"
 		morningstar.Verb = "bashes"
 		morningstar.Bonus = 1
 		morningstar.MinDamage = 0

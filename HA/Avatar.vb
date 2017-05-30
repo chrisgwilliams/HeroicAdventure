@@ -47,10 +47,10 @@ Imports HA.Common
 	Private intTown As Town = -1
 	Private intEquippedWeight As Integer
 	Private intBackpackWeight As Integer
-	Friend Equipped As Structures.BodyLocations
+    Friend Equipped As BodyLocations
 
 #Region " Physical and Mental Attributes "
-	Public MustOverride Property EStrength() As Integer
+    Public MustOverride Property EStrength() As Integer
 	Public MustOverride Property EIntelligence() As Integer
 	Public MustOverride Property EWisdom() As Integer
 	Public MustOverride Property EDexterity() As Integer

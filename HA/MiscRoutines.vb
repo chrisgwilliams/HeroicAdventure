@@ -1289,13 +1289,14 @@ Module m_MiscRoutines
         If i > -1 Then
             While Not OK
                 If strMessage.Substring(i + 1) <> " " Then
-                    If strMessage.Substring(i + 1, 3) = "..." Then
-                        i += 3
-                    Else
-                        strMessage.Insert(i + 1, " ")
+                    If i + 1 <= strMessage.Length - 3 Then
+                        If strMessage.Substring(i + 1, 3) = "..." Then
+                            i += 3
+                        Else
+                            strMessage.Insert(i + 1, " ")
+                        End If
                     End If
                 End If
-
                 i = strMessage.IndexOf(".", i + 1)
                 If i = -1 Then OK = True
                 If i >= strMessage.Length Then OK = True

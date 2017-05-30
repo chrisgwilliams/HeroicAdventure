@@ -1252,7 +1252,7 @@ Module m_Keybound
                     End If
 
                 Case "v"
-                    ShowBackpack("view")
+                    ShowBackpack(ActionType.None)
                     InventoryScreen()
 
                 Case "z"

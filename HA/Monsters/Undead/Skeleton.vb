@@ -30,8 +30,8 @@ Imports HA.Common
 
 		AttackList.Clear()
 
-		Dim claw As Structures.MonsterAttackType
-		claw.Name = "claw"
+        Dim claw As MonsterAttackType
+        claw.Name = "claw"
 		claw.Verb = "tears"
 		claw.Bonus = 0
 		claw.MinDamage = 1

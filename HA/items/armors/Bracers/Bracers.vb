@@ -6,8 +6,8 @@ Public MustInherit Class Bracers
 	Public Sub New()
 		MyBase.New()
 
-		Type = Enumerations.ItemType.Bracers
-		ACBonus = 1
+        Type = ItemType.Bracers
+        ACBonus = 1
 	End Sub
 
 	Public MustOverride Overrides Sub activate(whoIsActivating As Avatar)
