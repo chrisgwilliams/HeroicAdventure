@@ -50,80 +50,80 @@ Module Inventory
 
 	End Sub
 
-	Friend Sub InventoryScreen()
-		' build the screen first, then populate equipped items as relevant
-		EquippedLocationLayout()
+    Public Sub InventoryScreen()
+        ' build the screen first, then populate equipped items as relevant
+        EquippedLocationLayout()
 
-		' Each of these lines check to see if something is equipped before displaying the item.
-		' WriteItem() only needs the Item and Y index, unlike WriteAt() which accepts a string and x,y coords.
-		If Not TheHero.Equipped.Helmet Is Nothing Then WriteItem(TheHero.Equipped.Helmet, 4)
-		If Not TheHero.Equipped.Neck Is Nothing Then WriteItem(TheHero.Equipped.Neck, 5)
-		If Not TheHero.Equipped.Cloak Is Nothing Then WriteItem(TheHero.Equipped.Cloak, 6)
-		If Not TheHero.Equipped.Girdle Is Nothing Then WriteItem(TheHero.Equipped.Girdle, 7)
-		If Not TheHero.Equipped.Armor Is Nothing Then WriteItem(TheHero.Equipped.Armor, 8)
-		If Not TheHero.Equipped.LeftRing Is Nothing Then WriteItem(TheHero.Equipped.LeftRing, 11)
-		If Not TheHero.Equipped.RightRing Is Nothing Then WriteItem(TheHero.Equipped.RightRing, 12)
-		If Not TheHero.Equipped.Gloves Is Nothing Then WriteItem(TheHero.Equipped.Gloves, 13)
-		If Not TheHero.Equipped.Bracers Is Nothing Then WriteItem(TheHero.Equipped.Bracers, 14)
-		If Not TheHero.Equipped.Boots Is Nothing Then WriteItem(TheHero.Equipped.Boots, 15)
-		If Not TheHero.Equipped.MissleWeapon Is Nothing Then WriteItem(TheHero.Equipped.MissleWeapon, 16)
-		If Not TheHero.Equipped.Tool Is Nothing Then WriteItem(TheHero.Equipped.Tool, 18)
-
-
-		' Left and Right Hand are a bit more complex and don't rely upon WriteItem() although I 
-		' should probably stick this functionality in there just to clean things up.
-		If Not TheHero.Equipped.LeftHand Is Nothing Then
-			Dim str As String = TheHero.Equipped.LeftHand.name
-			Dim Modifier As Integer = Helper.AbilityMod(TheHero.EStrength)
-
-			If TheHero.Equipped.LeftHand.Type = ItemType.Weapon Then
-				str += " (" & TheHero.Equipped.LeftHand.damage
-				If Modifier > 0 Then
-					str += "+" & Modifier
-				ElseIf Modifier < 0 Then
-					str += Modifier
-				End If
-				str += ")"
-			ElseIf TheHero.Equipped.LeftHand.Type = ItemType.Shield Then
-				str += String.Format(" (AC +{0})", TheHero.Equipped.LeftHand.acbonus)
-			End If
-			WriteAt(19, 9, str)
-			WriteAt(70, 9, TheHero.Equipped.LeftHand.weight)
-
-			'ToDo: add code to handle checking for two handed weapons/items and clearing out the other hand.
-			' items removed from "other" hand should be returned to inventory.
-		End If
-
-		If Not TheHero.Equipped.RightHand Is Nothing Then
-			Dim str As String = TheHero.Equipped.RightHand.name
-			Dim Modifier As Integer = Helper.AbilityMod(TheHero.EStrength)
-
-			If TheHero.Equipped.RightHand.Type = ItemType.Weapon Then
-				str += " (" & TheHero.Equipped.RightHand.damage
-				If Modifier > 0 Then
-					str += "+" & Modifier
-				ElseIf Modifier < 0 Then
-					str += CStr(Modifier)
-				End If
-				str += ")"
-			ElseIf TheHero.Equipped.RightHand.Type = ItemType.Shield Then
-				str += String.Format(" (AC +{0})", TheHero.Equipped.RightHand.acbonus)
-			End If
-			WriteAt(19, 10, str)
-			WriteAt(70, 10, TheHero.Equipped.RightHand.weight)
-		End If
+        ' Each of these lines check to see if something is equipped before displaying the item.
+        ' WriteItem() only needs the Item and Y index, unlike WriteAt() which accepts a string and x,y coords.
+        If Not TheHero.Equipped.Helmet Is Nothing Then WriteItem(TheHero.Equipped.Helmet, 4)
+        If Not TheHero.Equipped.Neck Is Nothing Then WriteItem(TheHero.Equipped.Neck, 5)
+        If Not TheHero.Equipped.Cloak Is Nothing Then WriteItem(TheHero.Equipped.Cloak, 6)
+        If Not TheHero.Equipped.Girdle Is Nothing Then WriteItem(TheHero.Equipped.Girdle, 7)
+        If Not TheHero.Equipped.Armor Is Nothing Then WriteItem(TheHero.Equipped.Armor, 8)
+        If Not TheHero.Equipped.LeftRing Is Nothing Then WriteItem(TheHero.Equipped.LeftRing, 11)
+        If Not TheHero.Equipped.RightRing Is Nothing Then WriteItem(TheHero.Equipped.RightRing, 12)
+        If Not TheHero.Equipped.Gloves Is Nothing Then WriteItem(TheHero.Equipped.Gloves, 13)
+        If Not TheHero.Equipped.Bracers Is Nothing Then WriteItem(TheHero.Equipped.Bracers, 14)
+        If Not TheHero.Equipped.Boots Is Nothing Then WriteItem(TheHero.Equipped.Boots, 15)
+        If Not TheHero.Equipped.MissleWeapon Is Nothing Then WriteItem(TheHero.Equipped.MissleWeapon, 16)
+        If Not TheHero.Equipped.Tool Is Nothing Then WriteItem(TheHero.Equipped.Tool, 18)
 
 
-		' Missiles are also complex and don't rely upon WriteItem() although I should probably 
-		' stick this functionality in there too, just to clean things up.
-		If Not TheHero.Equipped.Missles Is Nothing Then
-			WriteAt(19, 17, String.Format("{0} (Qty: {1})", TheHero.Equipped.Missles.name, CInt(TheHero.Equipped.Missles.quantity)))
-			WriteAt(70, 17, CType(TheHero.Equipped.Missles.weight, Single) * CInt(TheHero.Equipped.Missles.quantity))
-		End If
+        ' Left and Right Hand are a bit more complex and don't rely upon WriteItem() although I 
+        ' should probably stick this functionality in there just to clean things up.
+        If Not TheHero.Equipped.LeftHand Is Nothing Then
+            Dim str As String = TheHero.Equipped.LeftHand.name
+            Dim Modifier As Integer = Helper.AbilityMod(TheHero.EStrength)
 
-	End Sub
+            If TheHero.Equipped.LeftHand.Type = ItemType.Weapon Then
+                str += " (" & TheHero.Equipped.LeftHand.damage
+                If Modifier > 0 Then
+                    str += "+" & Modifier
+                ElseIf Modifier < 0 Then
+                    str += Modifier
+                End If
+                str += ")"
+            ElseIf TheHero.Equipped.LeftHand.Type = ItemType.Shield Then
+                str += String.Format(" (AC +{0})", TheHero.Equipped.LeftHand.acbonus)
+            End If
+            WriteAt(19, 9, str)
+            WriteAt(70, 9, TheHero.Equipped.LeftHand.weight)
 
-	Private Sub WriteItem(ByVal item As Object, _
+            'ToDo: add code to handle checking for two handed weapons/items and clearing out the other hand.
+            ' items removed from "other" hand should be returned to inventory.
+        End If
+
+        If Not TheHero.Equipped.RightHand Is Nothing Then
+            Dim str As String = TheHero.Equipped.RightHand.name
+            Dim Modifier As Integer = Helper.AbilityMod(TheHero.EStrength)
+
+            If TheHero.Equipped.RightHand.Type = ItemType.Weapon Then
+                str += " (" & TheHero.Equipped.RightHand.damage
+                If Modifier > 0 Then
+                    str += "+" & Modifier
+                ElseIf Modifier < 0 Then
+                    str += CStr(Modifier)
+                End If
+                str += ")"
+            ElseIf TheHero.Equipped.RightHand.Type = ItemType.Shield Then
+                str += String.Format(" (AC +{0})", TheHero.Equipped.RightHand.acbonus)
+            End If
+            WriteAt(19, 10, str)
+            WriteAt(70, 10, TheHero.Equipped.RightHand.weight)
+        End If
+
+
+        ' Missiles are also complex and don't rely upon WriteItem() although I should probably 
+        ' stick this functionality in there too, just to clean things up.
+        If Not TheHero.Equipped.Missles Is Nothing Then
+            WriteAt(19, 17, String.Format("{0} (Qty: {1})", TheHero.Equipped.Missles.name, CInt(TheHero.Equipped.Missles.quantity)))
+            WriteAt(70, 17, CType(TheHero.Equipped.Missles.weight, Single) * CInt(TheHero.Equipped.Missles.quantity))
+        End If
+
+    End Sub
+
+    Private Sub WriteItem(ByVal item As Object, _
 						  ByVal Ypos As Integer)
 
 		'If item.stataffected > 0 Then
@@ -261,7 +261,7 @@ Module Inventory
 
     End Function
 
-    Friend Function ShowBackpack(ByVal action As ActionType, Optional ByVal itemCategory As ItemType = 0) As Object
+    Public Function ShowBackpack(ByVal action As ActionType, Optional ByVal itemCategory As ItemType = 0) As Object
         Dim yPos As Integer = 2,
             startLetter As String = "a",
             itemArray As New ArrayList,
@@ -495,7 +495,7 @@ Module Inventory
 
     End Function
 
-    Sub WriteItemHeading(ByRef yPos As Integer, heading As String)
+    Private Sub WriteItemHeading(ByRef yPos As Integer, heading As String)
         WriteAt(0, yPos, heading, ConsoleColor.DarkYellow)
         yPos += 1
         WriteAt(0, yPos, "--------------------", ConsoleColor.DarkYellow)
@@ -503,21 +503,21 @@ Module Inventory
         WriteAt(1, yPos, resBackpackNoMatchingItems)
     End Sub
 
-    Sub UpdateItemQuantity(itemType As ItemType, ByRef itemArray As ArrayList, ByRef startLetter As String, ByRef yPos As Integer)
+    Private Sub UpdateItemQuantity(itemType As ItemType, ByRef itemArray As ArrayList, ByRef startLetter As String, ByRef yPos As Integer)
 
-        For Each thing As Object In TheHero.Equipped.BackPack
-            If thing.type = itemType Then
-                Dim intQty As Integer = thing.quantity
+        For Each item As Object In TheHero.Equipped.BackPack
+            If item.type = itemType Then
+                Dim intQty As Integer = item.quantity
                 Dim strItem As New StringBuilder
 
-                strItem.Append(String.Format("{0}] {1}", startLetter, thing.Name))
-                If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", thing.quantity))
+                strItem.Append(String.Format("{0}] {1}", startLetter, item.Name))
+                If intQty > 1 Then strItem.Append(String.Format(" (Qty: {0})", item.quantity))
                 strItem.Append("               ")
                 WriteAt(1, yPos, strItem.ToString)
 
                 yPos += 1
                 startLetter = Chr(Asc(startLetter) + 1)
-                itemArray.Add(thing)
+                itemArray.Add(item)
             End If
         Next
 
