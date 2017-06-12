@@ -1,9 +1,6 @@
 Imports HA.Common
 
-#Region " Avatar Base Class "
-
 ' Avatar is the base class for all PCs, NPCs and Monsters
-
 <DebuggerStepThrough()> Public MustInherit Class Avatar
     Friend Equipped As BodyLocations
 
@@ -200,5 +197,4 @@ Imports HA.Common
 	End Sub
 End Class
 
-#End Region
 

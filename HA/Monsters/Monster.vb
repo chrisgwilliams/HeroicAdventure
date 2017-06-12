@@ -5,18 +5,7 @@ Imports HA.Common
 <DebuggerStepThrough()> Public MustInherit Class Monster
     Inherits Avatar
 
-    Private sCR As Single
-    Private strRace As String
-    Private strPluralRace As String ' only used when plural form is other than "s"
-    Private intNumber As Integer
-    Private strChar As String
-    Private intDestX As Integer
-    Private intDestY As Integer
-    Private bolObserved As Boolean
-    Private intFear As Integer
-    Private intAttacks As Integer
     Public AttackList As New ArrayList
-    Private strChatText As String
 
     '********************************************************************************************************
     'Cullen's changes for sorting characters by initiative
@@ -79,93 +68,16 @@ Imports HA.Common
     '********************************************************************************************************
 
     Public Property CR() As Single
-        Get
-            CR = sCR
-        End Get
-        Set(ByVal Value As Single)
-            sCR = Value
-        End Set
-    End Property
     Public Property MonsterRace() As String
-        Get
-            MonsterRace = strRace
-        End Get
-        Set(ByVal Value As String)
-            strRace = Value
-        End Set
-    End Property
     Public Property MonsterRacePlural() As String
-        Get
-            Return strPluralRace
-        End Get
-        Set(ByVal value As String)
-            strPluralRace = value
-        End Set
-    End Property
     Public Property Number() As Integer
-        Get
-            Number = intNumber
-        End Get
-        Set(ByVal Value As Integer)
-            intNumber = Value
-        End Set
-    End Property
     Public Property Character() As String
-        Get
-            Character = strChar
-        End Get
-        Set(ByVal value As String)
-            strChar = value
-        End Set
-    End Property
     Public Property DestX() As Integer
-        Get
-            DestX = intDestX
-        End Get
-        Set(ByVal Value As Integer)
-            intDestX = Value
-        End Set
-    End Property
     Public Property DestY() As Integer
-        Get
-            DestY = intDestY
-        End Get
-        Set(ByVal Value As Integer)
-            intDestY = Value
-        End Set
-    End Property
     Public Property Observed() As Boolean
-        Get
-            Observed = bolObserved
-        End Get
-        Set(ByVal Value As Boolean)
-            bolObserved = Value
-        End Set
-    End Property
     Public Property Fear() As Integer
-        Get
-            Fear = intFear
-        End Get
-        Set(ByVal Value As Integer)
-            intFear = Value
-        End Set
-    End Property
     Public Property Attacks() As Integer
-        Get
-            Attacks = intAttacks
-        End Get
-        Set(ByVal Value As Integer)
-            intAttacks = Value
-        End Set
-    End Property
     Public Property Chat() As String
-        Get
-            Chat = strChatText
-        End Get
-        Set(ByVal Value As String)
-            strChatText = Value
-        End Set
-    End Property
 
     Public Sub New()
         Observed = False
