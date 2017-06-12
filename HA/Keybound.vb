@@ -1217,7 +1217,7 @@ Module m_Keybound
                         TheHero.Equipped.Missles = Nothing
                         InventoryScreen()
                     Else
-                        TheHero.Equipped.Missles = ShowBackpack(ActionType.None, ItemType.Missles)
+                        TheHero.Equipped.Missles = ShowBackpack(ActionType.None, ItemType.Missiles)
                         InventoryScreen()
                     End If
 

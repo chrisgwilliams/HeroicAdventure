@@ -294,7 +294,7 @@ Module Inventory
                 If ShowAllItems(CheckBackpack(ItemType.Bracers), ItemType.Bracers, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackBracers, action) = "9999" Then Return "9999"
                 If ShowAllItems(CheckBackpack(ItemType.Boots), ItemType.Boots, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackBoots, action) = "9999" Then Return "9999"
                 If ShowAllItems(CheckBackpack(ItemType.MissleWeapon), ItemType.MissleWeapon, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackMissileWpns, action) = "9999" Then Return "9999"
-                If ShowAllItems(CheckBackpack(ItemType.Missles), ItemType.Missles, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackMissiles, action) = "9999" Then Return "9999"
+                If ShowAllItems(CheckBackpack(ItemType.Missiles), ItemType.Missiles, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackMissiles, action) = "9999" Then Return "9999"
                 If ShowAllItems(CheckBackpack(ItemType.Tool), ItemType.Tool, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackTools, action) = "9999" Then Return "9999"
                 If ShowAllItems(CheckBackpack(ItemType.Ring), ItemType.Ring, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackRings, action) = "9999" Then Return "9999"
                 If ShowAllItems(CheckBackpack(ItemType.Potion), ItemType.Potion, yPos, itemArray, MaxRows, startLetter, itemcount, resBackpackPotions, action) = "9999" Then Return "9999"
@@ -377,10 +377,10 @@ Module Inventory
                 WriteItemHeading(yPos, resBackpackMissileWpns)
                 UpdateItemQuantity(ItemType.MissleWeapon, itemArray, startLetter, yPos)
 
-            Case ItemType.Missles
+            Case ItemType.Missiles
                 action = ActionType.Throw
                 WriteItemHeading(yPos, resBackpackMissiles)
-                UpdateItemQuantity(ItemType.Missles, itemArray, startLetter, yPos)
+                UpdateItemQuantity(ItemType.Missiles, itemArray, startLetter, yPos)
 
             Case ItemType.Tool
                 action = ActionType.Use

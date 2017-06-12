@@ -174,8 +174,8 @@
 			Gloves = 14
 			Bracers = 15
 			MissleWeapon = 16
-			Missles = 17
-			Book = 18
+            Missiles = 17
+            Book = 18
 			Wand = 19
 			Gem = 20
 			Food = 21
@@ -235,6 +235,11 @@
             SouthEast = 3
         End Enum
 
+        Public Enum DivineState As Integer
+            Cursed = -1
+            Normal = 0
+            Blessed = 1
+        End Enum
     End Module
 
 End Namespace

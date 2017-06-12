@@ -103,7 +103,7 @@ Namespace Common
 
             'ToDo: add check for Lucky/Unlucky state when checking for blessed / cursed state of Potion
             'ToDo: spread out distribution of cursed/blessed Potions
-            RandomPotion.ItemState = DirectCast(RND.Next(-1, 1), ItemBase.DivineState)
+            RandomPotion.ItemState = DirectCast(RND.Next(-1, 1), DivineState)
 
         End Function
         Friend Function RandomScroll(Optional ByVal Modifier As Integer = 0) As Scroll
@@ -128,7 +128,7 @@ Namespace Common
 
             'ToDo: add check for Lucky/Unlucky state when checking for blessed / cursed state of Scroll
             'ToDo: spread out distribution of cursed/blessed scrolls
-            RandomScroll.ItemState = DirectCast(RND.Next(-1, 1), ItemBase.DivineState)
+            RandomScroll.ItemState = DirectCast(RND.Next(-1, 1), DivineState)
 
         End Function
         Friend Function RandomTool(Optional ByVal Modifier As Integer = 0) As ItemBase
@@ -141,7 +141,7 @@ Namespace Common
 
             'ToDo: add check for Lucky/Unlucky state when checking for blessed / cursed state of tools
             'ToDo: spread out distribution of cursed/blessed tools
-            RandomTool.ItemState = DirectCast(RND.Next(-1, 1), ItemBase.DivineState)
+            RandomTool.ItemState = DirectCast(RND.Next(-1, 1), DivineState)
 
         End Function
         Friend Function RandomArmor(Optional ByVal Modifier As Integer = 0) As Armor
@@ -183,7 +183,7 @@ Namespace Common
 
             'ToDo: add check for Lucky/Unlucky state when checking for blessed / cursed state of armor
             'ToDo: spread out distribution of cursed/blessed armor
-            RandomArmor.ItemState = DirectCast(RND.Next(-1, 1), ItemBase.DivineState)
+            RandomArmor.ItemState = DirectCast(RND.Next(-1, 1), DivineState)
 
         End Function
         Friend Function RandomWeapon(Optional ByVal Modifier As Integer = 0) As Weapon
@@ -364,7 +364,7 @@ Namespace Common
                     RandomMissleWeapon = New Sling
             End Select
         End Function
-        Friend Function RandomMissle(Optional ByVal Modifier As Integer = 0) As Missle
+        Friend Function RandomMissle(Optional ByVal Modifier As Integer = 0) As Missile
             Select Case (RND.Next(1, 4) + Modifier)
                 Case 1 To 2
                     RandomMissle = New Arrow

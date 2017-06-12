@@ -237,12 +237,45 @@
     <Compile Include="Items\Scrolls\SoIdentify.vb" />
     <Compile Include="Items\Scrolls\SoMagicMap.vb" />
     <Compile Include="Items\Scrolls\SoMagicMissile.vb" />
-    <Compile Include="Items\Tools.vb" />
+    <Compile Include="Items\Tools\PickAxe.vb" />
+    <Compile Include="Items\Tools\Tools.vb" />
     <Compile Include="Items\Treasure.vb" />
     <Compile Include="Items\Wands\Wand.vb" />
     <Compile Include="Items\Wands\WoLight.vb" />
     <Compile Include="Items\Wands\WoMagicMap.vb" />
     <Compile Include="Items\Wands\WoMagicMissile.vb" />
+    <Compile Include="Items\Weapons\Missiles\Arrow.vb" />
+    <Compile Include="Items\Weapons\BattleAxe.vb" />
+    <Compile Include="Items\Weapons\Club.vb" />
+    <Compile Include="Items\Weapons\Dagger.vb" />
+    <Compile Include="Items\Weapons\Falchion.vb" />
+    <Compile Include="Items\Weapons\GreatAxe.vb" />
+    <Compile Include="Items\Weapons\GreatClub.vb" />
+    <Compile Include="Items\Weapons\Greatsword.vb" />
+    <Compile Include="Items\Weapons\Halberd.vb" />
+    <Compile Include="Items\Weapons\HalfSpear.vb" />
+    <Compile Include="Items\Weapons\HandAxe.vb" />
+    <Compile Include="Items\Weapons\HeavyMace.vb" />
+    <Compile Include="Items\Weapons\HeavyPick.vb" />
+    <Compile Include="Items\Weapons\LightHammer.vb" />
+    <Compile Include="Items\Weapons\LightMace.vb" />
+    <Compile Include="Items\Weapons\Missiles\Missile.vb" />
+    <Compile Include="Items\Weapons\MissileWeapons\LongBow.vb" />
+    <Compile Include="Items\Weapons\LongSword.vb" />
+    <Compile Include="Items\Weapons\MissileWeapons\MissleWeapon.vb" />
+    <Compile Include="Items\Weapons\MorningStar.vb" />
+    <Compile Include="Items\Weapons\Quarterstaff.vb" />
+    <Compile Include="Items\Weapons\Rapier.vb" />
+    <Compile Include="Items\Weapons\Missiles\Rock.vb" />
+    <Compile Include="Items\Weapons\Scimitar.vb" />
+    <Compile Include="Items\Weapons\Scythe.vb" />
+    <Compile Include="Items\Weapons\MissileWeapons\ShortBow.vb" />
+    <Compile Include="Items\Weapons\ShortSpear.vb" />
+    <Compile Include="Items\Weapons\ShortSword.vb" />
+    <Compile Include="Items\Weapons\MissileWeapons\Sling.vb" />
+    <Compile Include="Items\Weapons\ThrowingAxe.vb" />
+    <Compile Include="Items\Weapons\Trident.vb" />
+    <Compile Include="Items\Weapons\Warhammer.vb" />
     <Compile Include="Keybound.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -292,7 +325,7 @@
     </Compile>
     <Compile Include="Screens\Screens.vb" />
     <Compile Include="Overland\Towns.vb" />
-    <Compile Include="Items\Weapons.vb">
+    <Compile Include="Items\Weapons\Weapons.vb">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Overland\Wilderness.vb" />

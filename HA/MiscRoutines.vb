@@ -585,8 +585,8 @@ Module m_MiscRoutines
 						Level(rndX, rndY, intZ).items.Add(RandomBracers)
 					Case ItemType.MissleWeapon
 						Level(rndX, rndY, intZ).items.Add(RandomMissleWeapon)
-					Case ItemType.Missles
-						Level(rndX, rndY, intZ).items.Add(RandomMissle)
+                    Case ItemType.Missiles
+                        Level(rndX, rndY, intZ).items.Add(RandomMissle)
 
 					Case ItemType.Book
 						'TODO: book code - implement later... for now just drop gold
