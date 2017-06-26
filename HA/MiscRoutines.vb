@@ -1020,8 +1020,8 @@ Module m_MiscRoutines
 		ElseIf TheHero.Overland Then
 			With OverlandMap(X, Y)
 				Select Case .TerrainType
-					Case TerrainType.Impassable, TerrainType.Mountain, TerrainType.Water
-						FixGround(X, Y)
+                    Case OverlandTerrainType.Impassable, OverlandTerrainType.Mountain, OverlandTerrainType.Water
+                        FixGround(X, Y)
 						Return .TerrainType
 					Case Else
 						' no obstacles noted
@@ -1126,21 +1126,21 @@ Module m_MiscRoutines
 			TheHero.Town = 0
 
 			Select Case OverlandMap(TheHero.OverX, TheHero.OverY).TerrainType
-				Case TerrainType.Road
+                Case OverlandTerrainType.Road
                     WalkoverMsg = resOverlandRoad
 
-                Case TerrainType.Plains
+                Case OverlandTerrainType.Plains
                     WalkoverMsg = resOverlandPlains
 
-                Case TerrainType.Forest
+                Case OverlandTerrainType.Forest
                     WalkoverMsg = resOverlandForest
 
-                Case TerrainType.Hills
+                Case OverlandTerrainType.Hills
                     WalkoverMsg = resOverlandHills
 
-                Case TerrainType.Special
-					' add coordinates here for various special encounters
-					If TheHero.OverX = 29 And TheHero.OverY = 14 Then
+                Case OverlandTerrainType.Special
+                    ' add coordinates here for various special encounters
+                    If TheHero.OverX = 29 And TheHero.OverY = 14 Then
                         WalkoverMsg = resOverlandDungeonForbiddenDesc
                         TheHero.CurrentDungeon = resOverlandDungeonForbidden
                     End If
@@ -1165,8 +1165,8 @@ Module m_MiscRoutines
                         TheHero.CurrentDungeon = resOverlandDungeonFlooded
                     End If
 
-				Case TerrainType.Town
-					If TheHero.OverX = 8 And TheHero.OverY = 14 Then
+                Case OverlandTerrainType.Town
+                    If TheHero.OverX = 8 And TheHero.OverY = 14 Then
                         WalkoverMsg = Chr(34) & resOverlandTownFincastle & Chr(34) & resOverlandTownFincastleDesc
                         TheHero.Town = Town.Fincastle
 					End If
@@ -1187,7 +1187,7 @@ Module m_MiscRoutines
                         TheHero.Town = Town.Abandoned
 					End If
 
-				Case TerrainType.Volcano
+                Case OverlandTerrainType.Volcano
                     WalkoverMsg = resOverlandVolcano
                 Case Else
 					WalkoverMsg = ""

@@ -426,12 +426,12 @@ Module m_Keybound
                 End If
             Else
                 Select Case Collision
-                    Case TerrainType.Impassable
+                    Case OverlandTerrainType.Impassable
                         strMessage = resImpassable
-                    Case TerrainType.Mountain
+                    Case OverlandTerrainType.Mountain
                         'TODO: Add check for climbing gear
                         strMessage = resNoClimbingYet
-                    Case TerrainType.Water
+                    Case OverlandTerrainType.Water
                         'TODO: Add check for swimming skill
                         strMessage = resNoSwimmingYet
                 End Select
@@ -1437,7 +1437,7 @@ Module m_Keybound
         End If
     End Function
     Friend Function kbDown() As String
-        If OverlandMap(TheHero.OverX, TheHero.OverY).TerrainType = TerrainType.Special _
+        If OverlandMap(TheHero.OverX, TheHero.OverY).TerrainType = OverlandTerrainType.Special _
         And TheHero.Overland = True Then
             If TheHero.OverX = 11 And TheHero.OverY = 5 Then     ' the flooded tunnel
                 kbDown = resFloodedTunnel
@@ -1445,7 +1445,7 @@ Module m_Keybound
                 kbDown = DoStairs(Direction.Down)
             End If
 
-        ElseIf OverlandMap(TheHero.OverX, TheHero.OverY).TerrainType = TerrainType.Town _
+        ElseIf OverlandMap(TheHero.OverX, TheHero.OverY).TerrainType = OverlandTerrainType.Town _
         And TheHero.Overland = True Then
             If TheHero.OverX = 8 And TheHero.OverY = 14 Then
                 kbDown = DoTown(Town.Fincastle)

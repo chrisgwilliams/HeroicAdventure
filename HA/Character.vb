@@ -529,90 +529,99 @@ Module Character
 	End Sub
 
 	Friend Sub HeroLevelUpCheck()
-		If TheHero.XP >= LevelLookup(TheHero.TotalLevels + 1) Then
+        If TheHero.XP >= LevelLookup(TheHero.TotalLevels + 1) Then
 
-			' let them know they went up a level
-			MessageHandler("You went up a level. You feel more powerful.")
-			More(46, 0)
-			WriteAt(1, 0, CLEARSPACE)
+            ' let them know they went up a level
+            MessageHandler("You went up a level. You feel more powerful.")
+            More(46, 0)
+            WriteAt(1, 0, CLEARSPACE)
 
-			' increase total levels
-			TheHero.TotalLevels += 1
-			UpdateLvlDisplay()
+            ' increase total levels
+            TheHero.TotalLevels += 1
+            UpdateLvlDisplay()
 
-			' adjust BaseAttackBonus
-			TheHero.BaseAtkBonus = BaseAtkBonus(TheHero.HeroClass)
-			UpdateAtkBonus()
+            ' adjust BaseAttackBonus
+            TheHero.BaseAtkBonus = BaseAtkBonus(TheHero.HeroClass)
+            UpdateAtkBonus()
 
-			' check for potential stat increase every 4th level
-			If TheHero.TotalLevels Mod 4 = 0 And TheHero.HeroClass > 0 Then
-				' Savage Races must have matured (selected a class) 
-				' in order to specify attribute increases
-				MessageHandler("You may increase a stat by 1 point.")
-				More(37, 0)
-				WriteAt(1, 0, CLEARSPACE)
-				MessageHandler("Please select 1-6 (Str, Int, Wis, Dex, Con, Cha): ")
-				CursorLeft = 51
-				CursorTop = 0
-				CursorVisible = True
+            HeroIncreaseStat()
+            HeroIncreaseHP()
 
-				Dim statIncrease As ConsoleKeyInfo
-				Dim ok As Boolean = False
-
-				Do While Not ok
-					statIncrease = ReadKey()
-					With TheHero
-						Select Case statIncrease.KeyChar.ToString
-							Case PCStats.strength
-								.Strength += 1
-								ok = True
-							Case PCStats.intelligence
-								.Intelligence += 1
-								ok = True
-							Case PCStats.wisdom
-								.Wisdom += 1
-								ok = True
-							Case PCStats.dexterity
-								.Dexterity += 1
-								ok = True
-							Case PCStats.constitution
-								.Constitution += 1
-								ok = True
-							Case PCStats.charisma
-								.Charisma += 1
-								ok = True
-							Case Else
-								ok = False
-						End Select
-					End With
-				Loop
-				UpdateEffectiveStats()
-				WriteAt(1, 0, CLEARSPACE)
-				CursorVisible = False
-			End If
-
-			' increase HP
-			Dim newHP As Int16
-			If TheHero.HeroRace = Race.Ogre And TheHero.HeroClass = 0 Then
-				newHP = OgreUp()
-			ElseIf TheHero.HeroRace = Race.Pixie And TheHero.HeroClass = 0 Then
-				newHP = PixieUp()
-			Else
-				newHP = RND.Next(1, TheHero.HitDie) + AbilityMod(TheHero.EConstitution)
-			End If
-
-			TheHero.HP += newHP
-			TheHero.CurrentHP += newHP
-			UpdateHPDisplay()
-		Else
-			' Sorry, you're not quite there yet... keep killing stuff.
-		End If
+        Else
+            ' Sorry, you're not quite there yet... keep killing stuff.
+        End If
 
 		UpdateEffectiveStats()
 		If Not TheHero.Overland Then DisplayValues()
 	End Sub
 
-	Private Function OgreUp() As Int16
+    Private Sub HeroIncreaseStat()
+        ' check for potential stat increase every 4th level
+        If TheHero.TotalLevels Mod 4 = 0 And TheHero.HeroClass > 0 Then
+            ' Savage Races must have matured (selected a class) 
+            ' in order to specify attribute increases
+            MessageHandler("You may increase a stat by 1 point.")
+            More(37, 0)
+            WriteAt(1, 0, CLEARSPACE)
+            MessageHandler("Please select 1-6 (Str, Int, Wis, Dex, Con, Cha): ")
+            CursorLeft = 51
+            CursorTop = 0
+            CursorVisible = True
+
+            Dim statIncrease As ConsoleKeyInfo
+            Dim ok As Boolean = False
+
+            Do While Not ok
+                statIncrease = ReadKey()
+                With TheHero
+                    Select Case statIncrease.KeyChar.ToString
+                        Case PCStats.strength
+                            .Strength += 1
+                            ok = True
+                        Case PCStats.intelligence
+                            .Intelligence += 1
+                            ok = True
+                        Case PCStats.wisdom
+                            .Wisdom += 1
+                            ok = True
+                        Case PCStats.dexterity
+                            .Dexterity += 1
+                            ok = True
+                        Case PCStats.constitution
+                            .Constitution += 1
+                            ok = True
+                        Case PCStats.charisma
+                            .Charisma += 1
+                            ok = True
+                        Case Else
+                            ok = False
+                    End Select
+                End With
+            Loop
+            UpdateEffectiveStats()
+            WriteAt(1, 0, CLEARSPACE)
+            CursorVisible = False
+        End If
+
+    End Sub
+    Private Sub HeroIncreaseHP()
+        ' increase HP
+        Dim newHP As Int16
+        If TheHero.HeroRace = Race.Ogre And TheHero.HeroClass = 0 Then
+            newHP = OgreUp()
+        ElseIf TheHero.HeroRace = Race.Pixie And TheHero.HeroClass = 0 Then
+            newHP = PixieUp()
+        Else
+            newHP = RND.Next(1, TheHero.HitDie) + AbilityMod(TheHero.EConstitution)
+        End If
+
+        TheHero.HP += newHP
+        TheHero.CurrentHP += newHP
+        UpdateHPDisplay()
+
+    End Sub
+
+    Private Function OgreUp() As Int16
 		Dim newHP As Int16
 
 		Select Case TheHero.TotalLevels
@@ -678,58 +687,20 @@ Module Character
 		Return newHP
 	End Function
 
-	'Friend Sub RemoveMod(ByVal item As Object)
-	'	With TheHero
-	'		Select Case item.StatAffected
-	'			Case PCStats.strength
-	'				.StrMods -= item.StatBonus
-	'			Case PCStats.intelligence
-	'				.IntMods -= item.StatBonus
-	'			Case PCStats.wisdom
-	'				.WisMods -= item.StatBonus
-	'			Case PCStats.dexterity
-	'				.DexMods -= item.StatBonus
-	'			Case PCStats.constitution
-	'				.ConMods -= item.StatBonus
-	'			Case PCStats.charisma
-	'				.ChaMods -= item.StatBonus
-	'		End Select
-	'	End With
-	'End Sub
+    <DebuggerStepThrough()>
+    Friend Sub UpdateEffectiveStats()
+        With TheHero
+            .EStrength = .Strength + .StrMods
+            .EIntelligence = .Intelligence + .IntMods
+            .EWisdom = .Wisdom + .WisMods
+            .EDexterity = .Dexterity + .DexMods
+            .EConstitution = .Constitution + .ConMods
+            .ECharisma = .Charisma + .ChaMods
+        End With
+    End Sub
 
-	'Friend Sub AddMod(ByVal item As Object)
-	'	With TheHero
-	'		Select Case item.StatAffected
-	'			Case PCStats.strength
-	'				.StrMods += item.StatBonus
-	'			Case PCStats.intelligence
-	'				.IntMods += item.StatBonus
-	'			Case PCStats.wisdom
-	'				.WisMods += item.StatBonus
-	'			Case PCStats.dexterity
-	'				.DexMods += item.StatBonus
-	'			Case PCStats.constitution
-	'				.ConMods += item.StatBonus
-	'			Case PCStats.charisma
-	'				.ChaMods += item.StatBonus
-	'		End Select
-	'	End With
-	'End Sub
-
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub UpdateEffectiveStats()
-		With TheHero
-			.EStrength = .Strength + .StrMods
-			.EIntelligence = .Intelligence + .IntMods
-			.EWisdom = .Wisdom + .WisMods
-			.EDexterity = .Dexterity + .DexMods
-			.EConstitution = .Constitution + .ConMods
-			.ECharisma = .Charisma + .ChaMods
-		End With
-	End Sub
-
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Private Function BaseAtkBonus(ByVal heroClass As Integer) As Integer
+    <DebuggerStepThrough()>
+    Private Function BaseAtkBonus(ByVal heroClass As Integer) As Integer
 		Select Case heroClass
 			Case PCClass.Warrior, PCClass.Barbarian, PCClass.Paladin
 				BaseAtkBonus = TheHero.TotalLevels
@@ -773,8 +744,8 @@ Module Character
 
 	End Function
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Private Sub UpdateAtkBonus()
+    <DebuggerStepThrough()>
+    Private Sub UpdateAtkBonus()
 		If CInt(TheHero.BaseAtkBonus) + CInt(AbilityMod(TheHero.EStrength)) >= 0 Then
 			WriteAt(72, 14, "+" & TheHero.BaseAtkBonus + AbilityMod(TheHero.EStrength) & " ")
 		Else
@@ -915,8 +886,8 @@ Module Character
 		End Select
 	End Function
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub HeroLOS()
+    <DebuggerStepThrough()>
+    Friend Sub HeroLOS()
 		' process visible area
 		Dim MinX As Int16, MinY As Int16, _
 			MaxX As Int16, MaxY As Int16, _
@@ -1420,8 +1391,8 @@ Module Character
 		WriteAt(TheHero.LocX, TheHero.LocY, TheHero.Icon, TheHero.Color)
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub UpdateHPDisplay()
+    <DebuggerStepThrough()>
+    Friend Sub UpdateHPDisplay()
 		Dim strHPdisplay As String = TheHero.CurrentHP
 
 		If (TheHero.CurrentHP <= CInt(TheHero.HP * 0.75)) _
@@ -1442,13 +1413,13 @@ Module Character
 		WriteAt(68, 17, TheHero.TotalLevels)
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub UpdateXPDisplay()
+    <DebuggerStepThrough()>
+    Friend Sub UpdateXPDisplay()
 		WriteAt(65, 11, TheHero.XP)
 	End Sub
 
-	<System.Diagnostics.DebuggerStepThrough()> _
-	Friend Sub HeroHealing()
+    <DebuggerStepThrough()>
+    Friend Sub HeroHealing()
 		Dim iHealRate As Integer = (35 - (AbilityMod(TheHero.EConstitution) * 5))
 		If iHealRate < 1 Then iHealRate = 1
 
@@ -1460,8 +1431,5 @@ Module Character
 	End Sub
 
 #End Region
-
-
-
 
 End Module

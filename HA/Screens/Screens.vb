@@ -327,37 +327,37 @@ Namespace Screens
                 For intCtrY = 0 To 17
                     For intCtrX = 0 To 72
                         Select Case OverlandMap(intCtrX, intCtrY).TerrainType
-                            Case Overland.TerrainType.Void
+                            Case OverlandTerrainType.Void
                             ' Do nothing, this area is just black.
 
-                            Case Overland.TerrainType.Impassable
+                            Case OverlandTerrainType.Impassable
                                 WriteAt(intCtrX + 1, intCtrY + 3, "^", ConsoleColor.Gray)
 
-                            Case Overland.TerrainType.Mountain
+                            Case OverlandTerrainType.Mountain
                                 WriteAt(intCtrX + 1, intCtrY + 3, "^", ConsoleColor.DarkGray)
 
-                            Case Overland.TerrainType.Volcano
+                            Case OverlandTerrainType.Volcano
                                 WriteAt(intCtrX + 1, intCtrY + 3, "^", ConsoleColor.Red)
 
-                            Case Overland.TerrainType.Hills
+                            Case OverlandTerrainType.Hills
                                 WriteAt(intCtrX + 1, intCtrY + 3, "~", ConsoleColor.DarkYellow)
 
-                            Case Overland.TerrainType.Plains
+                            Case OverlandTerrainType.Plains
                                 WriteAt(intCtrX + 1, intCtrY + 3, Chr(34), ConsoleColor.Green)
 
-                            Case Overland.TerrainType.Road
+                            Case OverlandTerrainType.Road
                                 WriteAt(intCtrX + 1, intCtrY + 3, ".", ConsoleColor.DarkYellow)
 
-                            Case Overland.TerrainType.Forest
+                            Case OverlandTerrainType.Forest
                                 WriteAt(intCtrX + 1, intCtrY + 3, "&", ConsoleColor.DarkGreen)
 
-                            Case Overland.TerrainType.Special
+                            Case OverlandTerrainType.Special
                                 WriteAt(intCtrX + 1, intCtrY + 3, "*", ConsoleColor.DarkGray)
 
-                            Case Overland.TerrainType.Town
+                            Case OverlandTerrainType.Town
                                 WriteAt(intCtrX + 1, intCtrY + 3, "o", ConsoleColor.DarkYellow)
 
-                            Case Overland.TerrainType.Water
+                            Case OverlandTerrainType.Water
                                 WriteAt(intCtrX + 1, intCtrY + 3, "=", ConsoleColor.Blue)
 
                         End Select

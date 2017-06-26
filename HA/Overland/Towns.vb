@@ -1,5 +1,6 @@
 Imports RND = DBuild.MersenneTwister
 Imports System.Console
+Imports HA.Common
 
 Public Module Towns
 #Region " Module Level Variables "
@@ -13,6 +14,9 @@ Public Module Towns
                                ByVal width As Int16, ByVal height As Int16, _
                                ByVal door As Heading, ByVal doorstate As DoorState, _
                                ByVal town As Town)
+
+        'TODO: modify GenericBuilding() to allow overlapping walls without overwriting doors
+
         '.......   
         '.#####.   creates a square or rectangular building
         '.#...#.   starting at the top left (startX & startY)
@@ -254,17 +258,6 @@ Public Module Towns
 
 #Region " Town Structures and Enums "
 
-    Public Enum Heading
-        North = 1
-        NorthEast = 2   '8 1 2
-        East = 3        '7 x 3
-        SouthEast = 4   '6 5 4
-        South = 5
-        SouthWest = 6
-        West = 7
-        NorthWest = 8
-    End Enum
-
     Public Enum CellType
         Void = 0            '    Unreachable Void
         grass = 1           ' .  grass (green)
@@ -279,7 +272,7 @@ Public Module Towns
     End Enum
 
     Public Structure TownCell
-        Dim CellType As Integer
+        Dim CellType As CellType
         Dim Observed As Boolean
 		Dim DoorState As DoorState
 		Dim NPC As Integer

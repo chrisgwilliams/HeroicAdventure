@@ -1,3 +1,5 @@
+Imports HA.Common
+
 Partial Public Class TownFactory
 
     Public Shared Sub Fincastle()
@@ -6,18 +8,18 @@ Partial Public Class TownFactory
         ' Fincastle
         For intXctr = 0 To 78
             For intYctr = 0 To 17
-				m_TownMap(intXctr, intYctr, Town.Fincastle).CellType = Towns.CellType.grass
-				m_TownMap(intXctr, intYctr, Town.Fincastle).items = New ArrayList()
+                m_TownMap(intXctr, intYctr, Town.Fincastle).CellType = Towns.CellType.grass
+                m_TownMap(intXctr, intYctr, Town.Fincastle).items = New ArrayList()
             Next
         Next
-        GenericBuilding(4, 4, 8, 5, Towns.Heading.East, DoorState.none, Town.Fincastle)
-        GenericBuilding(9, 11, 5, 5, Towns.Heading.North, DoorState.none, Town.Fincastle)
-        GenericBuilding(18, 3, 11, 5, Towns.Heading.South, DoorState.none, Town.Fincastle)
-        GenericBuilding(33, 4, 5, 4, Towns.Heading.South, DoorState.none, Town.Fincastle)
+        GenericBuilding(4, 4, 8, 5, Heading.East, DoorState.none, Town.Fincastle)
+        GenericBuilding(9, 11, 5, 5, Heading.North, DoorState.none, Town.Fincastle)
+        GenericBuilding(18, 3, 11, 5, Heading.South, DoorState.none, Town.Fincastle)
+        GenericBuilding(33, 4, 5, 4, Heading.South, DoorState.none, Town.Fincastle)
 
         ' composite building
-        GenericBuilding(27, 10, 5, 5, Towns.Heading.North, DoorState.none, Town.Fincastle)
-        GenericBuilding(31, 10, 5, 5, Towns.Heading.West, DoorState.none, Town.Fincastle)
+        GenericBuilding(27, 10, 5, 5, Heading.North, DoorState.none, Town.Fincastle)
+        GenericBuilding(31, 10, 5, 5, Heading.West, DoorState.none, Town.Fincastle)
 
         ' bridge
         For intXctr = 42 To 48
@@ -36,10 +38,10 @@ Partial Public Class TownFactory
         Next
         m_TownMap(52, 8, Town.Fincastle).CellType = Towns.CellType.grass
         m_TownMap(52, 9, Town.Fincastle).CellType = Towns.CellType.grass
-        GenericBuilding(60, 4, 7, 5, Towns.Heading.South, DoorState.none, Town.Fincastle)
-        GenericBuilding(55, 4, 6, 5, Towns.Heading.East, DoorState.none, Town.Fincastle)
-        GenericBuilding(66, 4, 6, 5, Towns.Heading.West, DoorState.none, Town.Fincastle)
-        GenericBuilding(60, 10, 7, 4, Towns.Heading.North, DoorState.none, Town.Fincastle)
+        GenericBuilding(60, 4, 7, 5, Heading.South, DoorState.none, Town.Fincastle)
+        GenericBuilding(55, 4, 6, 5, Heading.East, DoorState.none, Town.Fincastle)
+        GenericBuilding(66, 4, 6, 5, Heading.West, DoorState.none, Town.Fincastle)
+        GenericBuilding(60, 10, 7, 4, Heading.North, DoorState.none, Town.Fincastle)
 
         ' creek
         For intYctr = 0 To 6

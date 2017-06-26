@@ -9,7 +9,7 @@ Module Wilderness
 #End Region
 
 #Region " Wilderness Subs and Functions "
-    Friend Function DoTerrain(ByVal intTerrain As Integer) As String
+    Friend Function DoTerrain(ByVal terrain As OverlandTerrainType) As String
         DoTerrain = ""
 
         Clear()
@@ -19,16 +19,15 @@ Module Wilderness
         TheHero.TerrainZoom = True
 
         ' populate map
-        RenderTerrain(intTerrain)
+        RenderTerrain(terrain)
+        ReDrawTerrain(terrain)
+        TerrainLOS(terrain)
 
-        ReDrawTerrain(intTerrain)
-        TerrainLOS(intTerrain)
-
-		WriteAt(TheHero.LocX + 1, TheHero.LocY + 3, TheHero.Icon, TheHero.Color)
+        WriteAt(TheHero.LocX + 1, TheHero.LocY + 3, TheHero.Icon, TheHero.Color)
 
     End Function
 
-    Friend Sub RenderTerrain(ByVal terrain As TerrainType)
+    Friend Sub RenderTerrain(ByVal terrain As OverlandTerrainType)
         Dim intXCtr, intYCtr As Integer
 
         ' clear the observed state & cover the field with grass before adding any special tiles
@@ -36,17 +35,21 @@ Module Wilderness
             For intYCtr = 0 To 17
                 m_TerrainMap(intXCtr, intYCtr, terrain).Observed = False
                 m_TerrainMap(intXCtr, intYCtr, terrain).CellType = CellType.grass
-                m_TerrainMap(intXCtr, intYCtr, terrain).Color = ConsoleColor.Green
+                If (D12() = 1) Then
+                    m_TerrainMap(intXCtr, intYCtr, terrain).Color = ConsoleColor.DarkGreen
+                Else
+                    m_TerrainMap(intXCtr, intYCtr, terrain).Color = ConsoleColor.Green
+                End If
             Next
         Next
 
         Select Case terrain
-            Case TerrainType.Road
+            Case OverlandTerrainType.Road
                 Dim RoadDirection As RoadAlignment
 
-                If (OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = TerrainType.Road Or OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = TerrainType.Mountain) _
-                    And OverlandMap(TheHero.OverX + 1, TheHero.OverY).TerrainType = TerrainType.Road _
-                    And OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType <> TerrainType.Road Then
+                If (OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = OverlandTerrainType.Road Or OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = OverlandTerrainType.Mountain) _
+                    And OverlandMap(TheHero.OverX + 1, TheHero.OverY).TerrainType = OverlandTerrainType.Road _
+                    And OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType <> OverlandTerrainType.Road Then
                     RoadDirection = RoadAlignment.EastWest
                     Dim yBase As Integer
                     intYCtr = 0
@@ -65,8 +68,8 @@ Module Wilderness
                         If intYCtr < -2 Then intYCtr = -2
                     Next
 
-                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY - 1).TerrainType = TerrainType.Road _
-                    And OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType = TerrainType.Road Then
+                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY - 1).TerrainType = OverlandTerrainType.Road _
+                    And OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType = OverlandTerrainType.Road Then
                     RoadDirection = RoadAlignment.NorthSouth
 
                     Dim Xbase As Integer
@@ -86,8 +89,8 @@ Module Wilderness
                         If intXCtr < -2 Then intXCtr = -2
                     Next
 
-                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY - 1).TerrainType = TerrainType.Road _
-                    And OverlandMap(TheHero.OverX + 1, TheHero.OverY).TerrainType = TerrainType.Road Then
+                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY - 1).TerrainType = OverlandTerrainType.Road _
+                    And OverlandMap(TheHero.OverX + 1, TheHero.OverY).TerrainType = OverlandTerrainType.Road Then
                     RoadDirection = RoadAlignment.NorthEast
 
                     Dim Xbase As Integer
@@ -123,8 +126,8 @@ Module Wilderness
                         If intYCtr < -2 Then intYCtr = -2
                     Next
 
-                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY - 1).TerrainType = TerrainType.Road _
-                    And OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = TerrainType.Road Then
+                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY - 1).TerrainType = OverlandTerrainType.Road _
+                    And OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = OverlandTerrainType.Road Then
                     RoadDirection = RoadAlignment.NorthWest
 
                     Dim Xbase As Integer
@@ -162,8 +165,8 @@ Module Wilderness
                         If intYCtr < -2 Then intYCtr = -2
                     Next
 
-                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType = TerrainType.Road _
-                    And OverlandMap(TheHero.OverX + 1, TheHero.OverY).TerrainType = TerrainType.Road Then
+                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType = OverlandTerrainType.Road _
+                    And OverlandMap(TheHero.OverX + 1, TheHero.OverY).TerrainType = OverlandTerrainType.Road Then
                     RoadDirection = RoadAlignment.SouthEast
 
                     Dim yBase As Integer
@@ -201,8 +204,8 @@ Module Wilderness
                     Next
 
 
-                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType = TerrainType.Road _
-                    And OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = TerrainType.Road Then
+                ElseIf OverlandMap(TheHero.OverX, TheHero.OverY + 1).TerrainType = OverlandTerrainType.Road _
+                    And OverlandMap(TheHero.OverX - 1, TheHero.OverY).TerrainType = OverlandTerrainType.Road Then
                     RoadDirection = RoadAlignment.SouthWest
                 End If
 
@@ -233,7 +236,7 @@ Module Wilderness
                     End If
                 Next
 
-            Case TerrainType.Forest
+            Case OverlandTerrainType.Forest
                 Dim MaxTrees As Integer = RND.Next(500, 700)
                 Dim TreeCtr As Integer
 
@@ -249,10 +252,10 @@ Module Wilderness
                     End If
                 Next
 
-            Case TerrainType.Plains
+            Case OverlandTerrainType.Plains
                 ' do nothing, we already have grass
 
-            Case TerrainType.Hills
+            Case OverlandTerrainType.Hills
                 Dim MaxHills As Integer = RND.Next(500, 700)
                 Dim HillCtr As Integer
 
@@ -260,18 +263,18 @@ Module Wilderness
                     intXCtr = RND.Next(1, 77)
                     intYCtr = RND.Next(1, 16)
 
-                    m_TerrainMap(intXCtr, intYCtr, terrain).CellType = CellType.Hill
+                    m_TerrainMap(intXCtr, intYCtr, terrain).CellType = CellType.hill
                     m_TerrainMap(intXCtr, intYCtr, terrain).Color = ConsoleColor.DarkYellow
                 Next
 
 
-            Case TerrainType.Water
+            Case OverlandTerrainType.Water
                 'TODO: Water terrain not implemented yet
 
         End Select
     End Sub
 
-    Friend Sub ReDrawTerrain(ByVal terrain As TerrainType)
+    Friend Sub ReDrawTerrain(ByVal terrain As OverlandTerrainType)
         Dim intXctr As Int16, intYctr As Int16
 
         For intXctr = 0 To 78
@@ -280,6 +283,7 @@ Module Wilderness
                     Select Case .CellType
                         Case CellType.Void
                             ' do nothing, black/black is the default
+
                         Case CellType.grass
                             If .Observed Then
                                 ' ConsoleColor.Green
@@ -316,9 +320,9 @@ Module Wilderness
         Next
     End Sub
 
-    Friend Sub TerrainLOS(ByVal terrain As TerrainType)
-        Dim MinX As Int16, MinY As Int16, _
-            MaxX As Int16, MaxY As Int16, _
+    Friend Sub TerrainLOS(ByVal terrain As OverlandTerrainType)
+        Dim MinX As Int16, MinY As Int16,
+            MaxX As Int16, MaxY As Int16,
             xCtr As Int16, yCtr As Int16
 
         ' we can see farther on the overland map, might adjust by race eventually
@@ -366,7 +370,7 @@ Module Wilderness
         Next
     End Sub
 
-    Public Sub FixTerrain(ByVal x As Int16, ByVal y As Int16, ByVal terrain As TerrainType)
+    Public Sub FixTerrain(ByVal x As Int16, ByVal y As Int16, ByVal terrain As OverlandTerrainType)
         With m_TerrainMap(x, y, terrain)
             Select Case .CellType
                 Case CellType.Void
@@ -390,17 +394,6 @@ Module Wilderness
 
 #Region " Terrain Structures and Enums "
 
-    Public Enum Heading
-        North = 1
-        NorthEast = 2   '8 1 2
-        East = 3        '7 x 3
-        SouthEast = 4   '6 5 4
-        South = 5
-        SouthWest = 6
-        West = 7
-        NorthWest = 8
-    End Enum
-
     Public Enum CellType
         Void = 0            '    Unreachable Void
         grass = 1           ' .  grass (green)
@@ -411,19 +404,12 @@ Module Wilderness
     End Enum
 
     Public Structure TerrainCell
-        Dim CellType As Integer
+        Dim CellType As CellType
         Dim Observed As Boolean
         Dim Color As ConsoleColor
     End Structure
 
-    Public Enum RoadAlignment
-        EastWest
-        NorthSouth
-        NorthEast
-        NorthWest
-        SouthEast
-        SouthWest
-    End Enum
+
 
 #End Region
 
