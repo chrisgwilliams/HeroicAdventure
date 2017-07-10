@@ -4,7 +4,9 @@ Public MustInherit Class Potion
 	Inherits ItemBase
 	Implements iLiquidItem
 
-	Private intPType As Int16
+    'TODO: implement chance of drinking wrong potion when confused
+
+    Private intPType As Int16
 	Private strPMessage As String
 	Private intDuration As Int16
 

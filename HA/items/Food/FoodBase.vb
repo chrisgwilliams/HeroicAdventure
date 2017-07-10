@@ -22,6 +22,6 @@ Public MustInherit Class FoodBase
 		Cooked = False
 	End Sub
 
-	Public MustOverride Function eat(WhoIsEating As Avatar) As String Implements iEdibleItem.eat
+    Public MustOverride Function eat(whoIsEating As Avatar) As String Implements iEdibleItem.eat
 
 End Class

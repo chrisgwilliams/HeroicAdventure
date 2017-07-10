@@ -26,8 +26,9 @@ Public Class PoExtraHealing
 	End Function
 
 	Public Overrides Function drink(WhoIsDrinking As Avatar) As String
-		' TODO: Add Luck Factor to Extra Healing result
-		With WhoIsDrinking
+        ' TODO: Add Luck Factor to Extra Healing result
+        ' TODO: If CurrentHP = HP before drinking !oXH (and !oXH is not Cursed), add a point to HP total
+        With WhoIsDrinking
 			Select Case ItemState
 				Case DivineState.Blessed
 					.CurrentHP += D12() + D12()

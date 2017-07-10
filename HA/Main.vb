@@ -16,8 +16,8 @@ Module MainModule
 	Friend Const MAXWIDTH As Int16 = 59
 	Friend Const MAXHEIGHT As Int16 = 21
 
-	Friend TheHero As Hero
-	Friend Level(,,) As GridCell
+    Friend TheHero As Hero
+    Friend Level(,,) As GridCell
 	Friend m_arrMonster As New ArrayList
 	Friend m_version As New Version("0.1.7")
 	Friend RND As New DBuild.MersenneTwister

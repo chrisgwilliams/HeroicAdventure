@@ -20,7 +20,7 @@ Imports HA.Common
 
 		Chat = "Bree Yark!"
 
-		HitDie = 8
+		HitDieType = 8
 		HP = D8()
 		CurrentHP = HP
 

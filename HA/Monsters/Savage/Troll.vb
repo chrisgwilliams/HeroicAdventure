@@ -22,7 +22,7 @@ Imports HA.Common
 
 		Chat = "Raaarrgh! Food not talk!"
 
-		HitDie = 8 ' 6d8 + 36
+		HitDieType = 8 ' 6d8 + 36
 		Dim intCtr As Integer
 		For intCtr = 1 To 6
 			HP += D8()

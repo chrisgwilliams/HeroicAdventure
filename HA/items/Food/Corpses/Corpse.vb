@@ -14,6 +14,6 @@ Public MustInherit Class Corpse
 	Public MustOverride Property Description As String
 	Public MustOverride Property CorpseEffect As String
 
-	Public MustOverride Overrides Function eat(WhoIsEating As Avatar) As String
+    Public MustOverride Overrides Function eat(whoIsEating As Avatar) As String
 
 End Class

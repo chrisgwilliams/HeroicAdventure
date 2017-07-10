@@ -28,8 +28,13 @@ Public Class PoPoison
 	End Function
 
 	Public Overrides Function drink(WhoIsDrinking As Avatar) As String
-		'TODO: Drink Poison
+        'TODO: Drink Poison
 
-		Return Me.Message
-	End Function
+        WhoIsDrinking.Poisoned = True
+        WhoIsDrinking.CurrentHP -= RND.Next(1, WhoIsDrinking.CurrentHP \ 2)
+        If WhoIsDrinking.CurrentHP <= 0 Then WhoIsDrinking.Dead = True
+        WhoIsDrinking.PoisonDuration = TheHero.TurnCount + D4() + D4()
+
+        Return Message
+    End Function
 End Class

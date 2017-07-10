@@ -22,7 +22,7 @@ Imports HA.Common
 
 		Chat = "Bark! Hiss! The kobold spits angrily!"
 
-		HitDie = 4
+		HitDieType = 4
 		HP += D4()
 		CurrentHP = HP
 

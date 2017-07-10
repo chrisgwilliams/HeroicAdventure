@@ -1,8 +1,8 @@
 ﻿Imports HA.Common
 
 Public Interface iLiquidItem
-	Function drink(ByVal WhoIsDrinking As Avatar) As String
-	Function dip(ByRef WhatIsBeingDipped As ItemBase) As String
+    Function drink(ByVal whoIsDrinking As Avatar) As String
+    Function dip(ByRef whatIsBeingDipped As ItemBase) As String
 End Interface
 
 ' These methods are fired when an item is equipped and de-equipped, respectively.
@@ -12,11 +12,11 @@ Public Interface iEquippableItem
 End Interface
 
 Public Interface iEdibleItem
-	Function eat(ByVal WhoIsActivating As Avatar) As String
+    Function eat(ByVal whoIsEating As Avatar) As String
 End Interface
 
 Public Interface iPaperItem
-	Function read(ByVal WhoIsReading As Avatar) As String
+    Function read(ByVal whoIsReading As Avatar) As String
 End Interface
 
 Public Interface iMagicSpell

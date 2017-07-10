@@ -20,7 +20,7 @@ Public MustInherit Class Snake
 
 		Chat = "Hissssssssssssss!"
 
-		HitDie = 8
+		HitDieType = 8
 		HasHands = False
 		HasFeet = False
 		Initiative = 3

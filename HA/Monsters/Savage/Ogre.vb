@@ -22,7 +22,7 @@ Imports HA.Common
 
 		Chat = "*grunt* You smell funny! Hahaha"
 
-		HitDie = 8 '4d8+8
+		HitDieType = 8 '4d8+8
 		HP += D8()
 		HP += D8()
 		HP += D8()
@@ -64,7 +64,7 @@ End Class
 
 		Chat = "Insignificant fool, you are not worthy of my conversation."
 
-		HitDie = 8 '5d8+15
+		HitDieType = 8 '5d8+15
 		HP = D8()
 		HP += D8()
 		HP += D8()
@@ -110,7 +110,7 @@ End Class
 
 		Chat = "You dare speak to me? For that you shall die!"
 
-		HitDie = 8 '7d8+20
+		HitDieType = 8 '7d8+20
 		HP = D8()
 		HP += D8()
 		HP += D8()

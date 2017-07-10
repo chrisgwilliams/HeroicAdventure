@@ -46,7 +46,7 @@ End Class
 
 		Chat = "grrrrrrrrowwwwl!!"
 
-		HitDie = 8 'd8
+		HitDieType = 8 'd8
 		HP = D8()
 		HP += D8()
 		HP += D8()

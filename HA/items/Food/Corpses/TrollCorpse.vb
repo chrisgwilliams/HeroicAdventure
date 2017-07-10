@@ -25,13 +25,13 @@ Public Class TrollCorpse
 		Cooked = False
 	End Sub
 
-	Public Overrides Function eat(WhoIsEating As Avatar) As String
-		' TODO: eat a Troll Corpse
-		' Check for blessed / cursed / uncursed status
-		' check for rotten status
-		' TODO: pull Hero healing rate into property so it can be modified by external factors (like eating a troll)
+    Public Overrides Function eat(whoIsEating As Avatar) As String
+        ' TODO: eat a Troll Corpse
+        ' Check for blessed / cursed / uncursed status
+        ' check for rotten status
+        ' TODO: pull Hero healing rate into property so it can be modified by external factors (like eating a troll)
 
-		Return CorpseEffect
-	End Function
+        Return CorpseEffect
+    End Function
 
 End Class

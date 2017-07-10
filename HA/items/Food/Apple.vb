@@ -17,11 +17,12 @@ Public Class Apple
 
 	End Sub
 
-	Public Overrides Function eat(WhoIsEating As Avatar) As String
-		'TODO eat an apple
+    Public Overrides Function eat(whoIsEating As Avatar) As String
+        'TODO eat an apple
 
-		' check for blessed/cursed/uncursed status
-		Return ""
 
-	End Function
+        ' check for blessed/cursed/uncursed status
+        Return ""
+
+    End Function
 End Class

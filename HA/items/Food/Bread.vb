@@ -17,11 +17,11 @@ Public Class Bread
 		Cooked = True
 	End Sub
 
-	Public Overrides Function eat(WhoIsEating As Avatar) As String
-		'ToDo: eat Bread
-		' check for blessed/cursed/uncursed status
+    Public Overrides Function eat(whoIsEating As Avatar) As String
+        'ToDo: eat Bread
+        ' check for blessed/cursed/uncursed status
 
-		Return ""
+        Return ""
 
-	End Function
+    End Function
 End Class

@@ -22,7 +22,7 @@ Imports HA.Common
 
 		Chat = "hisssss!"
 
-		HitDie = 4 'd4+2
+		HitDieType = 4 'd4+2
 		HP = D4()
 		HP += 2
 		CurrentHP = HP
@@ -58,7 +58,7 @@ Public Class BabyLizard
 		Strength = 5
 		Constitution = 8
 
-		HitDie = 4 'd4
+		HitDieType = 4 'd4
 		HP = D4()
 		CurrentHP = HP
 

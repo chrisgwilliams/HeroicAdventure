@@ -58,18 +58,19 @@ Public Class PoWater
 	End Function
 
 	Public Overrides Function drink(WhoIsDrinking As Avatar) As String
-		'TODO: add benefits/penalties of drinking b/c water
+        'TODO: add benefits/penalties of drinking b/c water
+        'TODO: Do something for hunger/nutrition when drinking water
 
-		Select Case Me.ItemState
-			Case DivineState.Blessed
+        Select Case Me.ItemState
+            Case DivineState.Blessed
 
-			Case DivineState.Normal
+            Case DivineState.Normal
 
-			Case DivineState.Cursed
+            Case DivineState.Cursed
 
-		End Select
+        End Select
 
-		Return Me.Message
+        Return Message
 
-	End Function
+    End Function
 End Class

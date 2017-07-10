@@ -205,14 +205,14 @@ Module m_Generation
 				Case PCClass.Warrior
 					If .Strength < 15 Then .Strength = D4() + 14
 					If .Dexterity < 15 Then .Dexterity = D4() + 14
-					.HitDie = 10
+					.HitDieType = 10
 					.BaseAtkBonus = 1
 					.CasterType = MagicType.None
 
 				Case PCClass.Barbarian
 					If .Strength < 15 Then .Strength = D4() + 14
 					If .Constitution < 15 Then .Constitution = D4() + 14
-					.HitDie = 12
+					.HitDieType = 12
 					.BaseAtkBonus = 1
 					.CasterType = MagicType.None
 
@@ -220,45 +220,45 @@ Module m_Generation
 					If .Strength < 15 Then .Strength = D4() + 14
 					If .Charisma < 15 Then .Charisma = D4() + 14
 					If .Wisdom < 15 Then .Wisdom = D4() + 14
-					.HitDie = 10
+					.HitDieType = 10
 					.BaseAtkBonus = 1
 					.CasterType = MagicType.None
 
 				Case PCClass.Wizard
 					If .Intelligence < 15 Then .Intelligence = D4() + 14
-					.HitDie = 4
+					.HitDieType = 4
 					.BaseAtkBonus = 0
 					.CasterType = MagicType.Arcane
 
 				Case PCClass.Sorceror
 					If .Charisma < 15 Then .Charisma = D4() + 14
-					.HitDie = 4
+					.HitDieType = 4
 					.BaseAtkBonus = 0
 					.CasterType = MagicType.Arcane
 
 				Case PCClass.Thief
 					If .Dexterity < 15 Then .Dexterity = D4() + 14
 					If .Intelligence < 15 Then .Intelligence = D4() + 14
-					.HitDie = 6
+					.HitDieType = 6
 					.BaseAtkBonus = 0
 					.CasterType = MagicType.None
 
 				Case PCClass.Assassin
 					If .Dexterity < 15 Then .Dexterity = D4() + 14
 					If .Constitution < 15 Then .Constitution = D4() + 14
-					.HitDie = 6
+					.HitDieType = 6
 					.BaseAtkBonus = 0
 					.CasterType = MagicType.None
 
 				Case PCClass.Priest
 					If .Wisdom < 15 Then .Wisdom = D4() + 14
-					.HitDie = 8
+					.HitDieType = 8
 					.BaseAtkBonus = 0
 					.CasterType = MagicType.Divine
 
 				Case PCClass.Druid
 					If .Wisdom < 15 Then .Wisdom = D4() + 14
-					.HitDie = 8
+					.HitDieType = 8
 					.BaseAtkBonus = 0
 					.CasterType = MagicType.Divine
 			End Select
@@ -316,7 +316,7 @@ Module m_Generation
 					.NaturalArmor += 3
 					.MiscACMod += 0
 					.DarkVision = 6
-					.HitDie = 8
+					.HitDieType = 8
 					.BaseAtkBonus = 0
 
 				Case Race.Pixie
@@ -327,7 +327,7 @@ Module m_Generation
 					.NaturalArmor += 0
 					.MiscACMod += 1
 					.DarkVision = 0
-					.HitDie = 6
+					.HitDieType = 6
 					.BaseAtkBonus = 1
 
 			End Select
@@ -370,9 +370,9 @@ Module m_Generation
 	Friend Sub CalculateHP()
 
 		If TheHero.TotalLevels = 1 Then
-			TheHero.HP = TheHero.HitDie + AbilityMod(TheHero.Constitution)
+			TheHero.HP = TheHero.HitDieType + AbilityMod(TheHero.Constitution)
 		Else
-			TheHero.HP += RND.Next(1, TheHero.HitDie + 1) + AbilityMod(TheHero.Constitution)
+			TheHero.HP += RND.Next(1, TheHero.HitDieType + 1) + AbilityMod(TheHero.Constitution)
 		End If
 
 		TheHero.CurrentHP = TheHero.HP

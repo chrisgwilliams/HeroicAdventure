@@ -22,14 +22,7 @@ Imports HA.Common
 
 #Region " Stat Mods "
 
-    Private intStrMods As Integer
-	Private intIntMods As Integer
-	Private intWisMods As Integer
-	Private intDexMods As Integer
-	Private intConMods As Integer
-	Private intChaMods As Integer
-
-	Public Property StrMods() As Integer
+    Public Property StrMods() As Integer
     Public Property IntMods() As Integer
     Public Property WisMods() As Integer
     Public Property DexMods() As Integer
@@ -64,8 +57,7 @@ Imports HA.Common
 
     Public Property GP() As Integer
 
-    ' this is NOT the number of hitdice, but the sides of the die
-    Public Property HitDie() As Integer
+    Public Property HitDieType() As Integer
     Public Property HP() As Integer
     Public Property CurrentHP() As Integer
 

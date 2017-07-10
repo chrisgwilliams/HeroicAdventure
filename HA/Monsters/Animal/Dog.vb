@@ -22,7 +22,7 @@ Imports HA.Common
 
 		Chat = "woof woof! woof!"
 
-		HitDie = 8 'd8
+		HitDieType = 8 'd8
 		HP = D8()
 		HP += D8()
 		HP += 4
@@ -66,7 +66,7 @@ Public Class Puppy
 
 		Chat = "yip yap yip!"
 
-		HitDie = 4 'd4
+		HitDieType = 4 'd4
 		HP = D4()
 		HP += D4()
 		CurrentHP = HP

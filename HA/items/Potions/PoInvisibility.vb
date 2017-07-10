@@ -33,6 +33,6 @@ Public Class PoInvisibility
 		WhoIsDrinking.Invisible = True
 		WhoIsDrinking.InvisibilityDuration = D4() * D10()
 
-		Return Me.Message
-	End Function
+        Return Message
+    End Function
 End Class

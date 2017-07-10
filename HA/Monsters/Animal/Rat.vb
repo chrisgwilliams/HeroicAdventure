@@ -22,8 +22,8 @@ Imports HA.Common
 
 		Chat = "squeak squeeeeeeak! squeak!"
 
-		HitDie = 2 '1/4 d8
-		HP = RND.Next(1, HitDie)
+		HitDieType = 2 '1/4 d8
+		HP = RND.Next(1, HitDieType)
 		CurrentHP = HP
 
 		HasHands = False
@@ -61,7 +61,7 @@ End Class
 
 		Chat = "SQUEEEEAK! The foul breath nearly knocks you over."
 
-		HitDie = 8 'd8+1
+		HitDieType = 8 'd8+1
 		HP = D8() + 1
 		CurrentHP = HP
 

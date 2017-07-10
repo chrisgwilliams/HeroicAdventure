@@ -20,7 +20,7 @@ Imports HA.Common
 
 		Chat = "braaaaaains!"
 
-		HitDie = 12	' 2d12+3
+		HitDieType = 12	' 2d12+3
 		HP = D12()
 		HP += D12()
 		HP += 3

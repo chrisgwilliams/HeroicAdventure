@@ -265,14 +265,11 @@ Module Inventory
         Dim yPos As Integer = 2,
             startLetter As String = "a",
             itemArray As New ArrayList,
-            strSelection As ConsoleKeyInfo,
-            ok As Boolean,
             intQty As Integer,
             MaxRows As Integer = 21,
             itemcount As Integer
 
         Clear()
-
         WriteAt(0, 0, resBackpackTitle)
 
         Select Case itemCategory
@@ -428,10 +425,11 @@ Module Inventory
             WriteAt(44, MaxRows + 2, "                      ")
         End If
 
-        ' Use regular expressions to validate input
+        ' Process Input
         Dim ValidInput As Match
+        Dim strSelection As ConsoleKeyInfo
+        Dim ok As Boolean = False
 
-        ok = False
         Do While Not ok
             strSelection = ReadKey()
             ValidInput = Regex.Match(strSelection.KeyChar.ToString, "[a-z]")
@@ -453,8 +451,8 @@ Module Inventory
                         If action = ActionType.Drink Then
                             Dim strMessage As String
 
-                            TheHero.DrinkPotion(ShowBackpack.ptype)
-
+                            'TheHero.DrinkPotion(ShowBackpack.ptype)
+                            ShowBackpack.drink(TheHero)
                             strMessage = ShowBackpack.message
                             ShowBackpack = strMessage
                         End If

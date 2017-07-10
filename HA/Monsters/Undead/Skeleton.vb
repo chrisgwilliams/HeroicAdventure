@@ -20,7 +20,7 @@ Imports HA.Common
 
 		Chat = "Rattle me bones, it's freezing in here."
 
-		HitDie = 12
+		HitDieType = 12
 		HP = D12()
 		CurrentHP = HP
 

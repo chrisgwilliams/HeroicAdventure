@@ -111,11 +111,11 @@ Module m_MainMenu
 		Dim RaceMods As String = ""
 		Dim arrStat(6, 2) As Integer
 
-		' create a Hero object
-		TheHero = New Hero
+        ' create a Hero object
+        TheHero = New Hero
 
-		' generate the basic stats using best 3 dice out of 4
-		RollStats()
+        ' generate the basic stats using best 3 dice out of 4
+        RollStats()
 		arrStat = StuffStats(arrStat, 0)
 
 		Dim ok As Boolean

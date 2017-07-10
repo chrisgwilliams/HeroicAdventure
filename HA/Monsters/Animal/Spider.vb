@@ -22,7 +22,7 @@ Public MustInherit Class Spider
 
 		Chat = "The spider glares at you."
 
-		HitDie = 8
+		HitDieType = 8
 		HasHands = False
 		Initiative = 3
 		Attacks = 1

@@ -25,13 +25,13 @@ Public Class OrcCorpse
 		Cooked = False
 	End Sub
 
-	Public Overrides Function eat(WhoIsEating As Avatar) As String
-		'TODO: eat an orc corpse
-		' Check for blessed / cursed / uncursed status
-		' check for rotten status
+    Public Overrides Function eat(whoIsEating As Avatar) As String
+        'TODO: eat an orc corpse
+        ' Check for blessed / cursed / uncursed status
+        ' check for rotten status
 
-		Return CorpseEffect
-	End Function
+        Return CorpseEffect
+    End Function
 
 
 End Class

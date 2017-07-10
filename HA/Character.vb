@@ -612,7 +612,7 @@ Module Character
         ElseIf TheHero.HeroRace = Race.Pixie And TheHero.HeroClass = 0 Then
             newHP = PixieUp()
         Else
-            newHP = RND.Next(1, TheHero.HitDie) + AbilityMod(TheHero.EConstitution)
+            newHP = RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution)
         End If
 
         TheHero.HP += newHP
@@ -627,12 +627,12 @@ Module Character
 		Select Case TheHero.TotalLevels
 			Case 2
 				' 2d8 HD
-				newHP += (RND.Next(1, TheHero.HitDie) + AbilityMod(TheHero.EConstitution))
+				newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
 				TheHero.Strength += 2
 				TheHero.Constitution += 2
 			Case 3
 				' 3D8 HD
-				newHP += (RND.Next(1, TheHero.HitDie) + AbilityMod(TheHero.EConstitution))
+				newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
 				TheHero.NaturalArmor = 4
 				CalculateAC()
 			Case 4
@@ -641,7 +641,7 @@ Module Character
 				TheHero.Constitution += 2
 			Case 5
 				' 4D8 HD
-				newHP += (RND.Next(1, TheHero.HitDie) + AbilityMod(TheHero.EConstitution))
+				newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
 				TheHero.Strength += 2
 				TheHero.Dexterity -= 2
 				CalculateAC()
