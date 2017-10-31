@@ -447,32 +447,30 @@ Module Inventory
                     Else
                         ShowBackpack = itemArray(intItemIndex)
 
-                        ' drink the potion, then remove it from the backpack
-                        If action = ActionType.Drink Then
-                            Dim strMessage As String
+                        Select Case action
+                            Case ActionType.Drink
+                                ' drink the potion, then remove it from the backpack
+                                Dim strMessage As String
+                                ShowBackpack.drink(TheHero)
+                                strMessage = ShowBackpack.message
+                                ShowBackpack = strMessage
 
-                            'TheHero.DrinkPotion(ShowBackpack.ptype)
-                            ShowBackpack.drink(TheHero)
-                            strMessage = ShowBackpack.message
-                            ShowBackpack = strMessage
-                        End If
+                            Case ActionType.Drop
+                                ' drop the item, then remove it from the backpack
+                                ' place the item in the current tile Hero is occupying
+                                Dim item As ItemBase = itemArray(intItemIndex)
 
-                        ' drop the item, then remove it from the backpack
-                        If action = ActionType.Drop Then
-                            ' place the item in the current tile Hero is occupying
-                            Dim item As ItemBase = itemArray(intItemIndex)
+                                If Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount = 0 Then
+                                    Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items = New ArrayList
+                                End If
 
-                            If Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount = 0 Then
-                                Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items = New ArrayList
-                            End If
+                                Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items.Add(item)
+                                Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount += 1
+                                ShowBackpack = "You drop the " & itemArray(intItemIndex).walkover & "."
 
-                            Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).items.Add(item)
-                            Level(TheHero.LocX, TheHero.LocY, TheHero.LocZ).itemcount += 1
-                            ShowBackpack = "You drop the " & itemArray(intItemIndex).walkover & "."
-
-                            ' subtract item weight from backpack on drop
-                            TheHero.BackpackWeight -= item.Weight
-                        End If
+                                ' subtract item weight from backpack on drop
+                                TheHero.BackpackWeight -= item.Weight
+                        End Select
 
                         ' TODO: Should this be inside the drop block?
                         If itemArray(intItemIndex).quantity = 1 Then

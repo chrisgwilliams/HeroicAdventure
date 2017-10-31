@@ -208,6 +208,7 @@
     <Compile Include="Items\Food\Corpses\OrcCorpse.vb" />
     <Compile Include="Items\Food\Corpses\TrollCorpse.vb" />
     <Compile Include="Items\Food\FoodBase.vb" />
+    <Compile Include="Items\Food\LargeRation.vb" />
     <Compile Include="Items\Food\Ration.vb" />
     <Compile Include="Items\Girdles\Girdle.vb" />
     <Compile Include="Items\Girdles\LeatherGirdle.vb" />

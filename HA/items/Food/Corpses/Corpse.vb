@@ -10,9 +10,9 @@ Public MustInherit Class Corpse
 		MyBase.New()
 	End Sub
 
-	Public MustOverride Property Race As String
-	Public MustOverride Property Description As String
-	Public MustOverride Property CorpseEffect As String
+    Public Property Race As String
+    Public Property Description As String
+    Public Property CorpseEffect As String
 
     Public MustOverride Overrides Function eat(whoIsEating As Avatar) As String
 

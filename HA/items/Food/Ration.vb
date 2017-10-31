@@ -1,4 +1,3 @@
-
 Imports HA.Common
 
 Public Class Ration
@@ -9,17 +8,32 @@ Public Class Ration
 
 		Color = ColorList.Olive
 		Walkover = "ration"
-		Weight = 0.1
-		Name = "ration"
+        Weight = 0.5
+        Name = "ration"
 		Nutrition = 100
-		LifeSpan = -1
+        LifeSpan = 10000
 
-		Cooked = True
+        Cooked = True
 	End Sub
 
     Public Overrides Function eat(whoIsEating As Avatar) As String
         'TODO: eat a ration
-        ' check for blessed/cursed/uncursed status
+
+        If Rotten Then
+            Nutrition = Nutrition * 0.1
+        End If
+
+        ' check ItemState for blessed/cursed/uncursed status
+        With whoIsEating
+            Select Case ItemState
+                Case DivineState.Blessed
+
+                Case DivineState.Normal
+
+                Case DivineState.Cursed
+
+            End Select
+        End With
 
         Return ""
 

@@ -252,6 +252,13 @@
             Blessed = 1
         End Enum
 
+        Public Enum CookState As Integer
+            Raw
+            Cooked
+            Burnt
+            Inedible
+        End Enum
+
         Public Enum RoadAlignment
             EastWest
             NorthSouth

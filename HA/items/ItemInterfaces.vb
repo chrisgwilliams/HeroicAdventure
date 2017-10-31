@@ -13,6 +13,10 @@ End Interface
 
 Public Interface iEdibleItem
     Function eat(ByVal whoIsEating As Avatar) As String
+    Function bless(Optional ByVal silent As Boolean = True) As String
+    Function curse(Optional ByVal silent As Boolean = True) As String
+    Function decay(whoIsCarrying As Avatar) As String
+    Function cook(Optional ByVal silent As Boolean = True) As String
 End Interface
 
 Public Interface iPaperItem
