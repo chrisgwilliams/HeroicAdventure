@@ -1,3 +1,10 @@
-﻿Public Class KoboldCorpse
+﻿Imports HA
+Imports HA.Common
 
+Public Class KoboldCorpse
+    Inherits Corpse
+
+    Public Overrides Function eat(whoIsEating As Avatar) As String
+        Throw New NotImplementedException()
+    End Function
 End Class
