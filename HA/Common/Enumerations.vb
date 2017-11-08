@@ -259,6 +259,14 @@
             Inedible
         End Enum
 
+        Public Enum HungerState As Integer
+            Starving
+            Hungry
+            Normal
+            Satiated
+            Bloated
+        End Enum
+
         Public Enum RoadAlignment
             EastWest
             NorthSouth

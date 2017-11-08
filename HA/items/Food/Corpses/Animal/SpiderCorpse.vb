@@ -15,7 +15,7 @@ Public Class SpiderCorpse
         Walkover = "spider corpse"
         Weight = 0.2
         Name = "spider corpse"
-        Nutrition = 50
+        Nutrition = D20() + 40
         LifeSpan = 50
 
         Race = "spider"

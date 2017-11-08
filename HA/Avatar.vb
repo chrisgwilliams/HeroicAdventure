@@ -31,27 +31,46 @@ Imports HA.Common
 
 #End Region
 
+#Region " Status Flags "
+
+    Public Property Cannibal() As Boolean
+
+    Public Property Charmed As Boolean
+    Public Property CharmedDuration() As Int16
+
+    Public Property Confused() As Boolean
+    Public Property ConfusionDuration() As Int16
+
+    Public Property Invisible() As Boolean
+    Public Property InvisibilityDuration() As Int16
+
+    Public Property Poisoned() As Boolean
+    Public Property PoisonDuration() As Int16
+
+    Public Property Sleeping() As Boolean
+    Public Property SleepDuration() As Int16
+
+#End Region
+
+#Region " Resistances "
+
+    Public Property CharmResist() As Int16
+    Public Property SleepResist() As Int16
+    Public Property MagicResist() As Int16
+    Public Property PoisonResist() As Int16
+    Public Property ColdResist() As Int16
+
+#End Region
+
     Public Property Gender() As Gender
+    Public Property Hunger As HungerState
+
     Public Property HasHands() As Boolean
     Public Property HasFeet() As Boolean
     Public Property Dead() As Boolean
     Public Property NaturalArmor() As Int16
     Public Property Sight() As Int16
     Public Property DarkVision() As Int16
-    Public Property CharmResist() As Int16
-    Public Property SleepResist() As Int16
-    Public Property MagicResist() As Int16
-    Public Property Poisoned() As Boolean
-    Public Property PoisonDuration() As Int16
-    Public Property PoisonResist() As Int16
-    Public Property ColdResist() As Int16
-    Public Property Confused() As Boolean
-    Public Property ConfusionDuration() As Int16
-    Public Property AutoWalk() As Boolean
-    Public Property Sleeping() As Boolean
-    Public Property SleepDuration() As Int16
-    Public Property Invisible() As Boolean
-    Public Property InvisibilityDuration() As Int16
     Public Property EquippedWeight As Integer
     Public Property BackpackWeight As Integer
 
@@ -67,8 +86,9 @@ Imports HA.Common
 
     Public MustOverride ReadOnly Property TotalInitForRound() As Integer
 
-	' meta data
-	Public Property Icon() As String
+    ' meta data
+    Public Property AutoWalk() As Boolean
+    Public Property Icon() As String
     Public Property Color() As ConsoleColor
     Public Property LocX() As Integer
     Public Property LocY() As Integer
