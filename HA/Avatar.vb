@@ -1,4 +1,5 @@
 Imports HA.Common
+Imports HA.Common.Helper
 
 ' Avatar is the base class for all PCs, NPCs and Monsters
 <DebuggerStepThrough()> Public MustInherit Class Avatar
@@ -31,6 +32,41 @@ Imports HA.Common
 
 #End Region
 
+#Region " Effective Stat Modifiers "
+
+    Public ReadOnly Property StrMod() As Integer
+        Get
+            Return AbilityMod(EStrength)
+        End Get
+    End Property
+    Public ReadOnly Property IntMod() As Integer
+        Get
+            Return AbilityMod(EIntelligence)
+        End Get
+    End Property
+    Public ReadOnly Property WisMod() As Integer
+        Get
+            Return AbilityMod(EWisdom)
+        End Get
+    End Property
+    Public ReadOnly Property ConMod() As Integer
+        Get
+            Return AbilityMod(EConstitution)
+        End Get
+    End Property
+    Public ReadOnly Property DexMod() As Integer
+        Get
+            Return AbilityMod(EDexterity)
+        End Get
+    End Property
+    Public ReadOnly Property ChaMod() As Integer
+        Get
+            Return AbilityMod(ECharisma)
+        End Get
+    End Property
+
+#End Region
+
 #Region " Status Flags "
 
     Public Property Cannibal() As Boolean
@@ -43,6 +79,9 @@ Imports HA.Common
 
     Public Property Invisible() As Boolean
     Public Property InvisibilityDuration() As Int16
+
+    Public Property Sick() As Boolean
+    Public Property SickDuration() As Int16
 
     Public Property Poisoned() As Boolean
     Public Property PoisonDuration() As Int16

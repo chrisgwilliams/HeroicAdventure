@@ -4,6 +4,10 @@ Imports HA.Common.Enumerations
 
 Public MustInherit Class ItemBase
 
+    Public Sub New()
+        ItemState = DivineState.Normal
+    End Sub
+
     'TODO: Add code to increase / decrease weight in equippedweight and backpackweight whenever an equippable item is activated / deactivated
     Public Property Type() As ItemType
     Public Property Color() As ConsoleColor

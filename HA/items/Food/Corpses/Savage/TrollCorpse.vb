@@ -1,4 +1,5 @@
 ﻿Imports HA.Common
+Imports HA
 
 Public Class TrollCorpse
 	Inherits Corpse
@@ -29,9 +30,8 @@ Public Class TrollCorpse
         End If
 
         If Not Cooked Then
-            'TODO: add .Sick and .SickDuration properties to Avatars to support eating some raw / nasty foods
-            ' whoIsEating.Sick = True
-            ' whoIsEating.SickDuration = some value modified by BNC, modified by Con bonus
+            whoIsEating.Sick = True
+            whoIsEating.SickDuration = 50 - (ItemState * D12() + whoIsEating.ConMod)
         End If
 
         ' Check ItemState for blessed / cursed / uncursed status

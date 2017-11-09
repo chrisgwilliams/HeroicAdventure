@@ -13,14 +13,16 @@ Public MustInherit Class FoodBase
     Public Property CookMessage As String
 
     Public Sub New()
-		Type = ItemType.Food
+        MyBase.New()
 
-		IsBreakable = False
-		Tool = False
-		Missle = True
+        Type = ItemType.Food
 
-		Symbol = "%"
-		Quantity = 1
+        IsBreakable = False
+        Tool = False
+        Missle = True
+
+        Symbol = "%"
+        Quantity = 1
 
         Cooked = False
 
