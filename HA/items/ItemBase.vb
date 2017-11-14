@@ -28,14 +28,6 @@ Public MustInherit Class ItemBase
     Public Property Name() As String
     Public Property Identified() As Boolean
     Public Property StatBonus() As Integer
-    'Public Property StatAffected() As Integer
-    '	Get
-    '		StatAffected = intStatAffected
-    '	End Get
-    '	Set(ByVal Value As Integer)
-    '		intStatAffected = Value
-    '	End Set
-    'End Property
     Public Property HasCharges() As Boolean
     Public Property Charges() As Integer
     Public Property Flammable() As Boolean
@@ -44,54 +36,68 @@ Public MustInherit Class ItemBase
     Public Property AtkBonus() As Integer
     Public Property ItemState() As DivineState
 
+    Public Function Curse(ByVal whoIsCursing As Avatar, Optional ByVal strMessage As String = "") As String
+        'TODO: Curse item by spell or effect
+
+        Return strMessage
+    End Function
+
+    ' Bless an item by spell
+    Public Function Bless(ByVal whoIsCasting As Avatar, Optional ByVal strMessage As String = "") As String
+        'TODO: Bless item by spell or effect
+
+        Return strMessage
+    End Function
+
+    ' Dipping an item into Holy Water will Bless it
     Public Function Bless(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
-		Dim secondaryMessage As String = ""
+        Dim secondaryMessage As String = ""
 
-		If DippedInto.ItemState = DivineState.Blessed AndAlso DippedInto.Name = "water" Then
+        If DippedInto.ItemState = DivineState.Blessed AndAlso DippedInto.Name = "water" Then
 
-			Select Case Me.ItemState
-				Case DivineState.Normal
-					Me.ItemState = DivineState.Blessed
-					secondaryMessage = "You feel good about the " + Me.Name + ". You feel as though your god is pleased with you. "
-				'TODO: implement piety change for adding a blessing to an item.
+            Select Case Me.ItemState
+                Case DivineState.Normal
+                    Me.ItemState = DivineState.Blessed
+                    secondaryMessage = "You feel good about the " + Me.Name + ". You feel as though your god is pleased with you. "
+                'TODO: implement piety change for adding a blessing to an item.
 
-				Case DivineState.Cursed
-					Me.ItemState = DivineState.Normal
-					secondaryMessage = "You feel better about the " + Me.Name + ". "
+                Case DivineState.Cursed
+                    Me.ItemState = DivineState.Normal
+                    secondaryMessage = "You feel better about the " + Me.Name + ". "
 
-				Case DivineState.Blessed
-					Me.ItemState = DivineState.Blessed
-					secondaryMessage = "You don't feel any different about the " + Me.Name + ". "
+                Case DivineState.Blessed
+                    Me.ItemState = DivineState.Blessed
+                    secondaryMessage = "You don't feel any different about the " + Me.Name + ". "
 
-			End Select
-		End If
+            End Select
+        End If
 
-		If DippedInto.ItemState = DivineState.Cursed AndAlso DippedInto.Name = "water" Then
+        If DippedInto.ItemState = DivineState.Cursed AndAlso DippedInto.Name = "water" Then
 
-			Select Case Me.ItemState
-				Case DivineState.Normal
-					Me.ItemState = DivineState.Cursed
-					secondaryMessage = "You have a bad feeling about the " + Me.Name + ". "
+            Select Case Me.ItemState
+                Case DivineState.Normal
+                    Me.ItemState = DivineState.Cursed
+                    secondaryMessage = "You have a bad feeling about the " + Me.Name + ". "
 
-				Case DivineState.Cursed
-					Me.ItemState = DivineState.Cursed
-					secondaryMessage = "You don't feel any different about the " + Me.Name + ". "
+                Case DivineState.Cursed
+                    Me.ItemState = DivineState.Cursed
+                    secondaryMessage = "You don't feel any different about the " + Me.Name + ". "
 
-				Case DivineState.Blessed
-					Me.ItemState = DivineState.Normal
-					secondaryMessage = "The " + DippedInto.Name + " begins to bubble and hiss. You feel as if your god is disappointed in you. "
-					'TODO: implement piety change for removing a blessing from an item.
-			End Select
-		End If
+                Case DivineState.Blessed
+                    Me.ItemState = DivineState.Normal
+                    secondaryMessage = "The " + DippedInto.Name + " begins to bubble and hiss. You feel as if your god is disappointed in you. "
+                    'TODO: implement piety change for removing a blessing from an item.
+            End Select
+        End If
 
         strMessage += "You dip the " + Me.Name + " into the " + DippedInto.Name + ". " + secondaryMessage
 
-		Return strMessage
+        Return strMessage
 
-		'TODO: Destroy potion after dipping something into it.
-	End Function
+        'TODO: Destroy potion after dipping something into it.
+    End Function
 
-	Public Function Destroy(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
+    Public Function Destroy(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
 		strMessage &= String.Format("The {0} is destroyed when you dip it into the {1}.", Name, DippedInto.Name)
 
 		'''If itemArray(intItemIndex).quantity = 1 Then

@@ -343,6 +343,7 @@
     <Compile Include="Overland\Wilderness.vb" />
     <Content Include="HA.ico" />
     <AppDesigner Include="My Project\" />
+    <Compile Include="Items\Amulets\GoldAmulet.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="English.resx">
