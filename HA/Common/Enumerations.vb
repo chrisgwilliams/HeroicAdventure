@@ -150,6 +150,10 @@
             Twisted = 4
             Willow = 5
             Oak = 6
+            Bone = 7
+            Cherry = 8
+            Spruce = 9
+            Walnut = 10
         End Enum
 
         Public Enum Gender

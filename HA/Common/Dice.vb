@@ -1,3 +1,5 @@
+Imports System.Collections.Generic
+
 Namespace Common
 
     Module Dice
@@ -40,6 +42,22 @@ Namespace Common
         End Function
 
 #End Region
+
+        Friend Function GetRandomListOfUniqueInts(NumberOfInts As Int16) As Short()
+            Dim intList As HashSet(Of Int16) = New HashSet(Of Int16)
+            Dim ctr As Int16
+
+            Do Until ctr = NumberOfInts
+                If intList.Add(RND.Next(1, NumberOfInts)) = True Then
+                    ctr += 1
+                End If
+            Loop
+
+            Dim intArray(NumberOfInts - 1) As Short
+            intList.CopyTo(intArray)
+            Return intArray
+
+        End Function
 
     End Module
 End Namespace

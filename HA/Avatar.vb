@@ -103,6 +103,7 @@ Imports HA.Common.Helper
 
     Public Property Gender() As Gender
     Public Property Hunger As HungerState
+    Public Property Regeneration As Double
 
     Public Property HasHands() As Boolean
     Public Property HasFeet() As Boolean

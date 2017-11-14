@@ -380,8 +380,13 @@ Module m_MiscRoutines
 #End Region
 
 #Region " Hero Status Routines "
+    Friend Function CheckForSickness(ByVal strMessage As String) As String
+        'TODO: process sickness and decrement duration
 
-	Friend Function CheckForSleeping(ByVal strmessage As String) As String
+        Return strMessage
+    End Function
+
+    Friend Function CheckForSleeping(ByVal strmessage As String) As String
 		' if hero is sleeping, decrement duration counter
 		With TheHero
 			If .Sleeping And .SleepDuration > 0 Then
@@ -416,7 +421,8 @@ Module m_MiscRoutines
 
 	End Function
 
-	Friend Function CheckForConfusion(ByVal strMessage As String) As String
+    'TODO: Convert from TheHero to Avatar so Monsters can be Confused
+    Friend Function CheckForConfusion(ByVal strMessage As String) As String
 		' if hero is confused, decrement duration counter
 		With TheHero
 			If .Confused And .ConfusionDuration > 0 Then
@@ -433,7 +439,8 @@ Module m_MiscRoutines
 		Return strMessage
 	End Function
 
-	Friend Function CheckForPoison(ByVal strMessage As String) As String
+    'TODO: Convert from TheHero to Avatar so Monsters can be poisoned too.
+    Friend Function CheckForPoison(ByVal strMessage As String) As String
 		' if hero is poisoned, decrement duration counter
 		' then roll d10 and do damage on a 1. Pump out a message and
 		' also check for hero death from poisioning

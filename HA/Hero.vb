@@ -2,8 +2,6 @@ Imports System.Collections.Generic
 Imports HA.Common
 Imports HA.Common.Helper
 
-
-' inherits from Avatar
 Public Class Hero
     ' see Avatar class for base stats (i.e. strength, etc)
     Inherits Avatar
@@ -86,6 +84,8 @@ Public Class Hero
     End Sub
 
     Public Sub CastSpell()
+        'TODO: Magic System
+
         If Me.HeroClass = PCClass.Druid Or Me.HeroClass = PCClass.Priest Then
             ' Divine Spellcasters
 
@@ -117,9 +117,6 @@ Public Class Hero
     '                If Me.CurrentHP <= 0 Then Me.Dead = True
     '                Me.PoisonDuration = Me.TurnCount + D4() + D4()
 
-    '            Case PotionType.Water
-    '				 TODO: factor in b/u/c status
-
     '			Case PotionType.Invisibility
     '                    Me.Invisible = True
     '                    Me.InvisibilityDuration = Me.TurnCount + (D20() + 15)
@@ -136,6 +133,9 @@ Public Class Hero
     End Sub
 
     Public Function CheckStatuses(strMessage As String) As String
+        ' if hero is Sick, decrement duration and check for damage
+        strMessage = CheckForSickness(strMessage)
+
         ' if hero is poisoned, decrement duration and check for damage
         strMessage = CheckForPoison(strMessage)
 
