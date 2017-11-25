@@ -27,7 +27,6 @@ Public Class Hero
     Public Property DeepestLevel() As Integer
     Public Property KilledBy() As String
     Public Property TotalKills() As Integer
-    Public Property Cannibal As Boolean
 
 #End Region
 

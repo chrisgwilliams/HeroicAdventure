@@ -2,18 +2,39 @@
 
 Public Class PoPoison
 	Inherits Potion
-	
-	Public Sub New()
-		MyBase.New()
 
-		Color = ColorList.Green
-		PType = PotionType.Poison
-		Message = "urk... Poison! You throw up."
-		Walkover = "green potion"
-		Name = "poison"
-	End Sub
+    Public Property PoisonType As PoisonType
+    Public Property DMGMultiple As Int16
 
-	Public Overrides Function dip(ByRef WhatIsBeingDipped As ItemBase) As String
+    Public Sub New()
+        MyBase.New()
+
+        Color = ColorList.Green
+        PType = PotionType.Poison
+
+        'TODO: Modify drink message based on poison type
+        Message = "urk... Poison! You throw up."
+
+        'TODO: adjust poison walkover to reflect ItemFactory value
+        Walkover = "green potion"
+        Name = "poison"
+    End Sub
+
+    Public Sub New(PoisonType As PoisonType)
+        Me.New()
+        Me.PoisonType = PoisonType
+
+        Select Case Me.PoisonType
+            Case PoisonType.mild
+                DMGMultiple = 1
+            Case PoisonType.medium
+                DMGMultiple = 2
+            Case PoisonType.strong
+                DMGMultiple = 3
+        End Select
+    End Sub
+
+    Public Overrides Function dip(ByRef WhatIsBeingDipped As ItemBase) As String
 		Dim strMessage As String = ""
 
 		' is it paper? Destroy it.

@@ -263,6 +263,16 @@
             Inedible
         End Enum
 
+        Public Enum PietyState As Integer
+            Hated
+            Unfavored
+            Displeased
+            Normal
+            Pleased
+            Favored
+            Loved
+        End Enum
+
         Public Enum HungerState As Integer
             Starving
             Hungry

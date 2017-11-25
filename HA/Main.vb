@@ -38,8 +38,9 @@ Module MainModule
 		InitializeOverland()
 
 		InitializeVerbLists()
-		ItemFactory.InitializeItems()
-		TownFactory.InitializeTowns()
+        TimeKeeper.InitializeTimeKeeper()
+        ItemFactory.InitializeItems()
+        TownFactory.InitializeTowns()
 
 		SetupHero()
 

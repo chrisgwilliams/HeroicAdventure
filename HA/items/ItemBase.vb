@@ -19,6 +19,7 @@ Public MustInherit Class ItemBase
     Public Property IsLiquid() As Boolean
     Public Property IsPoisonable() As Boolean
     Public Property IsDirty() As Boolean
+
     Public Property Missle() As Boolean
     Public Property Tool() As Boolean
     Public Property Weight() As Single
@@ -35,6 +36,11 @@ Public MustInherit Class ItemBase
     Public Property ACBonus() As Integer
     Public Property AtkBonus() As Integer
     Public Property ItemState() As DivineState
+    Public Property Rusted As Boolean
+
+    Public Property IsPoisoned() As Boolean
+    Public Property Poison() As PoisonType
+    Public Property PoisonDMGMultiple As Int16
 
     Public Function Curse(ByVal whoIsCursing As Avatar, Optional ByVal strMessage As String = "") As String
         'TODO: Curse item by spell or effect
@@ -45,6 +51,24 @@ Public MustInherit Class ItemBase
     ' Bless an item by spell
     Public Function Bless(ByVal whoIsCasting As Avatar, Optional ByVal strMessage As String = "") As String
         'TODO: Bless item by spell or effect
+        Dim SecondaryMessage As String = ""
+
+        Select Case Me.ItemState
+            Case DivineState.Normal
+                Me.ItemState = DivineState.Blessed
+                secondaryMessage = "You feel good about the " + Me.Name + ". You feel as though your god is pleased with you. "
+                'TODO: implement piety change for adding a blessing to an item.
+
+            Case DivineState.Cursed
+                Me.ItemState = DivineState.Normal
+                secondaryMessage = "You feel better about the " + Me.Name + ". "
+
+            Case DivineState.Blessed
+                Me.ItemState = DivineState.Blessed
+                secondaryMessage = "You don't feel any different about the " + Me.Name + ". "
+        End Select
+
+        strMessage += "The " + Me.Name + " glows brightly for a moment. " + SecondaryMessage
 
         Return strMessage
     End Function
@@ -115,13 +139,17 @@ Public MustInherit Class ItemBase
 		Return strMessage
 	End Function
 
-	Public Function Rust(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
-		' TODO: Rust an item
-		' TODO: Hero luck should affect rust chance
-		Return strMessage
-	End Function
+    Public Function Rust(ByVal DippedInto As PoWater, Optional ByVal strMessage As String = "") As String
+        If IsRustable Then
+            Rusted = True
+        End If
+        ' TODO: Rusted items should have a higher break chance
+        ' TODO: Hero luck should affect rust chance
 
-	Public Function Mix(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
+        Return strMessage
+    End Function
+
+    Public Function Mix(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
 		' TODO: Mix potions
 		Return strMessage
 	End Function
@@ -131,10 +159,22 @@ Public MustInherit Class ItemBase
 		Return strMessage
 	End Function
 
-	Public Function ApplyPoison(ByVal DippedInto As Potion, Optional ByVal strMessage As String = "") As String
-		' TODO: Make something poisoned
-		Return strMessage
-	End Function
+    Public Function ApplyPoison(ByVal DippedInto As PoPoison, Optional ByVal strMessage As String = "") As String
+        If IsPoisonable Then
+            IsPoisoned = True
+            Poison = DippedInto.PoisonType
+            PoisonDMGMultiple = DippedInto.DMGMultiple
+
+            strMessage += "You successfully apply the poison to your " + Me.Name + ". "
+        Else
+            strMessage += "You are unable to apply poison to the " + Me.Name + ". "
+        End If
+
+        'TODO: should applied poison expire?
+        'TODO: Should attacking a poisonous monster trigger ApplyPoison?
+
+        Return strMessage
+    End Function
 
 End Class
 

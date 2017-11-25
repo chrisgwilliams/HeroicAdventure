@@ -341,6 +341,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Overland\Wilderness.vb" />
+    <Compile Include="Time.vb" />
     <Content Include="HA.ico" />
     <AppDesigner Include="My Project\" />
     <Compile Include="Items\Amulets\GoldAmulet.vb" />
