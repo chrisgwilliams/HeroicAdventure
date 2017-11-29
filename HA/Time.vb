@@ -22,7 +22,7 @@ Public Class TimeKeeper
 
     Friend Shared DayNight As DayNightState
     Friend TurnCountAtStateChange As Integer
-    Friend Shared GameCreationDate As DateTime  ' Real World
+    Friend Shared GameCreationDate As DateTime  ' Real World, to check for Creators Day
     Friend Shared GameStartDate As DateTime     ' In Game
     Friend Shared GameTime As DateTime
 
@@ -54,7 +54,7 @@ Public Class TimeKeeper
             GameTime.AddSeconds(DUNGEONTURN)
         End If
 
-        'TODO: add talent/feat for knowing sunup/sundown while underground
+        'TODO: create talent/feat for knowing sunup/sundown while underground
 
         If GameTime.TimeOfDay >= TimeSpan.Parse(DAWN) AndAlso GameTime.TimeOfDay < TimeSpan.Parse(DAY) Then
             If DayNight = DayNightState.Night Then
@@ -89,23 +89,45 @@ Public Class TimeKeeper
         Return Message
     End Function
 
-    Friend Shared Function GetGameDateTime() As String
+    Friend Shared Function GetGameElapsedTimeMessage(Alive As Boolean) As String
+        Dim ts As TimeSpan = GameTime - GameStartDate
+        Dim preamble As String
+        Dim postamble As String
 
-        Return ""
+        Dim Mon As Integer = ts.Days \ 30
+        Dim Day As Integer = If(Mon > 0, ts.Days Mod 30, ts.Days)
+        Dim Hrs As Integer = ts.Hours
+        Dim Min As Integer = ts.Minutes
+        Dim Sec As Integer = ts.Seconds
+
+        Dim MonMsg As String = If(Mon > 0, Mon.ToString + If(Mon = 1, " month, ", " months, "), "")
+        Dim DayMsg As String = If(Day > 0, Day.ToString + If(Day = 1, " day, ", " days, "), "")
+        Dim HrsMsg As String = If(Hrs > 0, Hrs.ToString + If(Hrs = 1, " hour, ", " hours, "), "")
+        Dim MinMsg As String = If(Min > 0, Min.ToString + If(Min = 1, " minute, ", " minutes, "), "")
+        Dim SecMsg As String = If(Sec > 0, Sec.ToString + If(Sec = 1, " second, ", " seconds, "), "")
+
+        If Alive Then
+            preamble = "You have been adventuring for "
+            postamble = " so far. "
+        Else
+            preamble = "You survived for "
+            postamble = ". "
+        End If
+
+        Return preamble + MonMsg + DayMsg + HrsMsg + MinMsg + SecMsg + postamble
+
     End Function
 
-    Friend Shared Function GetBirthDate() As String
-        Dim BirthDate As String = ""
-        Dim suffix As String = ""
-        Dim day As Integer = GameStartDate.Day
+    Friend Shared Function GetBirthDateMessage() As String
+        Dim suffix As String
 
+        Dim day As Integer = GameStartDate.Day
         If day = 1 Then suffix = "st"
         If day = 2 Then suffix = "nd"
         If day = 3 Then suffix = "rd"
         If day >= 4 Then suffix = "th"
-        BirthDate = "You were born on the " + day + suffix + " day of the month of the " + BirthSign.ToString + ". "
 
-        Return BirthDate
+        Return "You were born on the " + day + suffix + " day of the month of the " + BirthSign.ToString + ". "
     End Function
 
     'Activity	                                Speed Modifier
