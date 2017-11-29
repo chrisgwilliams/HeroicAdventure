@@ -30,6 +30,7 @@ Public Class Hero
 
 #End Region
 
+    Public Property StarSign() As StarSign
     Public Property SpellResist() As Integer
     Public Property Flight() As Integer
     Public Property Energy() As Integer

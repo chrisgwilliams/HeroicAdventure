@@ -36,8 +36,7 @@ Module MainModule
 
 		' new character created, setup world
 		InitializeOverland()
-
-		InitializeVerbLists()
+        InitializeVerbLists()
         TimeKeeper.InitializeTimeKeeper()
         ItemFactory.InitializeItems()
         TownFactory.InitializeTowns()
