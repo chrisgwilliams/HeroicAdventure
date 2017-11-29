@@ -128,6 +128,7 @@
     <Compile Include="Common\Structures.vb" />
     <Compile Include="Common\Util.vb" />
     <Compile Include="Common\Verbs.vb" />
+    <Compile Include="Common\Weather.vb" />
     <Compile Include="English.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -341,7 +342,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Overland\Wilderness.vb" />
-    <Compile Include="Time.vb" />
+    <Compile Include="Common\Time.vb" />
     <Content Include="HA.ico" />
     <AppDesigner Include="My Project\" />
     <Compile Include="Items\Amulets\GoldAmulet.vb" />

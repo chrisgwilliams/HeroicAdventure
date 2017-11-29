@@ -1,30 +1,7 @@
 ﻿Namespace Common
-
     Public Module Enumerations
 
-        Public Enum Race
-            Human = 1
-            Elf = 2
-            HalfElf = 3
-            Dwarf = 4
-            Gnome = 5
-            Halfling = 6
-            HalfOrc = 7
-            Ogre = 8
-            Pixie = 9
-        End Enum
-        Public Enum PCClass
-            None = 0
-            Warrior = 1
-            Barbarian = 5
-            Paladin = 9
-            Wizard = 2
-            Sorceror = 6
-            Thief = 3
-            Assassin = 7
-            Priest = 4
-            Druid = 8
-        End Enum
+#Region " Items "
         Public Enum ArmorType
             Robes = 1
             Clothing = 2
@@ -46,11 +23,6 @@
             Buckler = 1
             Small = 1
             Large = 2
-        End Enum
-        Public Enum MovementType
-            Walking = 1
-            Running = 2
-            Flying = 0
         End Enum
         Public Enum WeaponType
             Dagger = 0
@@ -81,6 +53,48 @@
 
             Unarmed = 50
         End Enum
+        Public Enum ItemType
+            Unspecified = 0
+            Potion = 1
+            Scroll = 2
+            Gold = 3
+            Tool = 4
+            Armor = 5
+            Weapon = 6
+            Helmet = 7
+            Boots = 8
+            Shield = 9
+            Neck = 10
+            Girdle = 11
+            Cloak = 12
+            Ring = 13
+            Gloves = 14
+            Bracers = 15
+            MissleWeapon = 16
+            Missiles = 17
+            Book = 18
+            Wand = 19
+            Gem = 20
+            Food = 21
+        End Enum
+        Public Enum PotionType
+            Healing = 1
+            ExtraHealing = 2
+            Poison = 3
+            Water = 4
+            Invisibility = 5
+        End Enum
+        Public Enum DivineState
+            Cursed = -1
+            Normal = 0
+            Blessed = 1
+        End Enum
+        Public Enum CookState
+            Raw
+            Cooked
+            Burnt
+            Inedible
+        End Enum
         Public Enum MissleType
             arrow = 1
             rock = 2
@@ -92,6 +106,60 @@
             Slashing = 3
             SlashPierce = 4
         End Enum
+#End Region
+
+#Region " Avatar "
+        Public Enum Race
+            Human = 1
+            Elf = 2
+            HalfElf = 3
+            Dwarf = 4
+            Gnome = 5
+            Halfling = 6
+            HalfOrc = 7
+            Ogre = 8
+            Pixie = 9
+        End Enum
+        Public Enum PCClass
+            None = 0
+            Warrior = 1
+            Barbarian = 5
+            Paladin = 9
+            Wizard = 2
+            Sorceror = 6
+            Thief = 3
+            Assassin = 7
+            Priest = 4
+            Druid = 8
+        End Enum
+        Public Enum PCStats
+            strength = 1
+            intelligence
+            wisdom
+            dexterity
+            constitution
+            charisma
+        End Enum
+        Public Enum Gender
+            female = 1
+            male = 2
+        End Enum
+        Public Enum PietyState
+            Hated = -3
+            Unfavored = -2
+            Displeased = -1
+            Normal = 0
+            Pleased = 1
+            Favored = 2
+            Loved = 3
+        End Enum
+        Public Enum HungerState
+            Starving
+            Hungry
+            Normal
+            Satiated
+            Bloated
+        End Enum
         Public Enum ActionType
             None = 0
             Drink = 1
@@ -100,7 +168,23 @@
             Use = 4
             Zap = 5
         End Enum
+        Public Enum StarSign
+            Raven = 1
+            Book = 2
+            Wand = 3
+            Unicorn = 4
+            Salamander = 5
+            Dragon = 6
+            Sword = 7
+            Falcon = 8
+            Cup = 9
+            Candle = 10
+            Wolf = 11
+            Tree = 12
+        End Enum
+#End Region
 
+#Region " Metadata "
         Public Enum ColorList
             Black = 0
             Navy = 1
@@ -155,49 +239,10 @@
             Spruce = 9
             Walnut = 10
         End Enum
-
-        Public Enum Gender
-            female = 1
-            male = 2
-        End Enum
-        Public Enum ItemType
-            Unspecified = 0
-            Potion = 1
-            Scroll = 2
-            Gold = 3
-            Tool = 4
-            Armor = 5
-            Weapon = 6
-            Helmet = 7
-            Boots = 8
-            Shield = 9
-            Neck = 10
-            Girdle = 11
-            Cloak = 12
-            Ring = 13
-            Gloves = 14
-            Bracers = 15
-            MissleWeapon = 16
-            Missiles = 17
-            Book = 18
-            Wand = 19
-            Gem = 20
-            Food = 21
-        End Enum
-        Public Enum PotionType
-            Healing = 1
-            ExtraHealing = 2
-            Poison = 3
-            Water = 4
-            Invisibility = 5
-        End Enum
-        Public Enum PCStats
-            strength = 1
-            intelligence
-            wisdom
-            dexterity
-            constitution
-            charisma
+        Public Enum MagicType
+            None = 0
+            Arcane = 1
+            Divine = 2
         End Enum
         Public Enum TrapType
             None = 0
@@ -221,27 +266,10 @@
             medium = 7
             strong = 8
         End Enum
-        Public Enum MagicType
-            None = 0
-            Arcane = 1
-            Divine = 2
-        End Enum
-        Public Enum StarSign
-            Raven = 1
-            Book = 2
-            Wand = 3
-            Unicorn = 4
-            Salamander = 5
-            Dragon = 6
-            Sword = 7
-            Falcon = 8
-            Cup = 9
-            Candle = 10
-            Wolf = 11
-            Tree = 12
-        End Enum
+#End Region
 
-        Public Enum CompassDirection As Integer
+#Region " Travel "
+        Public Enum CompassDirection
             NorthWest = 7
             North = 8       '7 8 9
             NorthEast = 9   '4 5 6
@@ -252,7 +280,6 @@
             South = 2
             SouthEast = 3
         End Enum
-
         Public Enum Heading
             North = 1
             NorthEast = 2   '8 1 2
@@ -263,45 +290,11 @@
             West = 7
             NorthWest = 8
         End Enum
-
-        Public Enum DivineState As Integer
-            Cursed = -1
-            Normal = 0
-            Blessed = 1
+        Public Enum MovementType
+            Walking = 1
+            Running = 2
+            Flying = 0
         End Enum
-
-        Public Enum CookState As Integer
-            Raw
-            Cooked
-            Burnt
-            Inedible
-        End Enum
-
-        Public Enum DayNightState As Integer
-            Dawn
-            Day
-            Dusk
-            Night
-        End Enum
-
-        Public Enum PietyState As Integer
-            Hated
-            Unfavored
-            Displeased
-            Normal
-            Pleased
-            Favored
-            Loved
-        End Enum
-
-        Public Enum HungerState As Integer
-            Starving
-            Hungry
-            Normal
-            Satiated
-            Bloated
-        End Enum
-
         Public Enum RoadAlignment
             EastWest
             NorthSouth
@@ -310,7 +303,40 @@
             SouthEast
             SouthWest
         End Enum
+#End Region
+
+#Region " World "
+        Public Enum WindState
+            None
+            Light
+            Moderate
+            Heavy
+        End Enum
+        Public Enum CloudState
+            None
+            Light
+            Moderate
+            Heavy
+        End Enum
+        Public Enum PrecipitationState
+            None
+            Light
+            Moderate
+            Heavy
+        End Enum
+        Public Enum SeasonState
+            Winter
+            Spring
+            Summer
+            Fall
+        End Enum
+        Public Enum DayNightState
+            Dawn
+            Day
+            Dusk
+            Night
+        End Enum
+#End Region
 
     End Module
-
 End Namespace
