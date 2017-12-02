@@ -2,6 +2,7 @@ Imports DBuild.DunGen3
 Imports System.console
 Imports System.Text
 Imports HA.Common.Helper
+Imports HA.Common.TimeKeeper
 
 Namespace Screens
     Module m_Screens
@@ -123,7 +124,8 @@ Namespace Screens
             intTurns As Integer,
             intKills As Integer,
             intDeathLevel As Integer,
-            strSleep As String = ""
+            strSleep As String = "",
+            strLifespan As String = GetGameElapsedTimeMessage(Alive:=False)
 
             With TheHero
                 strName = .Name
@@ -157,7 +159,7 @@ Namespace Screens
             WriteAt(2, 2, String.Format("Here lies {0}{1} killed{2} on level {3} by {4} {5}.", strName, strClass, strSleep, intDeathLevel, strArticle, strKilledBy))
             WriteAt(2, 4, "------------------------------------------------------------------------")
             WriteAt(2, 5, String.Format("Most folks agreed, {0} was a pretty decent {1}!", strName, strRace))
-            WriteAt(2, 6, String.Format("{0} lived for {1} turns and killed {2} monsters,", strCapPronoun, intTurns, intKills))
+            WriteAt(2, 6, String.Format("{0} {1} ({2} turns) and killed {3} monsters,", strCapPronoun, strLifespan, intTurns, intKills))
 
             Select Case intKills
                 Case 0

@@ -56,7 +56,9 @@ Module MainModule
 			bolValid As Boolean, strMessage As String = "", _
 			strCommand As String, strAutoWalkDirection As String = "5"
 
-		Debug.WriteLine("Entering Main Game Loop")
+        'TODO: BUG - Main Game loop is not checking health each turn unless hero is in combat. This can cause it to miss DoT effects,
+
+        Debug.WriteLine("Entering Main Game Loop")
 		Do While Not gameOver
 			' assume the player will press a valid key, 
 			' but set it to FALSE if he doesn't
@@ -78,19 +80,19 @@ Module MainModule
 				End If
 			End If
 
-			'Sort monsters (and Hero) by initiative
-			'Dim initList As List(Of Avatar) = SortByInitiative()
+            'Sort monsters (and Hero) by initiative
+            'Dim initList As List(Of Avatar) = SortByInitiative()
 
-			' first we process the players turn... unless he's sleeping or confused
-			If Not TheHero.Sleeping Then
-				strMessage = ProcessKeyStroke(strCommand, strMessage, strAutoWalkDirection, bolValid, gameOver)
-			Else
-				strMessage = ""
-				DoTurnCounter()
-			End If
+            ' first we process the players turn... unless he's sleeping or confused
+            If Not TheHero.Sleeping Then
+                strMessage = ProcessKeyStroke(strCommand, strMessage, strAutoWalkDirection, bolValid, gameOver)
+            Else
+                strMessage = ""
+                DoTurnCounter()
+            End If
 
-			' don't execute the rest of the turn unless a valid key was pressed (or hero was asleep)
-			If bolValid Then
+            ' don't execute the rest of the turn unless a valid key was pressed (or hero was asleep)
+            If bolValid Then
 
 				' Process Monster and NPC Turns
 				If TheHero.Overland And Not TheHero.TerrainZoom Then
@@ -102,8 +104,8 @@ Module MainModule
 				If strMessage Is Nothing Or strMessage = "" Then
 					strMessage = ""
 				Else
-					Debug.WriteLine("strmessage = " & strMessage)
-				End If
+                    Debug.WriteLine("strMessage = " & strMessage)
+                End If
 
 				If Not TheHero.Dead Then
 					' if hero is elf, autocheck for secret doors (1 in 6)

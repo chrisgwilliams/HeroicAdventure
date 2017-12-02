@@ -11,10 +11,10 @@
         Const DUNGEONTURN As Int16 = INCREMENT * 1
         Const OUTDOORTURN As Int16 = INCREMENT * 100
 
-        Const DAWN As String = "6:25:01 AM"
-        Const DAYLIGHT As String = "7:25:01 AM"
-        Const DUSK As String = "8:00:00 PM"
-        Const NIGHT As String = "8:50:00 PM"
+        Const DAWN As String = "06:25:01"
+        Const DAYLIGHT As String = "07:25:01"
+        Const DUSK As String = "20:00:00"
+        Const NIGHT As String = "20:50:00"
 
         Const CREATORSDAY_MONTH As Int16 = 1
         Const CREATORSDAY_DAY As Int16 = 6
@@ -45,25 +45,29 @@
             BirthSign = RandomMonth
         End Sub
 
-        Friend Shared Function ProcessTime() As String
+        Friend Shared Function Update(Optional Action As ActionType = ActionType.None) As String
             Dim Message As String = ""
 
             If TheHero.Overland Then
-                GameTime.AddSeconds(OUTDOORTURN)
+                If TheHero.TerrainZoom Then
+                    GameTime = GameTime.AddSeconds(DUNGEONTURN)
+                Else
+                    GameTime = GameTime.AddSeconds(OUTDOORTURN)
+                End If
             Else
-                GameTime.AddSeconds(DUNGEONTURN)
+                GameTime = GameTime.AddSeconds(DUNGEONTURN)
             End If
 
             'TODO: create talent/feat for knowing sunup/sundown while underground
-            'TODO: Call Weather as part of ProcessTime
-            If GameTime.TimeOfDay >= TimeSpan.Parse(DAWN) AndAlso GameTime.TimeOfDay < TimeSpan.Parse(DAY) Then
+            'TODO: Call Weather.update as part of ProcessTime
+            If GameTime.TimeOfDay >= TimeSpan.Parse(DAWN) AndAlso GameTime.TimeOfDay < TimeSpan.Parse(DAYLIGHT) Then
                 If DayNight = DayNightState.Night Then
                     DayNight = DayNightState.Dawn
                     If TheHero.Overland Then
                         Message = "The sun is starting to rise. "
                     End If
                 End If
-            ElseIf GameTime.TimeOfDay >= TimeSpan.Parse(DAY) AndAlso GameTime.TimeOfDay < TimeSpan.Parse(DUSK) Then
+            ElseIf GameTime.TimeOfDay >= TimeSpan.Parse(DAYLIGHT) AndAlso GameTime.TimeOfDay < TimeSpan.Parse(DUSK) Then
                 If DayNight = DayNightState.Dawn Then
                     DayNight = DayNightState.Day
                     If TheHero.Overland Then
@@ -104,17 +108,19 @@
             Dim DayMsg As String = If(Day > 0, Day.ToString + If(Day = 1, " day, ", " days, "), "")
             Dim HrsMsg As String = If(Hrs > 0, Hrs.ToString + If(Hrs = 1, " hour, ", " hours, "), "")
             Dim MinMsg As String = If(Min > 0, Min.ToString + If(Min = 1, " minute, ", " minutes, "), "")
-            Dim SecMsg As String = If(Sec > 0, Sec.ToString + If(Sec = 1, " second, ", " seconds, "), "")
+            Dim SecMsg As String = If(Sec > 0, Sec.ToString + If(Sec = 1, " second", " seconds"), "")
 
             If Alive Then
                 preamble = "You have been adventuring for "
                 postamble = " so far. "
             Else
-                preamble = "You survived for "
-                postamble = ". "
+                preamble = "survived for "
             End If
 
-            Return preamble + MonMsg + DayMsg + HrsMsg + MinMsg + SecMsg + postamble
+            Dim message As String = preamble + MonMsg + DayMsg + HrsMsg + MinMsg + SecMsg
+            If Left(message, message.Length - 1) = "," Then message = Left(message, message.Length - 2)
+
+            Return message
 
         End Function
 

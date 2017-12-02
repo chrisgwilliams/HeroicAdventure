@@ -368,8 +368,8 @@ Module m_Generation
 
 	End Sub
 	Friend Sub CalculateHP()
-
-		If TheHero.TotalLevels = 1 Then
+        'TODO: BUG - Generated a hero (Halfling Priest) with -1 HP
+        If TheHero.TotalLevels = 1 Then
 			TheHero.HP = TheHero.HitDieType + AbilityMod(TheHero.Constitution)
 		Else
 			TheHero.HP += RND.Next(1, TheHero.HitDieType + 1) + AbilityMod(TheHero.Constitution)

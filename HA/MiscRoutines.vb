@@ -1243,19 +1243,22 @@ Module m_MiscRoutines
 
 	Friend Sub DoTurnCounter(Optional ByVal show As Boolean = False)
 		Dim turnIncrement As Integer = 1
+        'TODO: get rid of additional turn cost and replace it with time cost
+        With TheHero
+            If .Overland And Not .InTown Then
+                turnIncrement = OverlandMap(.OverX, .OverY).MovementCost
+            End If
 
-		With TheHero
-			If .Overland And Not .InTown Then
-				turnIncrement = OverlandMap(.OverX, .OverY).MovementCost
-			End If
+            .TurnCount += turnIncrement
 
-			.TurnCount += turnIncrement
+            If show Then
+                WriteAt(68, 12, .TurnCount)
+            End If
+        End With
 
-			If show Then
-				WriteAt(68, 12, .TurnCount)
-			End If
-		End With
-	End Sub
+        ' TODO: This may not be the best place for this
+        TimeKeeper.Update()
+    End Sub
 
     <DebuggerStepThrough()>
     Friend Sub RedrawDisplay()
