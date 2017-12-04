@@ -159,32 +159,32 @@ Namespace Screens
             WriteAt(2, 2, String.Format("Here lies {0}{1} killed{2} on level {3} by {4} {5}.", strName, strClass, strSleep, intDeathLevel, strArticle, strKilledBy))
             WriteAt(2, 4, "------------------------------------------------------------------------")
             WriteAt(2, 5, String.Format("Most folks agreed, {0} was a pretty decent {1}!", strName, strRace))
-            WriteAt(2, 6, String.Format("{0} {1} ({2} turns) and killed {3} monsters,", strCapPronoun, strLifespan, intTurns, intKills))
+            WriteAt(2, 6, String.Format("{0} {1} ({2} turns) and ", strCapPronoun, strLifespan, intTurns))
 
             Select Case intKills
                 Case 0
-                    WriteAt(2, 7, "before slinking off to the afterlife.")
+                    WriteAt(2, 7, "killed no monsters before slinking off to the afterlife.")
                     WriteAt(2, 8, String.Format("Sadly, {0} won't be missed!", strPronoun))
-                Case 1 To 40
-                    WriteAt(2, 7, "before shuffling off to the afterlife.")
+                Case 1 To 75
+                    WriteAt(2, 7, String.Format("killed {0} monsters before shuffling off to the afterlife.", intKills))
                     WriteAt(2, 8, String.Format("Who knows? {0} might be missed!", strCapPronoun))
-                Case 41 To 180
-                    WriteAt(2, 7, "before marching off to the afterlife.")
+                Case 76 To 250
+                    WriteAt(2, 7, String.Format("killed {0} monsters before marching off to the afterlife.", intKills))
                     WriteAt(2, 8, strCapPronoun & " will be sorely missed!")
-                Case 181 To 500
-                    WriteAt(2, 7, "before storming off to the afterlife. The heavens cried for a hundred days.")
+                Case 251 To 750
+                    WriteAt(2, 7, String.Format("killed {0} monsters before storming off to the afterlife. The heavens cried for a hundred days.", intKills))
                     WriteAt(2, 8, strCapPronoun & " will be mourned for decades!")
-                Case 501 To 1000
-                    WriteAt(2, 7, "before deciding to conquer the afterlife. Even death could not slow this noble warrior.")
+                Case 751 To 1500
+                    WriteAt(2, 7, String.Format("killed {0} monsters before deciding to conquer the afterlife. Even death could not slow this noble warrior.", intKills))
                     WriteAt(2, 8, strCapPronoun & " will live on in song and story for many generations!")
-                Case Is > 1000
-                    WriteAt(2, 7, "before challenging the god of death himself.")
+                Case Is > 1501
+                    WriteAt(2, 7, String.Format("killed {0} monsters before challenging the god of death himself.", intKills))
                     WriteAt(2, 8, String.Format("Some say {0} still fights on in hell!", strCapPronoun))
             End Select
 
             WriteAt(2, 9, "------------------------------------------------------------------------")
 
-            WriteAt(19, 12, " __________", ConsoleColor.DarkGray)
+            WriteAt(19, 12, " __________ ", ConsoleColor.DarkGray)
             WriteAt(19, 13, "/    IN    \", ConsoleColor.DarkGray)
             WriteAt(19, 14, "| MEMORIAM |", ConsoleColor.DarkGray)
             WriteAt(19, 15, "|          |", ConsoleColor.DarkGray)
