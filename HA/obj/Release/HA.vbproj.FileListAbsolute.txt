@@ -1,0 +1,10 @@
+C:\code\HeroicAdventure\HA\bin\HA.exe.config
+C:\code\HeroicAdventure\HA\bin\HA.exe
+C:\code\HeroicAdventure\HA\bin\DBuild.dll
+C:\code\HeroicAdventure\HA\bin\DBuild.pdb
+C:\code\HeroicAdventure\HA\bin\DBuild.xml
+C:\code\HeroicAdventure\HA\obj\Release\HA.vbprojResolveAssemblyReference.cache
+C:\code\HeroicAdventure\HA\obj\Release\HA.English.resources
+C:\code\HeroicAdventure\HA\obj\Release\HA.MyResources.resources
+C:\code\HeroicAdventure\HA\obj\Release\HA.vbproj.GenerateResource.Cache
+C:\code\HeroicAdventure\HA\obj\Release\HA.exe

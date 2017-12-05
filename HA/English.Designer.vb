@@ -191,7 +191,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Missile Weapons:.
+        '''  Looks up a localized string similar to Missle Weapons:.
         '''</summary>
         Friend Shared ReadOnly Property resBackpackMissileWpns() As String
             Get
@@ -560,7 +560,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to ] Missile Weapon|.
+        '''  Looks up a localized string similar to ] Missle Weapon|.
         '''</summary>
         Friend Shared ReadOnly Property resEquippedMissileWpn() As String
             Get
