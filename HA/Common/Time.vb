@@ -36,13 +36,14 @@
                 CreatorsDay = True
             End If
 
-            Dim RandomDay As String = D100(30).ToString
+            Dim StartDay As String = "01"
             Dim RandomMonth As String = D12().ToString
+            If (RandomMonth.Length = 1) Then RandomMonth = "0" + RandomMonth
 
-            GameStartDate = CDate(RandomDay + "/" + RandomMonth + "/00 00:00:00")
+            GameStartDate = Convert.ToDateTime(StartDay + "/" + RandomMonth + "/00 00:00:00")
             GameTime = GameStartDate
 
-            BirthSign = RandomMonth
+            BirthSign = CInt(RandomMonth)
         End Sub
 
         Friend Shared Function Update(Optional Action As ActionType = ActionType.None) As String
