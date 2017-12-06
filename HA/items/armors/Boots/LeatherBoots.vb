@@ -14,10 +14,10 @@ Public Class LeatherBoots
 	End Sub
 
 	Public Overrides Sub activate(whoIsActivating As Avatar)
-		' TODO: equip leather boots
-	End Sub
+        whoIsActivating.MiscACMod += ACBonus
+    End Sub
 
 	Public Overrides Sub deactivate(whoIsDeactivating As Avatar)
-		' TODO: unequip leather boots
-	End Sub
+        whoIsDeactivating.MiscACMod -= ACBonus
+    End Sub
 End Class

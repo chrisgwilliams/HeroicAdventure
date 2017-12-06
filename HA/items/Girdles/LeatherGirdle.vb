@@ -8,16 +8,15 @@ Public Class LeatherGirdle
 
 		Color = Enumerations.ColorList.Olive
 		Name = "leather girdle"
-		Walkover = Name
-	End Sub
+        Walkover = Name
+        ACBonus = 1
+    End Sub
 
 	Public Overrides Sub activate(whoIsActivating As Avatar)
-		' TODO: Equip Leather Girdle
-
-	End Sub
+        whoIsActivating.MiscACMod += ACBonus
+    End Sub
 
 	Public Overrides Sub deactivate(whoIsDeactivating As Avatar)
-		' TODO: Unequip Leather Girdle
-
-	End Sub
+        whoIsDeactivating.MiscACMod -= ACBonus
+    End Sub
 End Class

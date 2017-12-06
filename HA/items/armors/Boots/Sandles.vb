@@ -13,10 +13,10 @@ Public Class Sandles
 	End Sub
 
 	Public Overrides Sub activate(whoIsActivating As Avatar)
-		' TODO: equip sandles
-	End Sub
+        whoIsActivating.MiscACMod += ACBonus
+    End Sub
 
 	Public Overrides Sub deactivate(whoIsDeactivating As Avatar)
-		' TODO: unequip sandles
-	End Sub
+        whoIsDeactivating.MiscACMod -= ACBonus
+    End Sub
 End Class

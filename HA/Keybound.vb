@@ -58,12 +58,12 @@ Module m_Keybound
 					strAutoWalkDirection = WalkDirection.KeyChar.ToString
 				End If
 
-				Do Until OK
-					Select Case strAutoWalkDirection
-						Case 1 To 9	' SW, S, SE, W, WAIT, E, NW, N, NE
-							TheHero.AutoWalk = True
-							strCommand = EvaluateDirection(strAutoWalkDirection)
-							bolValid = True
+                Do Until OK
+                    Select Case strAutoWalkDirection
+                        Case 1 To 9 ' SW, S, SE, W, WAIT, E, NW, N, NE
+                            TheHero.AutoWalk = True
+                            strCommand = EvaluateDirection(strAutoWalkDirection)
+                            bolValid = True
                             strMessage = resWalking
                             OK = True
 
@@ -90,7 +90,6 @@ Module m_Keybound
                             strMessage = ""
                             OK = True
                     End Select
-
                 Loop
                 CursorVisible = False
 
@@ -1376,7 +1375,7 @@ Module m_Keybound
                     ok = True
                     Exit Select
                 Case "y", "Y"
-                    'TODO: develop an "exit sequence"
+                    'TODO: develop an "exit sequence" since we dont show a tombstone for quitters
                     ok = True
                     Return True
             End Select

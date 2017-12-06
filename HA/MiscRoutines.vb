@@ -1241,8 +1241,8 @@ Module m_MiscRoutines
 		End If
 	End Function
 
-	Friend Sub DoTurnCounter(Optional ByVal show As Boolean = False)
-		Dim turnIncrement As Integer = 1
+    Friend Function DoTurnCounter(Optional ByVal show As Boolean = False) As String
+        Dim turnIncrement As Integer = 1
         'TODO: get rid of additional turn cost and replace it with time cost
         With TheHero
             If .Overland And Not .InTown Then
@@ -1256,9 +1256,9 @@ Module m_MiscRoutines
             End If
         End With
 
-        ' TODO: This may not be the best place for this
-        TimeKeeper.Update()
-    End Sub
+        ' TODO: This may not be the best place for the TimeKeeper.Update()
+        Return TimeKeeper.Update()
+    End Function
 
     <DebuggerStepThrough()>
     Friend Sub RedrawDisplay()

@@ -87,8 +87,7 @@ Module MainModule
             If Not TheHero.Sleeping Then
                 strMessage = ProcessKeyStroke(strCommand, strMessage, strAutoWalkDirection, bolValid, gameOver)
             Else
-                strMessage = ""
-                DoTurnCounter()
+                strMessage = DoTurnCounter()
             End If
 
             ' don't execute the rest of the turn unless a valid key was pressed (or hero was asleep)

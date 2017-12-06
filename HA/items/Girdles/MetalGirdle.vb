@@ -8,16 +8,15 @@ Public Class MetalGirdle
 
 		Color = Enumerations.ColorList.LightGray
 		Name = "metal girdle"
-		Walkover = Name
-	End Sub
+        Walkover = Name
+        ACBonus = 2
+    End Sub
 
 	Public Overrides Sub activate(whoIsActivating As Avatar)
-		'TODO: Equip Metal Girdle
+        whoIsActivating.MiscACMod += ACBonus
+    End Sub
 
-	End Sub
-
-	Public Overrides Sub deactivate(whoIsDeactivating As Avatar)
-		'TODO: UnEquip Metal Girdle
-
-	End Sub
+    Public Overrides Sub deactivate(whoIsDeactivating As Avatar)
+        whoIsDeactivating.MiscACMod -= ACBonus
+    End Sub
 End Class

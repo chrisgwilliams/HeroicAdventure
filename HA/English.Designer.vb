@@ -1721,7 +1721,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to  Are you sure you want to quit? (y,N) .
+        '''  Looks up a localized string similar to  Are you sure you want to quit? (y/N) .
         '''</summary>
         Friend Shared ReadOnly Property resPromptQuit() As String
             Get
