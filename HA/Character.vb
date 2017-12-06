@@ -310,8 +310,8 @@ Module Character
 
 	Friend Sub HeroDisplay()
 		Clear()
-
-		WriteAt(0, 0, "---------------------------------- Your Hero ----------------------------------", ConsoleColor.DarkYellow)
+        'TODO: Add survival time (so far)
+        WriteAt(0, 0, "---------------------------------- Your Hero ----------------------------------", ConsoleColor.DarkYellow)
 		WriteAt(35, 0, "Your Hero", ConsoleColor.Yellow)
 
 		WriteAt(1, 1, "Name:", ConsoleColor.Gray)
@@ -546,7 +546,7 @@ Module Character
 
             HeroIncreaseStat()
             HeroIncreaseHP()
-
+            'TODO: increase skills at LevelUp
         Else
             ' Sorry, you're not quite there yet... keep killing stuff.
         End If

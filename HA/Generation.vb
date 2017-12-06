@@ -169,21 +169,11 @@ Module m_Generation
 		TheHero.Name = Left(TheHero.Name, 11)
 
         If TheHero.Name = "" Then
-            Select Case D6()
-                Case 1
-                    TheHero.Name = "Pat"
-                Case 2
-                    TheHero.Name = "Robin"
-                Case 3
-                    TheHero.Name = "Tinky Winky"
-                Case 4
-                    TheHero.Name = "Butt Ugly"
-                Case 5
-                    TheHero.Name = "Troll Bait"
-                Case 6
-                    TheHero.Name = "Ineeda Name"
-            End Select
+            TheHero.Name = GetRandomName()
         End If
+
+        WriteAt(2, 22, CheckForPatronName(TheHero.Name), ConsoleColor.White)
+        PressAKey()
 
     End Sub
 	Friend Sub RollStats()
@@ -931,7 +921,41 @@ Module m_Generation
 		End Select
 	End Function
 
-#End Region
+    Private Function GetRandomName() As String
+        Select Case D10()
+            Case 1
+                Return "Pat"
+            Case 2
+                Return "Unwanted"
+            Case 3
+                Return "Dipsy"
+            Case 4
+                Return "Doofus"
+            Case 5
+                Return "Unloved"
+            Case 6
+                Return "Stinky"
+            Case 7
+                Return "Bobby"
+            Case 8
+                Return "Sue"
+            Case 9
+                Return "Carl"
+            Case 10
+                Return "Frida"
+            Case Else
+                Return "Zaphod"
+        End Select
+    End Function
 
+    Private Function CheckForPatronName(Name As String) As String
+        If (Name.ToLower = "dane") Then
+            Return "Dane, you say? I once knew a wizard named Dane! Helpful chap..."
+        End If
+
+        Return Name + "? Sure, why not? Sounds heroic enough! Good luck..."
+    End Function
+
+#End Region
 
 End Module

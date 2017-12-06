@@ -69,6 +69,7 @@ Namespace Common
         <DebuggerStepThrough()> Public Shared Function GetTrap(ByVal t As TrapType) As String
             Return t.ToString
         End Function
+
 #End Region
 
     End Class
