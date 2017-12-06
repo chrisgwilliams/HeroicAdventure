@@ -123,7 +123,7 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Awards.vb" />
+    <Compile Include="Avatar\Hero\Awards.vb" />
     <Compile Include="Common\Dice.vb" />
     <Compile Include="Common\Enumerations.vb" />
     <Compile Include="Common\LineDrawing.vb" />
@@ -147,18 +147,18 @@
     <Compile Include="AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AutoWalk.vb" />
-    <Compile Include="Avatar.vb" />
-    <Compile Include="AvatarSorter.vb" />
-    <Compile Include="Generation.vb">
+    <Compile Include="Avatar\Hero\AutoWalk.vb" />
+    <Compile Include="Avatar\Avatar.vb" />
+    <Compile Include="Avatar\AvatarSorter.vb" />
+    <Compile Include="Avatar\Hero\Generation.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Character.vb" />
-    <Compile Include="Hero.vb" />
+    <Compile Include="Avatar\Hero\Character.vb" />
+    <Compile Include="Avatar\Hero\Hero.vb" />
     <Compile Include="Common\Helper.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Inventory.vb" />
+    <Compile Include="Avatar\Inventory.vb" />
     <Compile Include="Items\Armors\BandedMail.vb" />
     <Compile Include="Items\Armors\Boots\Boots.vb" />
     <Compile Include="Items\Armors\Boots\ChainBoots.vb" />
@@ -294,26 +294,26 @@
     <Compile Include="Keybound.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainMenu.vb" />
-    <Compile Include="MiscRoutines.vb" />
+    <Compile Include="Common\MainMenu.vb" />
+    <Compile Include="Common\MiscRoutines.vb" />
     <Compile Include="Main.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monsters\Animal\Dog.vb" />
-    <Compile Include="Monsters\Animal\Lizard.vb" />
-    <Compile Include="Monsters\Animal\Spider.vb" />
-    <Compile Include="Monsters\Animal\Rat.vb" />
-    <Compile Include="Monsters\Animal\Snake.vb" />
-    <Compile Include="Monsters\Animal\Wolf.vb" />
-    <Compile Include="Monsters\Savage\Goblin.vb" />
-    <Compile Include="Monsters\Savage\Kobold.vb" />
-    <Compile Include="Monsters\Monster.vb" />
-    <Compile Include="Monsters\Savage\Ogre.vb" />
-    <Compile Include="Monsters\Savage\Orc.vb" />
-    <Compile Include="Monsters\Undead\Skeleton.vb" />
-    <Compile Include="Monsters\Savage\Troll.vb" />
-    <Compile Include="Monsters\Undead\Undead.vb" />
-    <Compile Include="Monsters\Undead\Zombie.vb" />
+    <Compile Include="Avatar\Monsters\Animal\Dog.vb" />
+    <Compile Include="Avatar\Monsters\Animal\Lizard.vb" />
+    <Compile Include="Avatar\Monsters\Animal\Spider.vb" />
+    <Compile Include="Avatar\Monsters\Animal\Rat.vb" />
+    <Compile Include="Avatar\Monsters\Animal\Snake.vb" />
+    <Compile Include="Avatar\Monsters\Animal\Wolf.vb" />
+    <Compile Include="Avatar\Monsters\Savage\Goblin.vb" />
+    <Compile Include="Avatar\Monsters\Savage\Kobold.vb" />
+    <Compile Include="Avatar\Monsters\Monster.vb" />
+    <Compile Include="Avatar\Monsters\Savage\Ogre.vb" />
+    <Compile Include="Avatar\Monsters\Savage\Orc.vb" />
+    <Compile Include="Avatar\Monsters\Undead\Skeleton.vb" />
+    <Compile Include="Avatar\Monsters\Savage\Troll.vb" />
+    <Compile Include="Avatar\Monsters\Undead\Undead.vb" />
+    <Compile Include="Avatar\Monsters\Undead\Zombie.vb" />
     <Compile Include="My Project\MyApplication.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>MyApplication.myapp</DependentUpon>
@@ -364,7 +364,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="HA_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="My Project\app.manifest" />
     <None Include="My Project\MyApplication.myapp">
