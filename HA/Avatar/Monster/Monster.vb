@@ -2,7 +2,7 @@ Imports System.Math
 Imports DBuild.DunGen3
 Imports HA.Common
 
-<DebuggerStepThrough()> Public MustInherit Class Monster
+Public MustInherit Class Monster
     Inherits Avatar
 
     Public AttackList As New ArrayList
@@ -13,7 +13,7 @@ Imports HA.Common
     'At some point, the initiative calculation should include a random roll fo a d20; that would be added here
     Public Overrides ReadOnly Property TotalInitForRound() As Integer
         Get
-			Return Helper.AbilityMod(EDexterity) + Initiative
+            Return Helper.AbilityMod(EDexterity) + Initiative
         End Get
     End Property
     Public Overrides Property ECharisma() As Integer
@@ -78,8 +78,12 @@ Imports HA.Common
     Public Property Fear() As Integer
     Public Property Attacks() As Integer
     Public Property Chat() As String
+    Public Property Attitude() As Disposition
 
     Public Sub New()
+        ' Monsters, by default, are hostile, but this can be overridden by inherited classes.
+        Attitude = Disposition.Hostile
+
         Observed = False
 
         ' female = 0, male = 1

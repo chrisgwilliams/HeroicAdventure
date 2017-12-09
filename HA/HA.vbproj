@@ -124,6 +124,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Avatar\Hero\Awards.vb" />
+    <Compile Include="Avatar\Monster\NPC\Fin_VillageElder.vb" />
+    <Compile Include="Avatar\Monster\NPC\NPC.vb" />
     <Compile Include="Common\Dice.vb" />
     <Compile Include="Common\Enumerations.vb" />
     <Compile Include="Common\LineDrawing.vb" />
@@ -299,21 +301,21 @@
     <Compile Include="Main.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Avatar\Monsters\Animal\Dog.vb" />
-    <Compile Include="Avatar\Monsters\Animal\Lizard.vb" />
-    <Compile Include="Avatar\Monsters\Animal\Spider.vb" />
-    <Compile Include="Avatar\Monsters\Animal\Rat.vb" />
-    <Compile Include="Avatar\Monsters\Animal\Snake.vb" />
-    <Compile Include="Avatar\Monsters\Animal\Wolf.vb" />
-    <Compile Include="Avatar\Monsters\Savage\Goblin.vb" />
-    <Compile Include="Avatar\Monsters\Savage\Kobold.vb" />
-    <Compile Include="Avatar\Monsters\Monster.vb" />
-    <Compile Include="Avatar\Monsters\Savage\Ogre.vb" />
-    <Compile Include="Avatar\Monsters\Savage\Orc.vb" />
-    <Compile Include="Avatar\Monsters\Undead\Skeleton.vb" />
-    <Compile Include="Avatar\Monsters\Savage\Troll.vb" />
-    <Compile Include="Avatar\Monsters\Undead\Undead.vb" />
-    <Compile Include="Avatar\Monsters\Undead\Zombie.vb" />
+    <Compile Include="Avatar\Monster\Animal\Dog.vb" />
+    <Compile Include="Avatar\Monster\Animal\Lizard.vb" />
+    <Compile Include="Avatar\Monster\Animal\Spider.vb" />
+    <Compile Include="Avatar\Monster\Animal\Rat.vb" />
+    <Compile Include="Avatar\Monster\Animal\Snake.vb" />
+    <Compile Include="Avatar\Monster\Animal\Wolf.vb" />
+    <Compile Include="Avatar\Monster\Savage\Goblin.vb" />
+    <Compile Include="Avatar\Monster\Savage\Kobold.vb" />
+    <Compile Include="Avatar\Monster\Monster.vb" />
+    <Compile Include="Avatar\Monster\Savage\Ogre.vb" />
+    <Compile Include="Avatar\Monster\Savage\Orc.vb" />
+    <Compile Include="Avatar\Monster\Undead\Skeleton.vb" />
+    <Compile Include="Avatar\Monster\Savage\Troll.vb" />
+    <Compile Include="Avatar\Monster\Undead\Undead.vb" />
+    <Compile Include="Avatar\Monster\Undead\Zombie.vb" />
     <Compile Include="My Project\MyApplication.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>MyApplication.myapp</DependentUpon>

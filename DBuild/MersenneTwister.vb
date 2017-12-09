@@ -3,7 +3,7 @@
 ' with reference to the C code written by Takuji Nishimura and Makoto Matsumoto
 ' (http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html).
 '
-' This code is free to use for any pupose.
+' This code is free to use for any purpose.
 '
 
 Option Strict On

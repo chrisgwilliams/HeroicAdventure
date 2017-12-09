@@ -184,6 +184,22 @@
         End Enum
 #End Region
 
+#Region " Monster / NPC "
+        Public Enum Disposition
+            Charmed = -2
+            Friendly = -1
+            Neutral = 0
+            Hostile = 1
+            Enraged = 2
+        End Enum
+        Public Enum QuestStatus
+            Unassigned
+            Assigned
+            Failed
+            Completed
+        End Enum
+#End Region
+
 #Region " Metadata "
         Public Enum ColorList
             Black = 0
@@ -302,6 +318,13 @@
             NorthWest
             SouthEast
             SouthWest
+        End Enum
+        Public Enum Town
+            AbandonedVillage
+            Fincastle
+            Lakeside
+            Sawtooth
+            StoneGate
         End Enum
 #End Region
 

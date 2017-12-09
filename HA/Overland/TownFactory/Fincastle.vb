@@ -94,6 +94,9 @@ Partial Public Class TownFactory
         m_TownMap(17, 14, Town.Fincastle).CellType = Towns.CellType.tree
         m_TownMap(18, 11, Town.Fincastle).CellType = Towns.CellType.tree
         m_TownMap(21, 13, Town.Fincastle).CellType = Towns.CellType.tree
+
+        'TODO: add Village Elder NPC to Fincastle initializer
+
     End Sub
 
 End Class
