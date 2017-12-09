@@ -350,6 +350,7 @@
     <Content Include="HA.ico" />
     <AppDesigner Include="My Project\" />
     <Compile Include="Items\Amulets\GoldAmulet.vb" />
+    <Compile Include="Quest\Quest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="English.resx">
@@ -401,9 +402,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Quests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.Targets" />
   <PropertyGroup>
     <PreBuildEvent>
