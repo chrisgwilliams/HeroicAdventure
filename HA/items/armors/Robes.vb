@@ -6,7 +6,7 @@ Public Class Robes
     Public Sub New()
         MyBase.New()
 
-        Dim rnd As New Random
+        Dim rnd As New System.Random
         Dim intColor As Integer = rnd.Next(1, 16)
         Color = intColor
 

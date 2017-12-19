@@ -2,8 +2,8 @@
 
 Public Module Util
 	Public Function Scramble(phrase As String) As String
-		Dim rand As New Random()
-		Dim newPhrase As String = ""
+        Dim rand As New System.Random()
+        Dim newPhrase As String = ""
 		Dim clist As New List(Of String)
 
 		' break phrase into characters and add to list

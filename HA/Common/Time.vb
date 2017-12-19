@@ -11,6 +11,8 @@
         Const DUNGEONTURN As Int16 = INCREMENT * 1
         Const OUTDOORTURN As Int16 = INCREMENT * 100
 
+        'ADOM uses (approx) 1 hr, 6 min at speed 100 for an outfoor turn.
+
         Const DAWN As String = "06:25:01"
         Const DAYLIGHT As String = "07:25:01"
         Const DUSK As String = "20:00:00"
@@ -24,7 +26,7 @@
         Friend TurnCountAtStateChange As Integer
         Friend Shared GameCreationDate As DateTime  ' Real World, to check for Creators Day
         Friend Shared GameStartDate As DateTime     ' In Game
-        Friend Shared GameTime As DateTime
+        Public Shared GameTime As DateTime
 
         Friend Shared BirthSign As StarSign
 

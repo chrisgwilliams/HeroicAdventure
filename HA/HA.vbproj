@@ -100,6 +100,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Random\Random.vbproj">
+      <Project>{8e35cfc1-3904-46c5-b420-3735ddd0d911}</Project>
+      <Name>Random</Name>
+    </ProjectReference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>

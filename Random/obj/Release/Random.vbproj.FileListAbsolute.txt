@@ -1,0 +1,8 @@
+C:\code\HeroicAdventure\Random\bin\Release\Random.dll
+C:\code\HeroicAdventure\Random\bin\Release\Random.pdb
+C:\code\HeroicAdventure\Random\bin\Release\Random.xml
+C:\code\HeroicAdventure\Random\obj\Release\Random.Resources.resources
+C:\code\HeroicAdventure\Random\obj\Release\Random.vbproj.GenerateResource.Cache
+C:\code\HeroicAdventure\Random\obj\Release\Random.dll
+C:\code\HeroicAdventure\Random\obj\Release\Random.xml
+C:\code\HeroicAdventure\Random\obj\Release\Random.pdb

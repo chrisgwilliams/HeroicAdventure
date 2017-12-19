@@ -775,9 +775,9 @@ Module m_MiscRoutines
 
 	Friend Sub PlaceMonsters(ByVal intZ As Integer, _
 					 Optional ByVal MaxMonsters As Integer = 0)
-		If RND Is Nothing Then RND = New DBuild.MersenneTwister
+        If RND Is Nothing Then RND = New Random.MersenneTwister
 
-		Debug.WriteLine("entering PlaceMonsters routine")
+        Debug.WriteLine("entering PlaceMonsters routine")
 
 		Dim intCtr As Integer, _
 			rndX As Integer, rndY As Integer

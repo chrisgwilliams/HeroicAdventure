@@ -1,4 +1,4 @@
-Imports RND = DBuild.MersenneTwister
+Imports RND = Random.MersenneTwister
 
 Namespace DunGen3
 

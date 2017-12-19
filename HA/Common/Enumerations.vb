@@ -336,10 +336,9 @@
             Heavy
         End Enum
         Public Enum CloudState
-            None
-            Light
-            Moderate
-            Heavy
+            Clear
+            PartlyCloudy
+            Cloudy
         End Enum
         Public Enum PrecipitationState
             None
@@ -347,11 +346,77 @@
             Moderate
             Heavy
         End Enum
+        Public Enum PrecipitationType
+            HeavyBlizzard
+            Blizzard
+            HeavySnowstorm
+            Snowstorm
+            Sleet
+            Hail
+            HeavyFog
+            LightFog
+            Mist
+            Drizzle
+            LightRain
+            HeavyRain
+            ThunderStorm
+            TropicalStorm
+            Monsoon
+            Gale
+            Hurricane
+        End Enum
         Public Enum SeasonState
             Winter
             Spring
             Summer
             Fall
+        End Enum
+        Public Enum BaseTempByMonth
+            Raven = 32
+            Book = 34
+            Wand = 42
+            Unicorn = 52
+            Salamander = 63
+            Dragon = 71
+            Sword = 77
+            Falcon = 75
+            Cup = 68
+            Candle = 57
+            Wolf = 46
+            Tree = 33
+        End Enum
+        Public Enum PrecipChanceByMonth
+            Raven = 46
+            Book = 40
+            Wand = 44
+            Unicorn = 42
+            Salamander = 42
+            Dragon = 36
+            Sword = 33
+            Falcon = 33
+            Cup = 33
+            Candle = 36
+            Wolf = 40
+            Tree = 43
+        End Enum
+        Public Enum RainbowChanceByPrecipType
+            HeavyBlizzard = 0
+            Blizzard = 0
+            HeavySnowstorm = 0
+            Snowstorm = 1
+            Sleet = 0
+            Hail = 0
+            HeavyFog = 1
+            LightFog = 3
+            Mist = 10
+            Drizzle = 5
+            LightRain = 15
+            HeavyRain = 20
+            ThunderStorm = 20
+            TropicalStorm = 10
+            Monsoon = 5
+            Gale = 10
+            Hurricane = 5
         End Enum
         Public Enum DayNightState
             Dawn

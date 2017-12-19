@@ -902,10 +902,10 @@ Module Overland
 #Region " Overland Encounter Functions "
 
 	Friend Function CheckForOverlandEncounter(ByVal strMessage As String) As String
-		RND = New DBuild.MersenneTwister
+        RND = New Random.MersenneTwister
 
-		' invisible heroes escape Overland encounters for now
-		If TheHero.Invisible Then Return strMessage
+        ' invisible heroes escape Overland encounters for now
+        If TheHero.Invisible Then Return strMessage
 
 		' Overland encounters have a 10% base chance of occurring each turn.
 		' This is modified by +1 % for each turn since the last encounter

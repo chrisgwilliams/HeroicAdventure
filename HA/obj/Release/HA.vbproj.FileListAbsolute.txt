@@ -8,3 +8,6 @@ C:\code\HeroicAdventure\HA\obj\Release\HA.English.resources
 C:\code\HeroicAdventure\HA\obj\Release\HA.MyResources.resources
 C:\code\HeroicAdventure\HA\obj\Release\HA.vbproj.GenerateResource.Cache
 C:\code\HeroicAdventure\HA\obj\Release\HA.exe
+C:\code\HeroicAdventure\HA\bin\Random.dll
+C:\code\HeroicAdventure\HA\bin\Random.pdb
+C:\code\HeroicAdventure\HA\bin\Random.xml

@@ -118,7 +118,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DunGen4.vb" />
-    <Compile Include="MersenneTwister.vb" />
     <AppDesigner Include="My Project\" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +139,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Random\Random.vbproj">
+      <Project>{8e35cfc1-3904-46c5-b420-3735ddd0d911}</Project>
+      <Name>Random</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.Targets" />
   <PropertyGroup>

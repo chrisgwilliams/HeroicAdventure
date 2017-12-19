@@ -1,5 +1,5 @@
 ﻿Imports System.Collections.Generic
-Imports RND = DBuild.MersenneTwister
+Imports RND = Random.MersenneTwister
 Imports CC = Microsoft.VisualBasic.ControlChars
 Imports System.Collections.ObjectModel
 

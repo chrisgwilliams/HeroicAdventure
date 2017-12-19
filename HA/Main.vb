@@ -20,9 +20,9 @@ Module MainModule
     Friend Level(,,) As GridCell
 	Friend m_arrMonster As New ArrayList
 	Friend m_version As New Version("0.1.7")
-	Friend RND As New DBuild.MersenneTwister
+    Friend RND As New Random.MersenneTwister
 
-	Public m_stairsUp As coord
+    Public m_stairsUp As coord
 	Public m_stairsDn As coord
 
 	Public m_qMessage As New Queue

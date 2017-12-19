@@ -1,0 +1,79 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Random
+</name>
+</assembly>
+<members>
+<member name="T:Random.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Random.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Random.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:Random.MersenneTwister">
+ 
+ A random number generator with a uniform distribution using the Mersenne 
+ Twister algorithm.
+ 
+</member>
+<member name="M:Random.MersenneTwister.#ctor">
+ <summary>
+ Create a new Mersenne Twister random number generator.
+ </summary>
+</member>
+<member name="M:Random.MersenneTwister.#ctor(System.UInt32)">
+ <summary>
+ Create a new Mersenne Twister random number generator with a
+ particular seed.
+ </summary>
+ <param name="seed">The seed for the generator.</param>
+</member>
+<member name="M:Random.MersenneTwister.#ctor(System.UInt32[])">
+ <summary>
+ Create a new Mersenne Twister random number generator with a
+ particular initial key.
+ </summary>
+ <param name="initialKey">The initial key.</param>
+</member>
+<member name="M:Random.MersenneTwister.NextUInt32">
+ <summary>
+ Generates a random number between 0 and System.UInt32.MaxValue.
+ </summary>
+</member>
+<member name="M:Random.MersenneTwister.Next">
+ <summary>
+ Generates a random integer between 0 and System.Int32.MaxValue.
+ </summary>
+</member>
+<member name="M:Random.MersenneTwister.Next(System.Int32)">
+ <summary>
+ Generates a random integer between 0 and maxValue.
+ </summary>
+ <param name="maxValue">The maximum value. Must be greater than zero.</param>
+</member>
+<member name="M:Random.MersenneTwister.Next(System.Int32,System.Int32)">
+ <summary>
+ Generates a random integer between minValue and maxValue.
+ </summary>
+ <param name="maxValue">The lower bound.</param>
+ <param name="minValue">The upper bound.</param>
+</member>
+<member name="M:Random.MersenneTwister.NextDouble">
+ <summary>
+ Generates a random floating point number between 0 and 1.
+ </summary>
+</member>
+</members>
+</doc>

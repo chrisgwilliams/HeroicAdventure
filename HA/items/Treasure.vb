@@ -33,7 +33,7 @@ Public Class Gem
         Tool = True
         Weight = 0.1
 
-        Dim rnd As New Random
+        Dim rnd As New System.Random
         Color = rnd.Next(1, 101)
         Select Case Color
             Case 1 To 50
