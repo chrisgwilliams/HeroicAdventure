@@ -707,12 +707,13 @@ Module Overland
         Mountain = 2        ' ^  Mountain
         Volcano = 3         ' ^  Volcano
         Hills = 4           ' ~  Hills
-        Plains = 5          ' "  Plains
+        Plains = 5          ' "  Plains 
         Road = 6            ' .  Road
         Forest = 7          ' &  Forest
         Special = 8         ' *  Dungeon/Temple/etc
         Town = 9            ' o  Town
         Water = 10          ' =  Water
+        Desert = 11         ' ~ Desert (yellow)
     End Enum
 
     Public Enum OverlandMovementCost
