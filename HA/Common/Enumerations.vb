@@ -371,6 +371,20 @@
             Summer
             Fall
         End Enum
+        Public Enum GameMonth
+            Raven = 1
+            Book = 2
+            Wand = 3
+            Unicorn = 4
+            Salamander = 5
+            Dragon = 6
+            Sword = 7
+            Falcon = 8
+            Cup = 9
+            Candle = 10
+            Wolf = 11
+            Tree = 12
+        End Enum
         Public Enum BaseTempByMonth
             Raven = 32
             Book = 34
