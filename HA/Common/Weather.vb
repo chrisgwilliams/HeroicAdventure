@@ -2,13 +2,15 @@
 
     Public Class Weather
         Public Shared SightMod As Int16
+        Public Shared MoveMod As Decimal
         Public Shared Temperature As Int16
         Public Shared WindSpeed As Int16
         Public Shared Sky As CloudState
         Public Shared Rainbow As Boolean
+        Public Shared WeatherType As String
 
         Private PreciptationAmount As Int16
-        Private RainbowChance As RainbowChanceByPrecipType
+        Friend Shared RainbowChance As RainbowChanceByPrecipType
         Private WeatherDuration As DateTimeOffset
 
         'TODO: Weather System
@@ -190,6 +192,17 @@
             Select Case zone
                 Case OverlandTerrainType.Desert
                     PrecipitationChance -= 30
+                    Select Case TimeKeeper.DayNight
+                        Case DayNightState.Dawn
+                            Temperature -= D20()
+                        Case DayNightState.Day
+                            Temperature += (D20() * 2)
+                        Case DayNightState.Dusk
+                            Temperature += D10()
+                        Case DayNightState.Night
+                            Temperature -= D10()
+                    End Select
+
                 Case OverlandTerrainType.Forest
                     PrecipitationChance += 5
                 Case OverlandTerrainType.Hills
@@ -210,35 +223,159 @@
                     Temperature -= 10
             End Select
 
-            Select Case D100()
-                Case 1 To 2         ' BLIZZARD, HEAVY
-                Case 3 To 5         ' BLIZZARD
-                Case 6 To 10        ' SNOWSTORM, HEAVY
-                Case 11 To 20       ' SNOWSTORM, LIGHT
-                Case 21 To 25       ' SLEETSTORM
-                Case 26 To 27       ' HAILSTORM
-                Case 28 To 30       ' FOG, HEAVY
-                Case 31 To 38       ' FOG, LIGHT
-                Case 39 To 40       ' MIST
-                Case 41 To 45       ' DRIZZLE
-                Case 46 To 60       ' RAINSTORM, LIGHT
-                Case 61 To 70       ' RAINSTORM, HEAVY
-                Case 71 To 84       ' THUNDERSTORM
-                Case 85 To 89       ' TROPICAL STORM
-                Case 90 To 94       ' MONSOON
-                Case 95 To 97       ' GALE
-                Case 98 To 100      ' HURRICANE
-            End Select
+            If D100() <= PrecipitationChance Then
+                GetWeather(zone)
+                AdjustmentsForWindSpeed()
+                CheckForRainbow()
+            End If
 
+            ' TODO: still need weather status messages
             Return Message
         End Function
 
-        Friend Shared Function LongString() As String
+        Friend Shared Function WeatherReport() As String
             Dim message As String = ""
 
+            ' TODO: need full weather report, for status page
             Return message
         End Function
 
+        Private Shared Sub GetWeather(zone As OverlandTerrainType)
+            Select Case D100()
+                Case 1 To 2         ' BLIZZARD, HEAVY
+                    WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
+                    WeatherType = "Heavy Blizzard"
+                    RainbowChance = RainbowChanceByPrecipType.HeavyBlizzard
+
+                Case 3 To 5         ' BLIZZARD
+                    WindSpeed = D8() + D8() + D8() + 36
+                    WeatherType = "Blizzard"
+                    RainbowChance = RainbowChanceByPrecipType.Blizzard
+
+                Case 6 To 10        ' SNOWSTORM, HEAVY
+                    WindSpeed = D10() + D10() + D10()
+                    WeatherType = "Heavy Snowstorm"
+                    RainbowChance = RainbowChanceByPrecipType.HeavySnowstorm
+
+                Case 11 To 20       ' SNOWSTORM
+                    WindSpeed = D6() + D6() + D6() + D6()
+                    WeatherType = "Snowstorm"
+                    RainbowChance = RainbowChanceByPrecipType.Snowstorm
+
+                Case 21 To 25       ' SLEETSTORM
+                    WindSpeed = D10() + D10() + D10()
+                    WeatherType = "Sleetstorm"
+                    RainbowChance = RainbowChanceByPrecipType.Sleet
+
+                Case 26 To 27       ' HAILSTORM
+                    WindSpeed = D10() + D10() + D10() + D10()
+                    WeatherType = "Hailstorm"
+                    RainbowChance = RainbowChanceByPrecipType.Hail
+
+                Case 28 To 30       ' FOG, HEAVY
+                    WindSpeed = D20()
+                    WeatherType = "Heavy Fog"
+                    RainbowChance = RainbowChanceByPrecipType.HeavyFog
+
+                Case 31 To 38       ' FOG
+                    WindSpeed = D10()
+                    WeatherType = "Fog"
+                    RainbowChance = RainbowChanceByPrecipType.LightFog
+
+                Case 39 To 40       ' MIST
+                    WindSpeed = D10()
+                    WeatherType = "Mist"
+                    RainbowChance = RainbowChanceByPrecipType.Mist
+
+                Case 41 To 45       ' DRIZZLE
+                    WindSpeed = D20()
+                    WeatherType = "Drizzle"
+                    RainbowChance = RainbowChanceByPrecipType.Drizzle
+
+                Case 46 To 60       ' RAINSTORM, LIGHT
+                    WindSpeed = D20()
+                    WeatherType = "Light Rain"
+                    RainbowChance = RainbowChanceByPrecipType.LightRain
+
+                Case 61 To 70       ' RAINSTORM, HEAVY
+                    WindSpeed = D12() + D12() + 10
+                    WeatherType = "Heavy Rain"
+                    RainbowChance = RainbowChanceByPrecipType.HeavyRain
+
+                Case 71 To 84       ' THUNDERSTORM
+                    WindSpeed = D10() + D10() + D10() + D10()
+                    WeatherType = "Thunderstorm"
+                    RainbowChance = RainbowChanceByPrecipType.ThunderStorm
+
+                Case 85 To 89       ' TROPICAL STORM
+                    WindSpeed = D12() + D12() + D12() + 30
+                    WeatherType = "Tropical Storm"
+                    RainbowChance = RainbowChanceByPrecipType.TropicalStorm
+
+                Case 90 To 94       ' MONSOON
+                    WindSpeed = D10() + D10() + D10() + D10() + D10() + D10()
+                    WeatherType = "Monsoon"
+                    RainbowChance = RainbowChanceByPrecipType.Monsoon
+
+                Case 95 To 97       ' GALE
+                    WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
+                    WeatherType = "Gale"
+                    RainbowChance = RainbowChanceByPrecipType.Gale
+
+                Case 98 To 100      ' HURRICANE
+                    WindSpeed = D10() + D10() + D10() + D10() + D10() + D10() + D10() + 70
+                    WeatherType = "Hurricane"
+                    RainbowChance = RainbowChanceByPrecipType.Hurricane
+
+            End Select
+        End Sub
+
+        Friend Shared Sub CheckForRainbow()
+            If D100() <= RainbowChance Then Rainbow = True
+        End Sub
+
+        Friend Shared Sub AdjustmentsForWindSpeed()
+            ' TODO: Some of these windspeed adjustments require modification to main loop and avatar classes
+
+            Select Case WindSpeed
+                Case < 30
+                    ' normal
+                    MoveMod = 1.0
+                Case 30 To 44
+                    ' no torches
+                    ' missiles 1/2 range, -1 TH
+                    MoveMod = 1.25
+
+                Case 45 To 59
+                    ' no torches
+                    ' no fires
+                    ' missiles 1/4 range, -3 TH
+                    MoveMod = 1.5
+
+                Case 60 To 74
+                    ' no torches
+                    ' no fires
+                    ' small trees uprooted
+                    ' no missile fire
+                    ' nomagical melee at -1 TH
+                    ' AC Dex Bonus cancelled
+                    MoveMod = 1.75
+
+                Case > 74
+                    ' no torches
+                    ' no fires
+                    ' small trees uprooted
+                    ' building damage
+                    ' movement impossible
+                    ' chance (adjusted by weight) of knocked prone
+                    ' no missile fire
+                    ' nomagical melee at -3 TH
+                    ' 20% chance of crit fumble (disarmed by wind)
+                    ' AC Dex Bonus cancelled
+                    MoveMod = 0
+
+            End Select
+        End Sub
 
     End Class
 
