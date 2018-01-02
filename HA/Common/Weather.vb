@@ -257,6 +257,8 @@
                     Else
                         WeatherType = "Heavy Blizzard"
                         RainbowChance = RainbowChanceByPrecipType.HeavyBlizzard
+
+                        If Temperature > 10 Then Temperature = 10
                     End If
 
                 Case 3 To 5         ' BLIZZARD
@@ -269,6 +271,8 @@
                     Else
                         WeatherType = "Blizzard"
                         RainbowChance = RainbowChanceByPrecipType.Blizzard
+
+                        If Temperature > 20 Then Temperature = D20()
                     End If
 
                 Case 6 To 10        ' SNOWSTORM, HEAVY
@@ -277,17 +281,23 @@
                     WeatherType = "Heavy Snowstorm"
                     RainbowChance = RainbowChanceByPrecipType.HeavySnowstorm
 
+                    If Temperature > 25 Then Temperature = D20() + 5
+
                 Case 11 To 20       ' SNOWSTORM
                     WindSpeed = D6() + D6() + D6() + D6()
                     VisibilityMod = -1
                     WeatherType = "Snowstorm"
                     RainbowChance = RainbowChanceByPrecipType.Snowstorm
 
+                    If Temperature > 35 Then Temperature = D20() + 15
+
                 Case 21 To 25       ' SLEETSTORM
                     WindSpeed = D10() + D10() + D10()
                     VisibilityMod = -1
                     WeatherType = "Sleetstorm"
                     RainbowChance = RainbowChanceByPrecipType.Sleet
+
+                    If Temperature > 35 Then Temperature = D20() + 15
 
                 Case 26 To 27       ' HAILSTORM
                     'No Effect on Visibility
@@ -299,6 +309,8 @@
                         WindSpeed = D10() + D10() + D10() + D10()
                         WeatherType = "Hailstorm"
                         RainbowChance = RainbowChanceByPrecipType.Hail
+
+                        If Temperature > 65 Then Temperature = D20() + D20() + D20() + 5
                     End If
 
                 Case 28 To 30       ' FOG, HEAVY
@@ -311,6 +323,8 @@
                         WindSpeed = D20()
                         WeatherType = "Heavy Fog"
                         RainbowChance = RainbowChanceByPrecipType.HeavyFog
+
+                        If Temperature < 20 Or Temperature > 60 Then Temperature = 20 + D20() + D20()
                     End If
 
                 Case 31 To 38       ' FOG
@@ -323,6 +337,8 @@
                         WindSpeed = D10()
                         WeatherType = "Fog"
                         RainbowChance = RainbowChanceByPrecipType.LightFog
+
+                        If Temperature < 30 Or Temperature > 70 Then Temperature = 30 + D20() + D20()
                     End If
 
                 Case 39 To 40       ' MIST
@@ -330,15 +346,21 @@
                     WeatherType = "Mist"
                     RainbowChance = RainbowChanceByPrecipType.Mist
 
+                    If Temperature < 30 Then Temperature = 30
+
                 Case 41 To 45       ' DRIZZLE
                     WindSpeed = D20()
                     WeatherType = "Drizzle"
                     RainbowChance = RainbowChanceByPrecipType.Drizzle
 
+                    If Temperature < 25 Then Temperature = 25
+
                 Case 46 To 60       ' RAINSTORM, LIGHT
                     WindSpeed = D20()
                     WeatherType = "Light Rain"
                     RainbowChance = RainbowChanceByPrecipType.LightRain
+
+                    If Temperature < 25 Then Temperature = 25
 
                 Case 61 To 70       ' RAINSTORM, HEAVY
                     VisibilityMod = -1
@@ -346,11 +368,15 @@
                     WeatherType = "Heavy Rain"
                     RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
+                    If Temperature < 25 Then Temperature = 25
+
                 Case 71 To 84       ' THUNDERSTORM
                     VisibilityMod = -1
                     WindSpeed = D10() + D10() + D10() + D10()
                     WeatherType = "Thunderstorm"
                     RainbowChance = RainbowChanceByPrecipType.ThunderStorm
+
+                    If Temperature < 30 Then Temperature = 30
 
                 Case 85 To 89       ' TROPICAL STORM
                     If zone = OverlandTerrainType.Desert Then
@@ -363,11 +389,15 @@
                         WindSpeed = D12() + D12() + 10
                         WeatherType = "Heavy Rain"
                         RainbowChance = RainbowChanceByPrecipType.HeavyRain
+
+                        If Temperature < 25 Then Temperature = 25
                     Else
                         VisibilityMod = -2
                         WindSpeed = D12() + D12() + D12() + 30
                         WeatherType = "Tropical Storm"
                         RainbowChance = RainbowChanceByPrecipType.TropicalStorm
+
+                        If Temperature < 40 Then Temperature = 40
                     End If
 
                 Case 90 To 94       ' MONSOON
@@ -381,11 +411,15 @@
                         WindSpeed = D12() + D12() + 10
                         WeatherType = "Heavy Rain"
                         RainbowChance = RainbowChanceByPrecipType.HeavyRain
+
+                        If Temperature < 25 Then Temperature = 25
                     Else
                         VisibilityMod = -3
                         WindSpeed = D10() + D10() + D10() + D10() + D10() + D10()
                         WeatherType = "Monsoon"
                         RainbowChance = RainbowChanceByPrecipType.Monsoon
+
+                        If Temperature < 55 Then Temperature = 55
                     End If
 
                 Case 95 To 97       ' GALE
@@ -398,6 +432,8 @@
                         WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
                         WeatherType = "Gale"
                         RainbowChance = RainbowChanceByPrecipType.Gale
+
+                        If Temperature < 40 Then Temperature = 40
                     End If
 
                 Case 98 To 100      ' HURRICANE
@@ -410,6 +446,8 @@
                         WindSpeed = D10() + D10() + D10() + D10() + D10() + D10() + D10() + 70
                         WeatherType = "Hurricane"
                         RainbowChance = RainbowChanceByPrecipType.Hurricane
+
+                        If Temperature < 55 Then Temperature = 55
                     End If
 
             End Select
