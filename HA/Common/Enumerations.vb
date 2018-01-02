@@ -348,7 +348,9 @@
         End Enum
         Public Enum PrecipitationType
             HeavyBlizzard
+            HeavySandstorm
             Blizzard
+            Sandstorm
             HeavySnowstorm
             Snowstorm
             Sleet
@@ -415,7 +417,9 @@
         End Enum
         Public Enum RainbowChanceByPrecipType
             HeavyBlizzard = 0
+            HeavySandstorm = 0
             Blizzard = 0
+            Sandstorm = 0
             HeavySnowstorm = 0
             Snowstorm = 1
             Sleet = 0
