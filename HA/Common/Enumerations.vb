@@ -340,12 +340,6 @@
             PartlyCloudy
             Cloudy
         End Enum
-        Public Enum PrecipitationState
-            None
-            Light
-            Moderate
-            Heavy
-        End Enum
         Public Enum PrecipitationType
             HeavyBlizzard
             HeavySandstorm

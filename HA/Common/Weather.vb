@@ -8,7 +8,10 @@
         Public Shared WindDirection As Heading
         Public Shared Sky As CloudState
         Public Shared Rainbow As Boolean
-        Public Shared WeatherType As String
+
+        Private Shared PreviousWeatherType As String
+        Public Shared CurrentWeatherType As String
+        Private Shared WeatherChange As Boolean
 
         Private PreciptationAmount As Int16
         Friend Shared RainbowChance As RainbowChanceByPrecipType
@@ -18,9 +21,11 @@
         Friend Shared Function CheckWeather(zone As OverlandTerrainType) As String
             Dim PrecipitationChance As PrecipChanceByMonth
             Dim Message As String = ""
+            WindSpeed = 0
             VisibilityMod = 0
             MoveMod = 0
 
+            ' These two methods compute Temp and Precip Chance by Month and Zone
             Select Case Month(TimeKeeper.GameTime)
                 Case GameMonth.Raven
                     PrecipitationChance = PrecipChanceByMonth.Raven
@@ -191,7 +196,6 @@
                     End Select
 
             End Select
-
             Select Case zone
                 Case OverlandTerrainType.Desert
                     PrecipitationChance -= 30
@@ -226,13 +230,20 @@
                     Temperature -= 10
             End Select
 
+            PreviousWeatherType = CurrentWeatherType
             If D100() <= PrecipitationChance Then
-                GetWeather(zone)
-                AdjustmentsForWindSpeed()
+                GetPrecipitation(zone)  ' This also computes windspeed, visibility, and Rainbow Chance
                 CheckForRainbow()
+            Else
+                GetSkyAndWind()
             End If
 
-            ' TODO: still need weather status messages
+            If WindSpeed > 0 Then WindDirection = D8()
+            AdjustmentsForWindSpeed()
+
+            WeatherChange = PreviousWeatherType <> CurrentWeatherType
+
+            ' TODO: need weather status messages
             Return Message
         End Function
 
@@ -243,8 +254,21 @@
             Return message
         End Function
 
-        Private Shared Sub GetWeather(zone As OverlandTerrainType)
-            'TODO: adjust result by min/max temp and zone
+        Private Shared Sub GetSkyAndWind()
+            Select Case D6()
+                Case 1 To 3
+                    CurrentWeatherType = CloudState.Clear.ToString
+                    WindSpeed += (D10() + D8() - 2)
+                Case 4 To 5
+                    CurrentWeatherType = CloudState.PartlyCloudy.ToString
+                    WindSpeed += D12() + 8
+                Case 6
+                    CurrentWeatherType = CloudState.Cloudy
+                    WindSpeed += D12() + 10
+            End Select
+        End Sub
+
+        Private Shared Sub GetPrecipitation(zone As OverlandTerrainType)
 
             Select Case D100()
                 Case 1 To 2         ' BLIZZARD, HEAVY / SANDSTORM, HEAVY
@@ -252,10 +276,10 @@
                     VisibilityMod = -3
 
                     If zone = OverlandTerrainType.Desert Then
-                        WeatherType = "Heavy Sandstorm"
+                        CurrentWeatherType = "Heavy Sandstorm"
                         RainbowChance = RainbowChanceByPrecipType.HeavySandstorm
                     Else
-                        WeatherType = "Heavy Blizzard"
+                        CurrentWeatherType = "Heavy Blizzard"
                         RainbowChance = RainbowChanceByPrecipType.HeavyBlizzard
 
                         If Temperature > 10 Then Temperature = 10
@@ -266,10 +290,10 @@
                     VisibilityMod = -2
 
                     If zone = OverlandTerrainType.Desert Then
-                        WeatherType = "Sandstorm"
+                        CurrentWeatherType = "Sandstorm"
                         RainbowChance = RainbowChanceByPrecipType.Sandstorm
                     Else
-                        WeatherType = "Blizzard"
+                        CurrentWeatherType = "Blizzard"
                         RainbowChance = RainbowChanceByPrecipType.Blizzard
 
                         If Temperature > 20 Then Temperature = D20()
@@ -278,7 +302,7 @@
                 Case 6 To 10        ' SNOWSTORM, HEAVY
                     WindSpeed = D10() + D10() + D10()
                     VisibilityMod = -2
-                    WeatherType = "Heavy Snowstorm"
+                    CurrentWeatherType = "Heavy Snowstorm"
                     RainbowChance = RainbowChanceByPrecipType.HeavySnowstorm
 
                     If Temperature > 25 Then Temperature = D20() + 5
@@ -286,7 +310,7 @@
                 Case 11 To 20       ' SNOWSTORM
                     WindSpeed = D6() + D6() + D6() + D6()
                     VisibilityMod = -1
-                    WeatherType = "Snowstorm"
+                    CurrentWeatherType = "Snowstorm"
                     RainbowChance = RainbowChanceByPrecipType.Snowstorm
 
                     If Temperature > 35 Then Temperature = D20() + 15
@@ -294,7 +318,7 @@
                 Case 21 To 25       ' SLEETSTORM
                     WindSpeed = D10() + D10() + D10()
                     VisibilityMod = -1
-                    WeatherType = "Sleetstorm"
+                    CurrentWeatherType = "Sleetstorm"
                     RainbowChance = RainbowChanceByPrecipType.Sleet
 
                     If Temperature > 35 Then Temperature = D20() + 15
@@ -303,11 +327,11 @@
                     'No Effect on Visibility
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
                         WindSpeed = D10() + D10() + D10() + D10()
-                        WeatherType = "Hailstorm"
+                        CurrentWeatherType = "Hailstorm"
                         RainbowChance = RainbowChanceByPrecipType.Hail
 
                         If Temperature > 65 Then Temperature = D20() + D20() + D20() + 5
@@ -317,11 +341,11 @@
                     VisibilityMod = -3
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
                         WindSpeed = D20()
-                        WeatherType = "Heavy Fog"
+                        CurrentWeatherType = "Heavy Fog"
                         RainbowChance = RainbowChanceByPrecipType.HeavyFog
 
                         If Temperature < 20 Or Temperature > 60 Then Temperature = 20 + D20() + D20()
@@ -331,11 +355,11 @@
                     VisibilityMod = -2
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
                         WindSpeed = D10()
-                        WeatherType = "Fog"
+                        CurrentWeatherType = "Fog"
                         RainbowChance = RainbowChanceByPrecipType.LightFog
 
                         If Temperature < 30 Or Temperature > 70 Then Temperature = 30 + D20() + D20()
@@ -343,21 +367,21 @@
 
                 Case 39 To 40       ' MIST
                     WindSpeed = D10()
-                    WeatherType = "Mist"
+                    CurrentWeatherType = "Mist"
                     RainbowChance = RainbowChanceByPrecipType.Mist
 
                     If Temperature < 30 Then Temperature = 30
 
                 Case 41 To 45       ' DRIZZLE
                     WindSpeed = D20()
-                    WeatherType = "Drizzle"
+                    CurrentWeatherType = "Drizzle"
                     RainbowChance = RainbowChanceByPrecipType.Drizzle
 
                     If Temperature < 25 Then Temperature = 25
 
                 Case 46 To 60       ' RAINSTORM, LIGHT
                     WindSpeed = D20()
-                    WeatherType = "Light Rain"
+                    CurrentWeatherType = "Light Rain"
                     RainbowChance = RainbowChanceByPrecipType.LightRain
 
                     If Temperature < 25 Then Temperature = 25
@@ -365,7 +389,7 @@
                 Case 61 To 70       ' RAINSTORM, HEAVY
                     VisibilityMod = -1
                     WindSpeed = D12() + D12() + 10
-                    WeatherType = "Heavy Rain"
+                    CurrentWeatherType = "Heavy Rain"
                     RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
                     If Temperature < 25 Then Temperature = 25
@@ -373,7 +397,7 @@
                 Case 71 To 84       ' THUNDERSTORM
                     VisibilityMod = -1
                     WindSpeed = D10() + D10() + D10() + D10()
-                    WeatherType = "Thunderstorm"
+                    CurrentWeatherType = "Thunderstorm"
                     RainbowChance = RainbowChanceByPrecipType.ThunderStorm
 
                     If Temperature < 30 Then Temperature = 30
@@ -381,20 +405,20 @@
                 Case 85 To 89       ' TROPICAL STORM
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     ElseIf zone = OverlandTerrainType.Plains Then
                         ' Convert to Heavy Rainstorm
                         VisibilityMod = -1
                         WindSpeed = D12() + D12() + 10
-                        WeatherType = "Heavy Rain"
+                        CurrentWeatherType = "Heavy Rain"
                         RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
                         If Temperature < 25 Then Temperature = 25
                     Else
                         VisibilityMod = -2
                         WindSpeed = D12() + D12() + D12() + 30
-                        WeatherType = "Tropical Storm"
+                        CurrentWeatherType = "Tropical Storm"
                         RainbowChance = RainbowChanceByPrecipType.TropicalStorm
 
                         If Temperature < 40 Then Temperature = 40
@@ -403,20 +427,20 @@
                 Case 90 To 94       ' MONSOON
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     ElseIf zone = OverlandTerrainType.Plains Then
                         ' Convert to Heavy Rainstorm
                         VisibilityMod = -1
                         WindSpeed = D12() + D12() + 10
-                        WeatherType = "Heavy Rain"
+                        CurrentWeatherType = "Heavy Rain"
                         RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
                         If Temperature < 25 Then Temperature = 25
                     Else
                         VisibilityMod = -3
                         WindSpeed = D10() + D10() + D10() + D10() + D10() + D10()
-                        WeatherType = "Monsoon"
+                        CurrentWeatherType = "Monsoon"
                         RainbowChance = RainbowChanceByPrecipType.Monsoon
 
                         If Temperature < 55 Then Temperature = 55
@@ -425,12 +449,12 @@
                 Case 95 To 97       ' GALE
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
                         VisibilityMod = -3
                         WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
-                        WeatherType = "Gale"
+                        CurrentWeatherType = "Gale"
                         RainbowChance = RainbowChanceByPrecipType.Gale
 
                         If Temperature < 40 Then Temperature = 40
@@ -439,27 +463,25 @@
                 Case 98 To 100      ' HURRICANE
                     If zone = OverlandTerrainType.Desert Then
                         WindSpeed = D4()
-                        WeatherType = "Sunny"
+                        CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
                         VisibilityMod = -3
                         WindSpeed = D10() + D10() + D10() + D10() + D10() + D10() + D10() + 70
-                        WeatherType = "Hurricane"
+                        CurrentWeatherType = "Hurricane"
                         RainbowChance = RainbowChanceByPrecipType.Hurricane
 
                         If Temperature < 55 Then Temperature = 55
                     End If
 
             End Select
-
-            If WindSpeed > 0 Then WindDirection = D8()
         End Sub
 
-        Friend Shared Sub CheckForRainbow()
+        Private Shared Sub CheckForRainbow()
             If D100() <= RainbowChance Then Rainbow = True
         End Sub
 
-        Friend Shared Sub AdjustmentsForWindSpeed()
+        Private Shared Sub AdjustmentsForWindSpeed()
             ' TODO: Some of these windspeed adjustments require modification to main loop and avatar classes
 
             Select Case WindSpeed
