@@ -1,198 +1,189 @@
 ﻿Namespace Common
 
     Public Class Weather
-        Public Shared VisibilityMod As Int16
-        Public Shared MoveMod As Decimal
-        Public Shared Temperature As Int16
-        Public Shared WindSpeed As Int16
-        Public Shared WindDirection As Heading
-        Public Shared Sky As CloudState
-        Public Shared Rainbow As Boolean
+        Public Shared CurrentWeatherType As String
 
         Private Shared PreviousWeatherType As String
-        Public Shared CurrentWeatherType As String
         Private Shared WeatherChange As Boolean
+        Private Shared RainbowChance As RainbowChanceByPrecipType
 
-        Private PreciptationAmount As Int16
-        Friend Shared RainbowChance As RainbowChanceByPrecipType
         Private WeatherDuration As DateTimeOffset
 
         'TODO: Weather System
         Friend Shared Function CheckWeather(zone As OverlandTerrainType) As String
             Dim PrecipitationChance As PrecipChanceByMonth
             Dim Message As String = ""
-            WindSpeed = 0
-            VisibilityMod = 0
-            MoveMod = 0
 
-            ' These two methods compute Temp and Precip Chance by Month and Zone
+            ResetWeatherEffectsForNewTurn()
+
+            ' These two blocks compute Temp and Precip Chance by Month and Zone
             Select Case Month(TimeKeeper.GameTime)
                 Case GameMonth.Raven
                     PrecipitationChance = PrecipChanceByMonth.Raven
-                    Temperature = BaseTempByMonth.Raven
+                    Effects.Temperature = BaseTempByMonth.Raven
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= D20()
+                            Effects.Temperature -= D20()
                         Case DayNightState.Day
-                            Temperature += D10()
+                            Effects.Temperature += D10()
                         Case DayNightState.Dusk
-                            Temperature += 0
+                            Effects.Temperature += 0
                         Case DayNightState.Night
-                            Temperature -= D10()
+                            Effects.Temperature -= D10()
                     End Select
 
                 Case GameMonth.Book
                     PrecipitationChance = PrecipChanceByMonth.Book
-                    Temperature = BaseTempByMonth.Book
+                    Effects.Temperature = BaseTempByMonth.Book
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D10() + 4)
+                            Effects.Temperature -= (D10() + 4)
                         Case DayNightState.Day
-                            Temperature += (D6() + 4)
+                            Effects.Temperature += (D6() + 4)
                         Case DayNightState.Dusk
-                            Temperature += D6()
+                            Effects.Temperature += D6()
                         Case DayNightState.Night
-                            Temperature -= D6()
+                            Effects.Temperature -= D6()
                     End Select
 
                 Case GameMonth.Wand
                     PrecipitationChance = PrecipChanceByMonth.Wand
-                    Temperature = BaseTempByMonth.Wand
+                    Effects.Temperature = BaseTempByMonth.Wand
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D10() + 4)
+                            Effects.Temperature -= (D10() + 4)
                         Case DayNightState.Day
-                            Temperature += (D8() + 4)
+                            Effects.Temperature += (D8() + 4)
                         Case DayNightState.Dusk
-                            Temperature += D8()
+                            Effects.Temperature += D8()
                         Case DayNightState.Night
-                            Temperature -= D8()
+                            Effects.Temperature -= D8()
                     End Select
 
                 Case GameMonth.Unicorn
                     PrecipitationChance = PrecipChanceByMonth.Unicorn
-                    Temperature = BaseTempByMonth.Unicorn
+                    Effects.Temperature = BaseTempByMonth.Unicorn
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D8() + 4)
+                            Effects.Temperature -= (D8() + 4)
                         Case DayNightState.Day
-                            Temperature += (D10() + 6)
+                            Effects.Temperature += (D10() + 6)
                         Case DayNightState.Dusk
-                            Temperature += D8()
+                            Effects.Temperature += D8()
                         Case DayNightState.Night
-                            Temperature -= D8()
+                            Effects.Temperature -= D8()
                     End Select
 
                 Case GameMonth.Salamander
                     PrecipitationChance = PrecipChanceByMonth.Salamander
-                    Temperature = BaseTempByMonth.Salamander
+                    Effects.Temperature = BaseTempByMonth.Salamander
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D10() + 6)
+                            Effects.Temperature -= (D10() + 6)
                         Case DayNightState.Day
-                            Temperature += (D10() + 6)
+                            Effects.Temperature += (D10() + 6)
                         Case DayNightState.Dusk
-                            Temperature += D10()
+                            Effects.Temperature += D10()
                         Case DayNightState.Night
-                            Temperature -= D10()
+                            Effects.Temperature -= D10()
                     End Select
 
                 Case GameMonth.Dragon
                     PrecipitationChance = PrecipChanceByMonth.Dragon
-                    Temperature = BaseTempByMonth.Dragon
+                    Effects.Temperature = BaseTempByMonth.Dragon
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D6() + 6)
+                            Effects.Temperature -= (D6() + 6)
                         Case DayNightState.Day
-                            Temperature += (D8() + 8)
+                            Effects.Temperature += (D8() + 8)
                         Case DayNightState.Dusk
-                            Temperature += D8()
+                            Effects.Temperature += D8()
                         Case DayNightState.Night
-                            Temperature -= D6()
+                            Effects.Temperature -= D6()
                     End Select
 
                 Case GameMonth.Sword
                     PrecipitationChance = PrecipChanceByMonth.Sword
-                    Temperature = BaseTempByMonth.Sword
+                    Effects.Temperature = BaseTempByMonth.Sword
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D6() + 6)
+                            Effects.Temperature -= (D6() + 6)
                         Case DayNightState.Day
-                            Temperature += (D6() + 4)
+                            Effects.Temperature += (D6() + 4)
                         Case DayNightState.Dusk
-                            Temperature += D6()
+                            Effects.Temperature += D6()
                         Case DayNightState.Night
-                            Temperature -= D6()
+                            Effects.Temperature -= D6()
                     End Select
 
                 Case GameMonth.Falcon
                     PrecipitationChance = PrecipChanceByMonth.Falcon
-                    Temperature = BaseTempByMonth.Falcon
+                    Effects.Temperature = BaseTempByMonth.Falcon
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D6() + 6)
+                            Effects.Temperature -= (D6() + 6)
                         Case DayNightState.Day
-                            Temperature += (D4() + 6)
+                            Effects.Temperature += (D4() + 6)
                         Case DayNightState.Dusk
-                            Temperature += D4()
+                            Effects.Temperature += D4()
                         Case DayNightState.Night
-                            Temperature -= D6()
+                            Effects.Temperature -= D6()
                     End Select
 
                 Case GameMonth.Cup
                     PrecipitationChance = PrecipChanceByMonth.Cup
-                    Temperature = BaseTempByMonth.Cup
+                    Effects.Temperature = BaseTempByMonth.Cup
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D8() + 6)
+                            Effects.Temperature -= (D8() + 6)
                         Case DayNightState.Day
-                            Temperature += (D8() + 6)
+                            Effects.Temperature += (D8() + 6)
                         Case DayNightState.Dusk
-                            Temperature += D8()
+                            Effects.Temperature += D8()
                         Case DayNightState.Night
-                            Temperature -= D8()
+                            Effects.Temperature -= D8()
                     End Select
 
                 Case GameMonth.Candle
                     PrecipitationChance = PrecipChanceByMonth.Candle
-                    Temperature = BaseTempByMonth.Candle
+                    Effects.Temperature = BaseTempByMonth.Candle
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D10() + 5)
+                            Effects.Temperature -= (D10() + 5)
                         Case DayNightState.Day
-                            Temperature += (D10() + 5)
+                            Effects.Temperature += (D10() + 5)
                         Case DayNightState.Dusk
-                            Temperature += D10()
+                            Effects.Temperature += D10()
                         Case DayNightState.Night
-                            Temperature -= D10()
+                            Effects.Temperature -= D10()
                     End Select
 
                 Case GameMonth.Wolf
                     PrecipitationChance = PrecipChanceByMonth.Wolf
-                    Temperature = BaseTempByMonth.Wolf
+                    Effects.Temperature = BaseTempByMonth.Wolf
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= (D10() + 4)
+                            Effects.Temperature -= (D10() + 4)
                         Case DayNightState.Day
-                            Temperature += (D10() + 6)
+                            Effects.Temperature += (D10() + 6)
                         Case DayNightState.Dusk
-                            Temperature += D10()
+                            Effects.Temperature += D10()
                         Case DayNightState.Night
-                            Temperature -= D10()
+                            Effects.Temperature -= D10()
                     End Select
 
                 Case GameMonth.Tree
                     PrecipitationChance = PrecipChanceByMonth.Tree
-                    Temperature = BaseTempByMonth.Tree
+                    Effects.Temperature = BaseTempByMonth.Tree
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= D20()
+                            Effects.Temperature -= D20()
                         Case DayNightState.Day
-                            Temperature += (D8() + 5)
+                            Effects.Temperature += (D8() + 5)
                         Case DayNightState.Dusk
-                            Temperature += D8()
+                            Effects.Temperature += D8()
                         Case DayNightState.Night
-                            Temperature -= D10()
+                            Effects.Temperature -= D10()
                     End Select
 
             End Select
@@ -201,13 +192,13 @@
                     PrecipitationChance -= 30
                     Select Case TimeKeeper.DayNight
                         Case DayNightState.Dawn
-                            Temperature -= D20()
+                            Effects.Temperature -= D20()
                         Case DayNightState.Day
-                            Temperature += (D20() * 2)
+                            Effects.Temperature += (D20() * 2)
                         Case DayNightState.Dusk
-                            Temperature += D10()
+                            Effects.Temperature += D10()
                         Case DayNightState.Night
-                            Temperature -= D10()
+                            Effects.Temperature -= D10()
                     End Select
 
                 Case OverlandTerrainType.Forest
@@ -215,7 +206,7 @@
                 Case OverlandTerrainType.Hills
                     PrecipitationChance += 0
                 Case OverlandTerrainType.Mountain
-                    Temperature -= 15
+                    Effects.Temperature -= 15
                 Case OverlandTerrainType.Plains
                     PrecipitationChance += 0
                 Case OverlandTerrainType.Road
@@ -225,9 +216,9 @@
                 Case OverlandTerrainType.Town
                     PrecipitationChance += 0
                 Case OverlandTerrainType.Volcano
-                    Temperature += 40
+                    Effects.Temperature += 40
                 Case OverlandTerrainType.Water
-                    Temperature -= 10
+                    Effects.Temperature -= 10
             End Select
 
             PreviousWeatherType = CurrentWeatherType
@@ -238,7 +229,8 @@
                 GetSkyAndWind()
             End If
 
-            If WindSpeed > 0 Then WindDirection = D8()
+            If Effects.WindSpeed > 0 Then Effects.WindDirection = D8()
+
             AdjustmentsForWindSpeed()
 
             WeatherChange = PreviousWeatherType <> CurrentWeatherType
@@ -247,7 +239,7 @@
             Return Message
         End Function
 
-        Friend Shared Function WeatherReport() As String
+        Public Shared Function WeatherReport() As String
             Dim message As String = ""
 
             ' TODO: need full weather report, for status page
@@ -257,247 +249,280 @@
         Private Shared Sub GetSkyAndWind()
             Select Case D6()
                 Case 1 To 3
-                    CurrentWeatherType = CloudState.Clear.ToString
-                    WindSpeed += (D10() + D8() - 2)
+                    Effects.Sky = CloudState.Clear.ToString
+                    Effects.WindSpeed += (D10() + D8() - 2)
                 Case 4 To 5
-                    CurrentWeatherType = CloudState.PartlyCloudy.ToString
-                    WindSpeed += D12() + 8
+                    Effects.Sky = CloudState.PartlyCloudy.ToString
+                    Effects.WindSpeed += D12() + 8
                 Case 6
-                    CurrentWeatherType = CloudState.Cloudy
-                    WindSpeed += D12() + 10
+                    Effects.Sky = CloudState.Cloudy
+                    Effects.WindSpeed += D12() + 10
             End Select
+
+            CurrentWeatherType = Effects.Sky
         End Sub
 
         Private Shared Sub GetPrecipitation(zone As OverlandTerrainType)
+            ' TODO: Calculate Precipitation Amount
 
             Select Case D100()
                 Case 1 To 2         ' BLIZZARD, HEAVY / SANDSTORM, HEAVY
-                    WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
-                    VisibilityMod = -3
+                    Effects.WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
+                    Effects.VisibilityMod = -3
 
                     If zone = OverlandTerrainType.Desert Then
                         CurrentWeatherType = "Heavy Sandstorm"
                         RainbowChance = RainbowChanceByPrecipType.HeavySandstorm
+                        Effects.Sky = CloudState.Clear
                     Else
                         CurrentWeatherType = "Heavy Blizzard"
                         RainbowChance = RainbowChanceByPrecipType.HeavyBlizzard
+                        Effects.Sky = CloudState.Cloudy
 
-                        If Temperature > 10 Then Temperature = 10
+                        If Effects.Temperature > 10 Then Effects.Temperature = 10
                     End If
 
                 Case 3 To 5         ' BLIZZARD
-                    WindSpeed = D8() + D8() + D8() + 36
-                    VisibilityMod = -2
+                    Effects.WindSpeed = D8() + D8() + D8() + 36
+                    Effects.VisibilityMod = -2
 
                     If zone = OverlandTerrainType.Desert Then
                         CurrentWeatherType = "Sandstorm"
                         RainbowChance = RainbowChanceByPrecipType.Sandstorm
+                        Effects.Sky = CloudState.Clear
                     Else
                         CurrentWeatherType = "Blizzard"
                         RainbowChance = RainbowChanceByPrecipType.Blizzard
+                        Effects.Sky = CloudState.Cloudy
 
-                        If Temperature > 20 Then Temperature = D20()
+                        If Effects.Temperature > 20 Then Effects.Temperature = D20()
                     End If
 
                 Case 6 To 10        ' SNOWSTORM, HEAVY
-                    WindSpeed = D10() + D10() + D10()
-                    VisibilityMod = -2
+                    Effects.WindSpeed = D10() + D10() + D10()
+                    Effects.VisibilityMod = -2
+                    Effects.Sky = CloudState.Cloudy
+
                     CurrentWeatherType = "Heavy Snowstorm"
                     RainbowChance = RainbowChanceByPrecipType.HeavySnowstorm
 
-                    If Temperature > 25 Then Temperature = D20() + 5
+                    If Effects.Temperature > 25 Then Effects.Temperature = D20() + 5
 
                 Case 11 To 20       ' SNOWSTORM
-                    WindSpeed = D6() + D6() + D6() + D6()
-                    VisibilityMod = -1
+                    Effects.WindSpeed = D6() + D6() + D6() + D6()
+                    Effects.VisibilityMod = -1
+                    Effects.Sky = CloudState.Cloudy
+
                     CurrentWeatherType = "Snowstorm"
                     RainbowChance = RainbowChanceByPrecipType.Snowstorm
 
-                    If Temperature > 35 Then Temperature = D20() + 15
+                    If Effects.Temperature > 35 Then Effects.Temperature = D20() + 15
 
                 Case 21 To 25       ' SLEETSTORM
-                    WindSpeed = D10() + D10() + D10()
-                    VisibilityMod = -1
+                    Effects.WindSpeed = D10() + D10() + D10()
+                    Effects.VisibilityMod = -1
+                    Effects.Sky = CloudState.Cloudy
+
                     CurrentWeatherType = "Sleetstorm"
                     RainbowChance = RainbowChanceByPrecipType.Sleet
 
-                    If Temperature > 35 Then Temperature = D20() + 15
+                    If Effects.Temperature > 35 Then Effects.Temperature = D20() + 15
 
                 Case 26 To 27       ' HAILSTORM
                     'No Effect on Visibility
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Clear
                         CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
-                        WindSpeed = D10() + D10() + D10() + D10()
+                        Effects.WindSpeed = D10() + D10() + D10() + D10()
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Hailstorm"
                         RainbowChance = RainbowChanceByPrecipType.Hail
 
-                        If Temperature > 65 Then Temperature = D20() + D20() + D20() + 5
+                        If Effects.Temperature > 65 Then Effects.Temperature = D20() + D20() + D20() + 5
                     End If
 
                 Case 28 To 30       ' FOG, HEAVY
-                    VisibilityMod = -3
+                    Effects.VisibilityMod = -3
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Clear
                         CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
-                        WindSpeed = D20()
+                        Effects.WindSpeed = D20()
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Heavy Fog"
                         RainbowChance = RainbowChanceByPrecipType.HeavyFog
 
-                        If Temperature < 20 Or Temperature > 60 Then Temperature = 20 + D20() + D20()
+                        If Effects.Temperature < 20 Or Effects.Temperature > 60 Then Effects.Temperature = 20 + D20() + D20()
                     End If
 
                 Case 31 To 38       ' FOG
-                    VisibilityMod = -2
+                    Effects.VisibilityMod = -2
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Clear
                         CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
-                        WindSpeed = D10()
+                        Effects.WindSpeed = D10()
                         CurrentWeatherType = "Fog"
                         RainbowChance = RainbowChanceByPrecipType.LightFog
 
-                        If Temperature < 30 Or Temperature > 70 Then Temperature = 30 + D20() + D20()
+                        If Effects.Temperature < 30 Or Effects.Temperature > 70 Then Effects.Temperature = 30 + D20() + D20()
                     End If
 
                 Case 39 To 40       ' MIST
-                    WindSpeed = D10()
+                    Effects.WindSpeed = D10()
+                    Effects.Sky = CloudState.Cloudy
                     CurrentWeatherType = "Mist"
                     RainbowChance = RainbowChanceByPrecipType.Mist
 
-                    If Temperature < 30 Then Temperature = 30
+                    If Effects.Temperature < 30 Then Effects.Temperature = 30
 
                 Case 41 To 45       ' DRIZZLE
-                    WindSpeed = D20()
+                    Effects.WindSpeed = D20()
+                    Effects.Sky = CloudState.Cloudy
                     CurrentWeatherType = "Drizzle"
                     RainbowChance = RainbowChanceByPrecipType.Drizzle
 
-                    If Temperature < 25 Then Temperature = 25
+                    If Effects.Temperature < 25 Then Effects.Temperature = 25
 
                 Case 46 To 60       ' RAINSTORM, LIGHT
-                    WindSpeed = D20()
+                    Effects.WindSpeed = D20()
+                    Effects.Sky = CloudState.Cloudy
                     CurrentWeatherType = "Light Rain"
                     RainbowChance = RainbowChanceByPrecipType.LightRain
 
-                    If Temperature < 25 Then Temperature = 25
+                    If Effects.Temperature < 25 Then Effects.Temperature = 25
 
                 Case 61 To 70       ' RAINSTORM, HEAVY
-                    VisibilityMod = -1
-                    WindSpeed = D12() + D12() + 10
+                    Effects.VisibilityMod = -1
+                    Effects.WindSpeed = D12() + D12() + 10
+                    Effects.Sky = CloudState.Cloudy
                     CurrentWeatherType = "Heavy Rain"
                     RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
-                    If Temperature < 25 Then Temperature = 25
+                    If Effects.Temperature < 25 Then Effects.Temperature = 25
 
                 Case 71 To 84       ' THUNDERSTORM
-                    VisibilityMod = -1
-                    WindSpeed = D10() + D10() + D10() + D10()
+                    Effects.VisibilityMod = -1
+                    Effects.WindSpeed = D10() + D10() + D10() + D10()
+                    Effects.Sky = CloudState.Cloudy
                     CurrentWeatherType = "Thunderstorm"
                     RainbowChance = RainbowChanceByPrecipType.ThunderStorm
 
-                    If Temperature < 30 Then Temperature = 30
+                    If Effects.Temperature < 30 Then Effects.Temperature = 30
 
                 Case 85 To 89       ' TROPICAL STORM
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Clear
                         CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     ElseIf zone = OverlandTerrainType.Plains Then
                         ' Convert to Heavy Rainstorm
-                        VisibilityMod = -1
-                        WindSpeed = D12() + D12() + 10
+                        Effects.VisibilityMod = -1
+                        Effects.WindSpeed = D12() + D12() + 10
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Heavy Rain"
                         RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
-                        If Temperature < 25 Then Temperature = 25
+                        If Effects.Temperature < 25 Then Effects.Temperature = 25
                     Else
-                        VisibilityMod = -2
-                        WindSpeed = D12() + D12() + D12() + 30
+                        Effects.VisibilityMod = -2
+                        Effects.WindSpeed = D12() + D12() + D12() + 30
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Tropical Storm"
                         RainbowChance = RainbowChanceByPrecipType.TropicalStorm
 
-                        If Temperature < 40 Then Temperature = 40
+                        If Effects.Temperature < 40 Then Effects.Temperature = 40
                     End If
 
                 Case 90 To 94       ' MONSOON
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Clear
                         CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     ElseIf zone = OverlandTerrainType.Plains Then
                         ' Convert to Heavy Rainstorm
-                        VisibilityMod = -1
-                        WindSpeed = D12() + D12() + 10
+                        Effects.VisibilityMod = -1
+                        Effects.WindSpeed = D12() + D12() + 10
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Heavy Rain"
                         RainbowChance = RainbowChanceByPrecipType.HeavyRain
 
-                        If Temperature < 25 Then Temperature = 25
+                        If Effects.Temperature < 25 Then Effects.Temperature = 25
                     Else
-                        VisibilityMod = -3
-                        WindSpeed = D10() + D10() + D10() + D10() + D10() + D10()
+                        Effects.VisibilityMod = -3
+                        Effects.WindSpeed = D10() + D10() + D10() + D10() + D10() + D10()
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Monsoon"
                         RainbowChance = RainbowChanceByPrecipType.Monsoon
 
-                        If Temperature < 55 Then Temperature = 55
+                        If Effects.Temperature < 55 Then Effects.Temperature = 55
                     End If
 
                 Case 95 To 97       ' GALE
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Clear
                         CurrentWeatherType = "Sunny"
                         RainbowChance = 0
                     Else
-                        VisibilityMod = -3
-                        WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
+                        Effects.VisibilityMod = -3
+                        Effects.WindSpeed = D8() + D8() + D8() + D8() + D8() + D8() + 40
+                        Effects.Sky = CloudState.PartlyCloudy
                         CurrentWeatherType = "Gale"
                         RainbowChance = RainbowChanceByPrecipType.Gale
 
-                        If Temperature < 40 Then Temperature = 40
+                        If Effects.Temperature < 40 Then Effects.Temperature = 40
                     End If
 
                 Case 98 To 100      ' HURRICANE
                     If zone = OverlandTerrainType.Desert Then
-                        WindSpeed = D4()
-                        CurrentWeatherType = "Sunny"
+                        Effects.WindSpeed = D4()
+                        Effects.Sky = CloudState.Cloudy
+                        CurrentWeatherType = "Cloudy"
                         RainbowChance = 0
                     Else
-                        VisibilityMod = -3
-                        WindSpeed = D10() + D10() + D10() + D10() + D10() + D10() + D10() + 70
+                        Effects.VisibilityMod = -3
+                        Effects.WindSpeed = D10() + D10() + D10() + D10() + D10() + D10() + D10() + 70
+                        Effects.Sky = CloudState.Cloudy
                         CurrentWeatherType = "Hurricane"
                         RainbowChance = RainbowChanceByPrecipType.Hurricane
 
-                        If Temperature < 55 Then Temperature = 55
+                        If Effects.Temperature < 55 Then Effects.Temperature = 55
                     End If
 
             End Select
         End Sub
 
         Private Shared Sub CheckForRainbow()
-            If D100() <= RainbowChance Then Rainbow = True
+            If D100() <= RainbowChance Then Effects.Rainbow = True
         End Sub
 
         Private Shared Sub AdjustmentsForWindSpeed()
             ' TODO: Some of these windspeed adjustments require modification to main loop and avatar classes
 
-            Select Case WindSpeed
+            Select Case Effects.WindSpeed
                 Case < 30
                     ' normal
-                    MoveMod = 1.0
+                    Effects.MoveMod = 1.0
                 Case 30 To 44
                     ' no torches
                     ' missiles 1/2 range, -1 TH
-                    MoveMod = 1.25
+                    Effects.MoveMod = 1.25
 
                 Case 45 To 59
                     ' no torches
                     ' no fires
                     ' missiles 1/4 range, -3 TH
-                    MoveMod = 1.5
+                    Effects.MoveMod = 1.5
 
                 Case 60 To 74
                     ' no torches
@@ -506,7 +531,7 @@
                     ' no missile fire
                     ' nomagical melee at -1 TH
                     ' AC Dex Bonus cancelled
-                    MoveMod = 1.75
+                    Effects.MoveMod = 1.75
 
                 Case > 74
                     ' no torches
@@ -519,10 +544,32 @@
                     ' nomagical melee at -3 TH
                     ' 20% chance of crit fumble (disarmed by wind)
                     ' AC Dex Bonus cancelled
-                    MoveMod = 0
+                    Effects.MoveMod = 0
 
             End Select
         End Sub
+
+        Private Shared Sub ResetWeatherEffectsForNewTurn()
+            Effects.WindSpeed = 0
+            Effects.VisibilityMod = 0
+            Effects.MoveMod = 0
+            Effects.PreciptationAmount = 0
+            Effects.Rainbow = False
+            Effects.Temperature = 0
+            Effects.WindSpeed = 0
+            Effects.WindDirection = 0
+        End Sub
+
+        Public Structure Effects
+            Public Shared Sky As CloudState
+            Public Shared MoveMod As Int16
+            Public Shared PreciptationAmount As Int16
+            Public Shared Rainbow As Boolean
+            Public Shared Temperature As Int16
+            Public Shared VisibilityMod As Int16
+            Public Shared WindDirection As Heading
+            Public Shared WindSpeed As Int16
+        End Structure
 
     End Class
 
