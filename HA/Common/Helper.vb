@@ -44,14 +44,14 @@ Namespace Common
         <DebuggerStepThrough()> Public Shared Function GetArmor(ByVal a As ArmorType) As String
             Return a.ToString
         End Function
-        <DebuggerStepThrough()> Public Shared Function GetGender(ByVal g As Gender) As String
+        <DebuggerStepThrough()> Public Shared Function GetGender(ByVal g As Avatar.Sex) As String
             If g = 0 Then Return "" Else Return g.ToString
         End Function
-        <DebuggerStepThrough()> Public Shared Function GetPronoun(ByVal g As Gender) As String
+        <DebuggerStepThrough()> Public Shared Function GetPronoun(ByVal g As Avatar.Sex) As String
             Select Case g
-                Case Gender.female
+                Case Avatar.Sex.female
                     Return "she"
-                Case Gender.male
+                Case Avatar.Sex.male
                     Return "he"
                 Case Else
                     Return "it"

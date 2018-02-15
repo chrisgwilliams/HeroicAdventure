@@ -272,8 +272,8 @@ Module m_MainMenu
 					End If
 
 				Case "!"
-					TheHero.Gender = RND.Next(Gender.female, Gender.male)
-					TheHero.HeroRace = RND.Next(Race.Human, Race.Pixie)
+                    TheHero.Gender = RND.Next(Avatar.Sex.female, Avatar.Sex.male)
+                    TheHero.HeroRace = RND.Next(Race.Human, Race.Pixie)
 					If TheHero.HeroRace < Race.Ogre Then
 						TheHero.HeroClass = RND.Next(PCClass.Warrior, PCClass.Paladin)
 					Else

@@ -131,6 +131,7 @@
     <Compile Include="Avatar\Monster\NPC\Fin_VillageElder.vb" />
     <Compile Include="Avatar\Monster\NPC\NPC.vb" />
     <Compile Include="Common\Dice.vb" />
+    <Compile Include="Common\Dictionaries.vb" />
     <Compile Include="Common\Enumerations.vb" />
     <Compile Include="Common\LineDrawing.vb" />
     <Compile Include="Common\Structures.vb" />

@@ -140,26 +140,6 @@
             constitution
             charisma
         End Enum
-        Public Enum Gender
-            female = 1
-            male = 2
-        End Enum
-        Public Enum PietyState
-            Hated = -3
-            Unfavored = -2
-            Displeased = -1
-            Normal = 0
-            Pleased = 1
-            Favored = 2
-            Loved = 3
-        End Enum
-        Public Enum HungerState
-            Starving
-            Hungry
-            Normal
-            Satiated
-            Bloated
-        End Enum
         Public Enum ActionType
             None = 0
             Drink = 1
@@ -341,6 +321,7 @@
             Cloudy
         End Enum
         Public Enum PrecipitationType
+            None
             HeavyBlizzard
             HeavySandstorm
             Blizzard

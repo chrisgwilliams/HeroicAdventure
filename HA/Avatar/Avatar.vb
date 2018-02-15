@@ -105,7 +105,7 @@ Public MustInherit Class Avatar
 
 #End Region
 
-    Public Property Gender() As Gender
+    Public Property Gender() As Sex
 
     Public Property Nourishment As Integer
     Public Property HungerLevel As HungerState
@@ -150,7 +150,8 @@ Public MustInherit Class Avatar
     Public Property TerrainZoom() As Boolean
     Public Property Town() As Town
 
-    ' methods
+#Region " Methods "
+
     Public Sub Walk(ByVal direction As Integer)
         If TheHero.InTown Then
             Select Case direction
@@ -257,6 +258,36 @@ Public MustInherit Class Avatar
     Public Sub ResistPoison()
 
     End Sub
+
+#End Region
+
+#Region "Enumerations"
+
+    Public Enum Sex
+        female = 1
+        male = 2
+    End Enum
+
+    Public Enum PietyState
+        Hated = -3
+        Unfavored = -2
+        Displeased = -1
+        Normal = 0
+        Pleased = 1
+        Favored = 2
+        Loved = 3
+    End Enum
+
+    Public Enum HungerState
+        Starving
+        Hungry
+        Normal
+        Satiated
+        Bloated
+    End Enum
+
+#End Region
+
 End Class
 
 

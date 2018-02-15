@@ -623,36 +623,37 @@ Module Character
 
     Private Function OgreUp() As Int16
 		Dim newHP As Int16
+        'ToDo: Take a look at Ogre HP Progression when leveling up. Make sure it's working properly.
+        'ToDo: Ogre needs class levels after ECL 6
+        Select Case TheHero.TotalLevels
+            Case 2
+                ' 2d8 HD
+                newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
+                TheHero.Strength += 2
+                TheHero.Constitution += 2
+            Case 3
+                ' 3D8 HD
+                newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
+                TheHero.NaturalArmor = 4
+                CalculateAC()
+            Case 4
+                ' 3D8 HD
+                TheHero.Strength += 2
+                TheHero.Constitution += 2
+            Case 5
+                ' 4D8 HD
+                newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
+                TheHero.Strength += 2
+                TheHero.Dexterity -= 2
+                CalculateAC()
+            Case 6
+                '4D8 HD
+                TheHero.Strength += 2
+                TheHero.NaturalArmor = 5
+                CalculateAC()
+        End Select
 
-		Select Case TheHero.TotalLevels
-			Case 2
-				' 2d8 HD
-				newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
-				TheHero.Strength += 2
-				TheHero.Constitution += 2
-			Case 3
-				' 3D8 HD
-				newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
-				TheHero.NaturalArmor = 4
-				CalculateAC()
-			Case 4
-				' 3D8 HD
-				TheHero.Strength += 2
-				TheHero.Constitution += 2
-			Case 5
-				' 4D8 HD
-				newHP += (RND.Next(1, TheHero.HitDieType) + AbilityMod(TheHero.EConstitution))
-				TheHero.Strength += 2
-				TheHero.Dexterity -= 2
-				CalculateAC()
-			Case 6
-				'4D8 HD
-				TheHero.Strength += 2
-				TheHero.NaturalArmor = 5
-				CalculateAC()
-		End Select
-
-		Return newHP
+        Return newHP
 	End Function
 	Private Function PixieUp() As Int16
 		Dim newHP As Int16

@@ -25,12 +25,12 @@ Module m_Generation
 
 		Select Case ReadKey().KeyChar.ToString()
 			Case "m"
-				TheHero.Gender = Gender.male
-			Case "f"
-				TheHero.Gender = Gender.female
-			Case "*"
-				TheHero.Gender = RND.Next(Gender.female, Gender.male)
-			Case "z" ' previous menu
+                TheHero.Gender = Avatar.Sex.male
+            Case "f"
+                TheHero.Gender = Avatar.Sex.female
+            Case "*"
+                TheHero.Gender = RND.Next(Avatar.Sex.female, Avatar.Sex.male)
+            Case "z" ' previous menu
 				Return
 			Case Else
 				GenderMenu()

@@ -7,7 +7,7 @@ Namespace Common
 		Public SlashList As List(Of String) = New List(Of String)()
 		Public SlashPierceList As List(Of String) = New List(Of String)()
 
-		Public Sub InitializeVerbLists()
+        Public Sub InitializeVerbLists()
 			BludgeonList.Add("crush")
 			BludgeonList.Add("smash")
 			BludgeonList.Add("pulverize")
@@ -71,7 +71,7 @@ Namespace Common
 			SlashPierceList.Add("disembowel")
 			SlashPierceList.Add("eviscerate")
 
-		End Sub
+        End Sub
 
 
 

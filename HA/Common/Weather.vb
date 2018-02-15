@@ -1,4 +1,6 @@
-﻿Namespace Common
+﻿Imports System.Collections.Generic
+
+Namespace Common
 
     Public Class Weather
         Public Shared CurrentWeatherType As String
@@ -12,8 +14,11 @@
         'TODO: Weather System
         Friend Shared Function CheckWeather(zone As OverlandTerrainType) As String
             Dim PrecipitationChance As PrecipChanceByMonth
-            Dim Message As String = ""
 
+            'ToDo: storms should persist for multiple turns. 
+            '      check for new weather once the storm has ended, rather than every round.
+            '      this comes into play when in tactical mode (overland), because tactical 
+            '      turns use smaller time increments than overland map movement.
             ResetWeatherEffectsForNewTurn()
 
             ' These two blocks compute Temp and Precip Chance by Month and Zone
@@ -236,13 +241,19 @@
             WeatherChange = PreviousWeatherType <> CurrentWeatherType
 
             ' TODO: need weather status messages
-            Return Message
+            Return WeatherReport(True)
         End Function
 
-        Public Shared Function WeatherReport() As String
+        Public Shared Function WeatherReport(Optional Shortened As Boolean = False) As String
             Dim message As String = ""
 
-            ' TODO: need full weather report, for status page
+            If Shortened Then
+                message = CurrentWeatherType
+            Else
+                'ToDo: Determine format for more verbose weather message (status page)
+
+            End If
+
             Return message
         End Function
 
@@ -570,6 +581,9 @@
             Public Shared WindDirection As Heading
             Public Shared WindSpeed As Int16
         End Structure
+
+
+
 
     End Class
 
